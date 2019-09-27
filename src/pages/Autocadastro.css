@@ -1,0 +1,106 @@
+/* Form cadastro */
+
+.main-container {
+    height: 100%;
+    background: url(../assets/fundo.png);
+}
+
+.autocadastro-container {
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;    
+}
+
+.autocadastro-container form {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(245, 245, 245, 0.548);
+    padding: 15px;
+    border-radius: 5px;
+    margin-right: 50px;
+}
+
+.autocadastro-container form p {
+    font-size: 16px;
+    line-height: 20px;
+    color: #666;
+    margin: 5px 0 5px 0;
+}
+
+.autocadastro-container form input {
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.autocadastro-container form .number-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.autocadastro-container form .number-input .idade input {
+    width: 60%;
+}
+
+.autocadastro-container form button {
+    margin-top: 10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #DF4723;
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+}
+
+/* Mensagem flutuante */
+.sudotest-container {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    /* background: #ddd; */
+}
+
+.sudotest-container img {
+    width: 100px;
+}
+
+.sudotest-container .titulo {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    letter-spacing: 3px;   
+}
+
+.sudotest-container .titulo .sudo {
+    font-size: 62px;
+    color: #3F3A7F;
+    font-weight: bold;  
+}
+
+.sudotest-container .titulo .test {
+    font-size: 50px;
+    color: #EF7733;
+}
+
+.sudotest-container .sudotest-texto {
+    font-size: 25px;
+    line-height: 20px;
+    font-style: italic;
+    margin-top: 10px;
+}
