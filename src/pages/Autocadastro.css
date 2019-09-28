@@ -1,13 +1,17 @@
-/* Form cadastro */
-
+/* Div principal */
 .main-container {
     height: 100%;
     background: url(../assets/fundo.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Form autocadastro */
 .autocadastro-container {
     height: 100%;
     display: flex;
+    flex: 1;
     justify-content: right;
     align-items: center;    
 }
@@ -64,16 +68,13 @@
 
 /* Mensagem flutuante */
 .sudotest-container {
-    width: 100%;
-    max-width: 300px;
+    /* width: 100%; */
+    /* max-width: 300px; */
     display: flex;
+    flex: 2;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 30%;
-    left: 20%;
-    /* background: #ddd; */
 }
 
 .sudotest-container img {

@@ -4,12 +4,12 @@ import './Autocadastro.css';
 import logo from '../assets/logo.png';
 
 export default function Autocadastro() {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [idade, setIdade] = useState('');
-    const [cpf, setCpf] = useState('');
+    const [nome, setNome] = useState(''),
+          [email, setEmail] = useState(''),
+          [senha, setSenha] = useState(''),
+          [telefone, setTelefone] = useState(''),
+          [idade, setIdade] = useState(''),
+          [cpf, setCpf] = useState('');
 
     function handleCadastrar(e) {
         e.preventDefault();
@@ -19,7 +19,6 @@ export default function Autocadastro() {
 
     return (
         <div className="main-container">
-
             <div className="sudotest-container">
                 <img src={logo} alt="Sudotec Logo" />
                 <div className="titulo">
