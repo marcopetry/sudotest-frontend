@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
 
@@ -9,10 +9,17 @@ export default function Login({ history }) {
     const [email, setEmail] = useState(''),
           [senha, setSenha] = useState('');
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
 
-        history.push('/autocadastro');
+        // const response = await api.post('/aluno', {
+        //     email,
+        //     senha,
+        // });
+
+        // const {  } = response.data;
+
+        history.push(`/autocadastro`);
     }
 
     return (
