@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Autocadastro.css';
+import api from '../services/api'
 
 import logo from '../assets/logo.png';
 
@@ -14,6 +15,16 @@ export default function Autocadastro() {
     function handleCadastrar(e) {
         e.preventDefault();
 
+        api.get('/cadastroAluno', {
+            params:{
+                nome: nome,
+                email: email,
+                senha: senha,
+                telefone: telefone,
+                idade: idade,
+                cpf: cpf
+            }
+        });
         console.log(nome, email, senha, telefone, idade, cpf);
     }
 
