@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-// import api from '../services/api';
+// import api from '../../services/api';
 
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 export default function Login({ history }) {
     const [email, setEmail] = useState(''),

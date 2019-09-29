@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Login from './pages/Login';
-import Autocadastro from './pages/Autocadastro';
+import Login from './components/Login/Login';
+import Autocadastro from './components/Autocadastro/Autocadastro';
 
 export default function Routes() {
     return (
