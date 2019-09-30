@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 import api from '../../services/api';
@@ -39,7 +40,12 @@ export default function Login({ history }) {
                     value={senha}
                     onChange={e => setSenha(e.target.value)}
                 />
+                
                 <button type="submit">Enviar</button>
+                
+                <Link to="/autocadastro" style={{ textDecoration: 'none'}}>
+                    <p>Não tem cadastro?</p>
+                </Link>
             </form>
         </div>
     );
