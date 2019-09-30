@@ -13,14 +13,16 @@ export default function Login({ history }) {
     async function handleLogin(e) {
         e.preventDefault();
 
-        // const response = await api.post('/aluno', {
-        //     email,
-        //     senha,
-        // });
+        const response = await api.post('/aluno', {
+            email,
+            senha,
+        });
 
-        // const {  } = response.data;
-
-        history.push(`/autocadastro`);
+        if(response.data.login === true){
+            history.push(`/autocadastro`);
+        }else{
+            console.log('Email ou Senha Inválidos')
+        }
     }
 
     return (
