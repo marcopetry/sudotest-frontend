@@ -1,0 +1,22 @@
+.resposta {
+    margin: 2em;
+    padding: 2em;
+    background-color:#fff;
+    border-radius: 1em;
+}
+
+.check-resposta {
+    height: 2em;
+    width: 2em;       
+}
+
+.item-resposta {
+    display: float;
+    margin-left: 2em;
+    margin-top: -2em;
+    padding: 0 0.5em;      
+}
+ 
+/* .texto-resposta {
+    padding-left: 1em;
+}  */

@@ -1,0 +1,20 @@
+.main-container {
+    height: 100%;
+    background: url(../../assets/fundo.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-questoes {
+    width: 70%;    
+    background-color: rgba(245, 245, 245, 0.548);
+    border-radius: 1em;
+}
+
+.questao {
+    margin: 2em;
+    padding: 2em;
+    background-color:#fff;
+    border-radius: 1em;
+}
