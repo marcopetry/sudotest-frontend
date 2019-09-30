@@ -19,7 +19,7 @@ export default function Login({ history }) {
         });
 
         if(response.data.login === true){
-            history.push(`/autocadastro`);
+            history.push(`/adm`);
         }else{
             console.log('Email ou Senha Inválidos')
         }
