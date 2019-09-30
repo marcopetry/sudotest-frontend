@@ -44,3 +44,11 @@
     color: #FFF;
     cursor: pointer;
 }
+
+.login-container form p {
+    margin-top: 10px;
+    color: #DF4723;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}

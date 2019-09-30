@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Autocadastro.css';
 
 import api from '../../services/api'
@@ -107,6 +108,10 @@ export default function Autocadastro() {
                     </div>
 
                     <button type="submit">Cadastrar</button>
+
+                    <Link to="/" style={{ textDecoration: 'none'}}>
+                        <p className="p-link">Já é cadastrado? Faça o login</p>
+                    </Link>
                 </form>
             </div >
 
