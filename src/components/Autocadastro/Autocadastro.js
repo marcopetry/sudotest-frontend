@@ -97,7 +97,7 @@ export default function Autocadastro() {
                         <div className="cpf">
                             <p>CPF</p>
                             <input
-                                // class="form-control"
+                                class="form-control"
                                 id="inputCPF"
                                 placeholder="Digite seu CPF"
                                 value={cpf}
@@ -107,7 +107,7 @@ export default function Autocadastro() {
                     </div>
 
                     <button type="submit">Cadastrar</button>
-                </form>
+               </form>
             </div >
 
         </div>

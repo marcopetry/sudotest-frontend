@@ -15,13 +15,20 @@
 
 form {
     width: 80%;    
-    margin: 2em auto;
+    margin: 1em auto;
+}
+
+form h1 {
+    margin-left: 2em;
+    font-family: 'Asap', sans-serif;
+    font-weight: 700;
 }
 
 .item-cadastro-questao {
-    margin: 1.5em 0;    
+    margin: 1.5em 0;
+    vertical-align: top;        
 }
-
+/* 
 .item-cadastro-questao p {
     width: 100%;    
     border-radius: 0.5em;
@@ -30,29 +37,53 @@ form {
     line-height: 20px;
     color: #666;
     margin: 5px 0 5px 0;
+} */
+
+
+.item-cadastro-questao input {
+    width: 3em;
+    height: 3em;
+    margin-right: 2em; 
 }
 
-.item-cadastro-questao input, textarea {
-    width: 100%;
-    height: 3em;
+/*o textarea da pergunta tem ajustes pelo id abaixo*/
+.item-cadastro-questao textarea {
+    width: 93.5%;
+    height: 5em; 
     border-radius: 0.5em;
     padding-left: 1em;
     font-size: 16px;
     line-height: 20px;
     color: #666;
-    margin: 5px 0 5px 0;
+    margin: 1px 0 1px 0;
+    font-family: 'Asap', sans-serif;
+    font-weight: 400;
+}
+ 
+#inputPergunta {
+    height: 10em;
+    margin-left: 4em;
+} 
+
+.container-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
-
 .cadastro-questoes-container form button {
-    width: 100%;
+    width: 45%; 
     margin-top: 10px;
     border: 0;
     border-radius: 4px;
     height: 48px;
-    font-size: 25px;
+    font-size: 25px; 
     background: #DF4723;
     font-weight: bold;
     color: #FFF;
     cursor: pointer;
+    font-family: 'Asap', sans-serif;    
+}
+
+#botaoCadastrar {
+    background: #006641;
 }
