@@ -9,7 +9,8 @@ export default function CadastroQuestoes() {
         [res4, setRes4] = useState(''),
         [res5, setRes5] = useState(''), 
         [respostaCerta, setResCerta] = useState(''),
-        [voltar, setVoltar] = useState(false);
+        [voltar, setVoltar] = useState(false),
+        [categoria, setCategoria] = useState('Selecione');
 
     
     //const voltar = () => alert('precisamos implementar o voltar'); 
@@ -28,8 +29,8 @@ export default function CadastroQuestoes() {
                     <h1>Cadastre a questão e marque a resposta correta:</h1>                    
                     
                     <div className="item-cadastro-questao">
-                        <select className="form-control">
-                            <option value="Selecione uma categoria">Selecione uma categoria:</option>
+                        <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
+                            <option value="Selecione">Selecione uma categoria:</option>
                             <option value="portugues">Português</option>
                             <option value="matematica">Matemática</option>
                             <option value="informatica">Informática</option>
