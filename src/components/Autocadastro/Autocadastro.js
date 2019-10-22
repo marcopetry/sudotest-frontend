@@ -87,7 +87,7 @@ export default function Autocadastro() {
                         <div className="idade">
                             <p>Idade</p>
                             <input
-                                // class="form-control"
+                                class="form-control"
                                 id="inputCity"
                                 placeholder="Idade"
                                 value={idade}
@@ -98,7 +98,7 @@ export default function Autocadastro() {
                         <div className="cpf">
                             <p>CPF</p>
                             <input
-                                // class="form-control"
+                                class="form-control"
                                 id="inputCPF"
                                 placeholder="Digite seu CPF"
                                 value={cpf}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Questoes.css';
 import Respostas from '../Resposta/Resposta'
 
-export default function Questoes() {
+export default function Questoes(props) {
 const [pergunta, setPergunta] = useState(''),
         [res1, setRes1] = useState(''),
         [res2, setRes2] = useState(''),
@@ -15,7 +15,7 @@ const [pergunta, setPergunta] = useState(''),
         <div className="main-container">
             <div className="form-questoes">                
                 <div className="questao">
-                    <h2>Questão Número:</h2>
+                    <h2>{props.texto}</h2>
                     <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                         when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
@@ -29,7 +29,11 @@ const [pergunta, setPergunta] = useState(''),
                 <Respostas />
                 <Respostas />
                 <Respostas />
-            </div>            
+                <div className="container-buttons">
+                    <button type="submit">Cadastrar</button>
+                    <button type="button">Voltar</button>
+                </div>            
+            </div>
         </div>
     );
 }
