@@ -16,11 +16,6 @@ export default function CadastroQuestoes() {
     //const voltar = () => alert('precisamos implementar o voltar'); 
     const cadastrarQuestao = () => alert('Falta implementar questao');
 
-    if(voltar){
-        return(
-            <Redirect to='/' />
-        );
-    }
 
     return (
         <div className="main-container">
