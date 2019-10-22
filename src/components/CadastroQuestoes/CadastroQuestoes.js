@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Redirect } from 'react';
 import './CadastroQuestoes.css';
 
 export default function CadastroQuestoes() {
@@ -8,18 +8,37 @@ export default function CadastroQuestoes() {
         [res3, setRes3] = useState(''),
         [res4, setRes4] = useState(''),
         [res5, setRes5] = useState(''), 
-        [respostaCerta, setResCerta] = useState('');
+        [respostaCerta, setResCerta] = useState(''),
+        [voltar, setVoltar] = useState(false);
+
     
-    const voltar = () => alert('precisamos implementar o voltar'); 
+    //const voltar = () => alert('precisamos implementar o voltar'); 
     const cadastrarQuestao = () => alert('Falta implementar questao');
+
+    if(voltar){
+        return(
+            <Redirect to='/' />
+        );
+    }
 
     return (
         <div className="main-container">
             <div className="cadastro-questoes-container">
                 <form onSubmit={cadastrarQuestao}>
-                    <h1>Cadastrar questão:</h1>
+                    <h1>Cadastre a questão e marque a resposta correta:</h1>                    
                     
                     <div className="item-cadastro-questao">
+                        <select className="form-control">
+                            <option value="Selecione uma categoria">Selecione uma categoria:</option>
+                            <option value="portugues">Português</option>
+                            <option value="matematica">Matemática</option>
+                            <option value="informatica">Informática</option>
+                            <option value="conhecimentos">Conhecimentos Gerais</option>
+                        </select>
+                    </div>
+
+
+                    <div className="item-cadastro-questao">                        
                         <textarea
                             className="form-control"
                             id="inputPergunta"
@@ -31,10 +50,10 @@ export default function CadastroQuestoes() {
                     
                     <div className="item-cadastro-questao">                        
                         <input type="radio" 
-                               name="resposta"
-                               value="opcao1"
-                               checked={respostaCerta === "opcao1"}
-                               onChange={e => setResCerta(e.target.value)}                        
+                            name="resposta"
+                            value="opcao1"
+                            checked={respostaCerta === "opcao1"}
+                            onChange={e => setResCerta(e.target.value)}                        
                         />
                         <textarea
                             className="form-control"
@@ -110,7 +129,7 @@ export default function CadastroQuestoes() {
                     </div>
 
                     <div className="container-buttons">
-                        <button type="button" onClick={voltar}>Voltar</button>
+                        <button type="button" onClick={e => setVoltar(true)}>Voltar</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </form>
