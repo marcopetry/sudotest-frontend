@@ -10,7 +10,7 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Route path="/" exact component={Login}/>
-            <Route path="/cadastro_questoes" exact component={CadastroQuestoes}/>            
+            <Route path="/cadastro_questoes" exact component={CadastroQuestoes}/>
             <Route path="/questoes" exact component={Questoes}/> 
             <Route path="/autocadastro" exact component={Autocadastro}/>
         </BrowserRouter>
