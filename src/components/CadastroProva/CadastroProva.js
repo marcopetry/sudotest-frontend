@@ -2,7 +2,7 @@ import React, { useState, Redirect } from 'react';
 import './CadastroQuestoes.css';
 import api from '../../services/api';
 
-export default function CadastroQuestoes() {
+export default function CadastroProva() {
     const [enunciado, setEnunciado] = useState(''),
         [alternativa1, setAlternativa1] = useState(''),
         [alternativa2, setAlternativa2] = useState(''),
@@ -13,11 +13,7 @@ export default function CadastroQuestoes() {
         [voltar, setVoltar] = useState(false),
         [categoria, setCategoria] = useState('Selecione');
 
-
-    //const voltar = () => alert('precisamos implementar o voltar'); 
-    //const cadastrarQuestao = () => alert('Falta implementar questao');
-
-    async function cadastrarQuestao(e) {
+    async function cadastrarProva(e) {
         e.preventDefault();
 
         const response = await api.post('/cadastroQuestao', {
@@ -42,7 +38,7 @@ export default function CadastroQuestoes() {
     return (
         <div className="main-container">
             <div className="cadastro-questoes-container">
-                <form onSubmit={cadastrarQuestao}>
+                <form onSubmit={cadastrarProva}>
                     <h1>Cadastre a questão e marque a alternativaposta correta:</h1>
 
                     <div className="item-cadastro-questao">

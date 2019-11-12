@@ -6,7 +6,7 @@ const [resposta, setResposta] = useState('');
     
     return (
         <div className="resposta">            
-            <input type="checkbox" className="check-resposta" />            
+            <input type="radio" className="check-resposta" name="resposta-marcada" value={resposta}/>            
             <div className="item-resposta">                
                 <label className="texto-resposta">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 

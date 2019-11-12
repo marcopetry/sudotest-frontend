@@ -5,6 +5,7 @@ import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
 import Questoes from './components/Questoes/Questoes'
 import CadastroQuestoes from './components/CadastroQuestoes/CadastroQuestoes';
+import CadastroProva from './components/CadastroProva/CadastroProva';
 
 export default function Routes() {
     return (
@@ -13,6 +14,7 @@ export default function Routes() {
             <Route path="/cadastro_questoes" exact component={CadastroQuestoes}/>
             <Route path="/questoes" exact component={Questoes}/> 
             <Route path="/autocadastro" exact component={Autocadastro}/>
+            <Route path="/cadastrar_prova" exact component={CadastroProva} />
         </BrowserRouter>
     );
 }

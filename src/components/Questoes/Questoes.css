@@ -18,3 +18,26 @@
     background-color:#fff;
     border-radius: 1em;
 }
+
+.container-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-buttons button {
+    width: 40%; 
+    margin: 30px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 25px; 
+    background: #DF4723;
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Asap', sans-serif;    
+}
+
+#botaoCadastrar {
+    background: #006641;
+}
