@@ -1,28 +1,23 @@
 .container {
     display: flex;
     height: 100%;
-    width: 100%;
-    background: url(../../assets/fundo.png); 
+    background: url(../../assets/fundo.png);
     font-family: 'Asap', sans-serif;
 }
 
-.dashboard-comandos {
-    width: 500px;
+.container-dash{
+    min-width: 500px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     padding-top: 2em;
-    background-color: rgba(245, 245, 245, 0.4);
+    background-color: rgba(245, 245, 245, 1);
     border-radius: 1em; 
 }
 
-.img-dash {
-    padding-left: 2.5em;
-}
-
-.container-opcoes {
-    margin-top: 0.5em;
+ul {
     width: 100%;
 }
 
@@ -31,6 +26,7 @@ ul li {
     padding: 1.5em 2em;
     font-size: 16pt;
     font-weight: 500;
+    border-bottom: 0.1px solid red;
 }
 
 ul li:hover {

@@ -35,118 +35,113 @@ export default function CadastroQuestoes() {
     }
 
     return (
-        <div className="main-container">
-            <div className="cadastro-questoes-container">
-                <form onSubmit={cadastrarQuestao}>
-                    <h1>Cadastre a questão e marque a alternativa correta:</h1>
-                    <div className="item-cadastro-questao">
-                        <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
-                            <option value="Selecione">Selecione uma categoria:</option>
-                            <option value="portugues">Português</option>
-                            <option value="matematica">Matemática</option>
-                            <option value="informatica">Informática</option>
-                            <option value="conhecimentos">Conhecimentos Gerais</option>
-                        </select>
-                    </div>
+        <form className="form" onSubmit={cadastrarQuestao}>
+            <h1>Cadastre a questão e marque a alternativa correta:</h1>
+            <div className="item-cadastro-questao">
+                <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
+                    <option value="Selecione">Selecione uma categoria:</option>
+                    <option value="portugues">Português</option>
+                    <option value="matematica">Matemática</option>
+                    <option value="informatica">Informática</option>
+                    <option value="conhecimentos">Conhecimentos Gerais</option>
+                </select>
+            </div>
 
+            <div className="item-cadastro-questao">
+                <textarea
+                    className="form-control"
+                    id="inputEnunciado"
+                    placeholder="Digite a pergunta:"
+                    value={enunciado}
+                    onChange={e => setEnunciado(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <textarea
-                            className="form-control"
-                            id="inputEnunciado"
-                            placeholder="Digite a pergunta:"
-                            value={enunciado}
-                            onChange={e => setEnunciado(e.target.value)}
-                        />
-                    </div>
+            <div className="item-cadastro-questao">
+                <input type="radio"
+                    name="alternativacorreta"
+                    value="alternativa1"
+                    checked={alternativacorreta === "alternativa1"}
+                    onChange={e => setAlternativaCorreta(e.target.value)}
+                />
+                <textarea
+                    className="form-control"
+                    id="inputAlternativa1"
+                    placeholder="Digite a primeira alternativa:"
+                    value={alternativa1}
+                    onChange={e => setAlternativa1(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <input type="radio"
-                            name="alternativacorreta"
-                            value="alternativa1"
-                            checked={alternativacorreta === "alternativa1"}
-                            onChange={e => setAlternativaCorreta(e.target.value)}
-                        />
-                        <textarea
-                            className="form-control"
-                            id="inputAlternativa1"
-                            placeholder="Digite a primeira alternativa:"
-                            value={alternativa1}
-                            onChange={e => setAlternativa1(e.target.value)}
-                        />
-                    </div>
+            <div className="item-cadastro-questao">
+                <input type="radio"
+                    name="alternativacorreta"
+                    value="alternativa2"
+                    checked={alternativacorreta === "alternativa2"}
+                    onChange={e => setAlternativaCorreta(e.target.value)}
+                />
+                <textarea
+                    className="form-control"
+                    id="inputalternativa2"
+                    placeholder="Digite a segunda alternativa:"
+                    value={alternativa2}
+                    onChange={e => setAlternativa2(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <input type="radio"
-                            name="alternativacorreta"
-                            value="alternativa2"
-                            checked={alternativacorreta === "alternativa2"}
-                            onChange={e => setAlternativaCorreta(e.target.value)}
-                        />
-                        <textarea
-                            className="form-control"
-                            id="inputalternativa2"
-                            placeholder="Digite a segunda alternativa:"
-                            value={alternativa2}
-                            onChange={e => setAlternativa2(e.target.value)}
-                        />
-                    </div>
+            <div className="item-cadastro-questao">
+                <input type="radio"
+                    name="alternativacorreta"
+                    value="alternativa3"
+                    checked={alternativacorreta === "alternativa3"}
+                    onChange={e => setAlternativaCorreta(e.target.value)}
+                />
+                <textarea
+                    className="form-control"
+                    id="inputalternativa3"
+                    placeholder="Digite a terceira alternativa:"
+                    value={alternativa3}
+                    onChange={e => setAlternativa3(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <input type="radio"
-                            name="alternativacorreta"
-                            value="alternativa3"
-                            checked={alternativacorreta === "alternativa3"}
-                            onChange={e => setAlternativaCorreta(e.target.value)}
-                        />
-                        <textarea
-                            className="form-control"
-                            id="inputalternativa3"
-                            placeholder="Digite a terceira alternativa:"
-                            value={alternativa3}
-                            onChange={e => setAlternativa3(e.target.value)}
-                        />
-                    </div>
+            <div className="item-cadastro-questao">
+                <input type="radio"
+                    name="alternativacorreta"
+                    value="alternativa4"
+                    checked={alternativacorreta === "alternativa4"}
+                    onChange={e => setAlternativaCorreta(e.target.value)}
+                />
+                <textarea
+                    className="form-control"
+                    id="inputalternativa4"
+                    placeholder="Digite a quarta alternativa:"
+                    value={alternativa4}
+                    onChange={e => setAlternativa4(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <input type="radio"
-                            name="alternativacorreta"
-                            value="alternativa4"
-                            checked={alternativacorreta === "alternativa4"}
-                            onChange={e => setAlternativaCorreta(e.target.value)}
-                        />
-                        <textarea
-                            className="form-control"
-                            id="inputalternativa4"
-                            placeholder="Digite a quarta alternativa:"
-                            value={alternativa4}
-                            onChange={e => setAlternativa4(e.target.value)}
-                        />
-                    </div>
+            <div className="item-cadastro-questao">
+                <input type="radio"
+                    name="alternativacorreta"
+                    value="alternativa5"
+                    checked={alternativacorreta === "alternativa5"}
+                    onChange={e => setAlternativaCorreta(e.target.value)}
+                />
+                <textarea
+                    className="form-control"
+                    id="inputalternativa5"
+                    placeholder="Digite a quinta alternativa :"
+                    value={alternativa5}
+                    onChange={e => setAlternativa5(e.target.value)}
+                />
+            </div>
 
-                    <div className="item-cadastro-questao">
-                        <input type="radio"
-                            name="alternativacorreta"
-                            value="alternativa5"
-                            checked={alternativacorreta === "alternativa5"}
-                            onChange={e => setAlternativaCorreta(e.target.value)}
-                        />
-                        <textarea
-                            className="form-control"
-                            id="inputalternativa5"
-                            placeholder="Digite a quinta alternativa :"
-                            value={alternativa5}
-                            onChange={e => setAlternativa5(e.target.value)}
-                        />
-                    </div>
+            <div className="cont-buttons">
+                <button type="button" onClick={e => setVoltar(true)}>Voltar</button>
+                <button id="botaoCadastrar" type="submit">Cadastrar</button>
+            </div>
+        </form>
 
-                    <div className="container-buttons">
-                        <button type="button" onClick={e => setVoltar(true)}>Voltar</button>
-                        <button id="botaoCadastrar" type="submit">Cadastrar</button>
-                    </div>
-                </form>
-            </div >
-
-        </div>
     );
 }
