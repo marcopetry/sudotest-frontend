@@ -13,10 +13,6 @@ export default function CadastroQuestoes() {
         [voltar, setVoltar] = useState(false),
         [categoria, setCategoria] = useState('Selecione');
 
-
-    //const voltar = () => alert('precisamos implementar o voltar'); 
-    //const cadastrarQuestao = () => alert('Falta implementar questao');
-
     async function cadastrarQuestao(e) {
         e.preventDefault();
 
@@ -38,13 +34,11 @@ export default function CadastroQuestoes() {
         }
     }
 
-
     return (
         <div className="main-container">
             <div className="cadastro-questoes-container">
                 <form onSubmit={cadastrarQuestao}>
-                    <h1>Cadastre a questão e marque a alternativaposta correta:</h1>
-
+                    <h1>Cadastre a questão e marque a alternativa correta:</h1>
                     <div className="item-cadastro-questao">
                         <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
                             <option value="Selecione">Selecione uma categoria:</option>

@@ -1,5 +1,5 @@
 import React, { useState, Redirect } from 'react';
-import './CadastroQuestoes.css';
+import './CadastroProvas.css';
 import api from '../../services/api';
 
 export default function CadastroProva() {
@@ -13,32 +13,10 @@ export default function CadastroProva() {
         [voltar, setVoltar] = useState(false),
         [categoria, setCategoria] = useState('Selecione');
 
-    async function cadastrarProva(e) {
-        e.preventDefault();
-
-        const response = await api.post('/cadastroQuestao', {
-            enunciado,
-            alternativa1,
-            alternativa2,
-            alternativa3,
-            alternativa4,
-            alternativa5,
-            alternativacorreta,
-            categoria
-        })
-
-        if (response.data.Erro) {
-            alert(response.data.Erro)
-        } else{
-            alert('Questão cadastrada com sucesso')
-        }
-    }
-
-
     return (
         <div className="main-container">
             <div className="cadastro-questoes-container">
-                <form onSubmit={cadastrarProva}>
+                <form >
                     <h1>Cadastre a questão e marque a alternativaposta correta:</h1>
 
                     <div className="item-cadastro-questao">

@@ -1,7 +1,7 @@
 /* Div principal */
 .main-container {
     height: 100%;
-    background: url(../../assets/fundo.png);
+    /* background: url(../../assets/fundo.png); */
     display: flex;
     align-items: center;
     justify-content: center;
