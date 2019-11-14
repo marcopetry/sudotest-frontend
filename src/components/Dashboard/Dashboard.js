@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Dashboard.css';
 import ControlerAdm from '../ControlerAdm/ControlerAdm';
 
 export default function Dashboard({ history }) {
-    const [atividade, setAtividade] = useState('cadastrar-questao');
+    const [atividade, setAtividade] = useState('home');
 
     const mudaAtividade = (e) => {
         setAtividade(e);

@@ -1,4 +1,4 @@
-import React, { useState, Redirect } from 'react';
+import React, { useState } from 'react';
 import './CadastroQuestoes.css';
 import api from '../../services/api';
 
@@ -10,7 +10,6 @@ export default function CadastroQuestoes() {
         [alternativa4, setAlternativa4] = useState(''),
         [alternativa5, setAlternativa5] = useState(''),
         [alternativacorreta, setAlternativaCorreta] = useState(''),
-        [voltar, setVoltar] = useState(false),
         [categoria, setCategoria] = useState('Selecione');
 
     async function cadastrarQuestao(e) {
@@ -32,6 +31,17 @@ export default function CadastroQuestoes() {
         } else{
             alert('Questão cadastrada com sucesso')
         }
+    }
+
+    const limpar = () => {
+        setEnunciado('');
+        setAlternativa1('');
+        setAlternativa2('');
+        setAlternativa3('');
+        setAlternativa4('');
+        setAlternativa5('');
+        setCategoria('Selecione');
+        setAlternativaCorreta('');
     }
 
     return (
@@ -140,7 +150,7 @@ export default function CadastroQuestoes() {
                     </div>
 
                     <div className="cont-buttons">
-                        <button type="button" onClick={e => setVoltar(true)}>Limpar campos</button>
+                        <button type="button" onClick={limpar}>Limpar campos</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>

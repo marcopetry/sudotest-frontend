@@ -3,9 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
-import Questoes from './components/Questoes/Questoes'
-import CadastroQuestoes from './components/CadastroQuestoes/CadastroQuestoes';
-import CadastroProva from './components/CadastroProva/CadastroProva';
 import Dashboard from './components/Dashboard/Dashboard';
 
 export default function Routes() {
