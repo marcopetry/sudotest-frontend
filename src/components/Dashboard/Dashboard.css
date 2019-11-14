@@ -25,15 +25,14 @@ ul li {
     list-style: none;
     padding: 1.5em 2em;
     font-size: 16pt;
-    font-weight: 500;
-    border-bottom: 0.1px solid red;
+    font-weight: 400;
 }
 
 ul li:hover {
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(200, 200, 200, 1);
 }
 
 .atual {
-    background-color: rgba(256, 256, 256, 0.5);
+    background-color: #afafaf;
 }

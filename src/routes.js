@@ -12,7 +12,6 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Route path="/" exact component={Login}/>
-            <Route path="/cadastro_questoes" exact component={CadastroQuestoes}/> 
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/dashboard" exact component={Dashboard} />
         </BrowserRouter>

@@ -1,53 +1,77 @@
-.form {
-    margin: 3em;
+.container-questao {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+form {
     background-color: rgba(245, 245, 245, 0.548);
     border-radius: 1em;
-    padding: 3em;
-    width: 80%;
+    width: 95%;
+    font-family: 'Asap', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-form {
+    margin: 3em;
 }
 
 form h1 {
-    margin-left: 2em;
-    font-family: 'Asap', sans-serif;
     font-weight: 700;
 }
 
-.item-cadastro-questao {
-    margin: 1.5em 0;
+.item-cadastro-questao, .item-cadastro-questao-sem-radio {
     display: flex;
-    align-items: center;
+    align-items: center;    
+    margin-top: 1em;
+}
+
+.item-cadastro-questao{
+    justify-content: space-between;
+}
+
+.item-cadastro-questao-sem-radio{
     justify-content: flex-end;
 }
 
 .item-cadastro-questao input {
     width: 3em;
     height: 3em;
-    margin-right: 2em;
 }
 
-.item-cadastro-questao textarea, .item-cadastro-questao select {
+.item-cadastro-questao textarea, 
+.item-cadastro-questao-sem-radio select, 
+.item-cadastro-questao-sem-radio textarea {
     width: 90%;
     height: 5em; 
     border-radius: 0.5em;
-    padding-left: 1em;
     font-size: 16px;
     line-height: 20px;
     color: #666;
-    margin: 1px 0 1px 0;
     font-family: 'Asap', sans-serif;
     font-weight: 400;
 }
 
-.item-cadastro-questao select {
+.item-cadastro-questao-sem-radio select {
     height: 3em;
     font-size: 16px;
     background-color: #fff;
 }
  
-#inputPergunta {
+#inputEnunciado {
     height: 10em;
-    margin-left: 4em;
 } 
+
+textarea, select {
+    padding-left: 2em;
+}
+
+textarea {
+    padding-top: 0.5em;
+}
 
 .cont-buttons {
     display: flex;
@@ -55,7 +79,7 @@ form h1 {
 }
 
 .cont-buttons button {
-    width: 40%; 
+    width: 45%;
     border: 0;
     border-radius: 4px;
     height: 48px;

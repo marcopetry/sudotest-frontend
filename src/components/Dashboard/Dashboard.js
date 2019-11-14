@@ -3,7 +3,7 @@ import './Dashboard.css';
 import ControlerAdm from '../ControlerAdm/ControlerAdm';
 
 export default function Dashboard({ history }) {
-    const [atividade, setAtividade] = useState('');
+    const [atividade, setAtividade] = useState('cadastrar-questao');
 
     const mudaAtividade = (e) => {
         setAtividade(e);
@@ -20,9 +20,10 @@ export default function Dashboard({ history }) {
                 <div className="container-dash">
                     <ul>
                         <li id="home" onClick={() => mudaAtividade('home')}>Home</li>
-                        <li id="cadastrar-questao" onClick={() => mudaAtividade('cadastrar-questao')}>Cadastro de questão</li>
-                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Cadastro de prova</li>
-                        <li>Relatórios</li>
+                        <li id="cadastrar-questao" onClick={() => mudaAtividade('cadastrar-questao')}>Cadastrar de questão</li>
+                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Criar de prova</li>
+                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Provas abertas</li>
+                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Provas encerradas</li>
                         <li>Sair</li>
                     </ul>
                 </div>

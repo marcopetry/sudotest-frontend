@@ -1,0 +1,62 @@
+.container-prova {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+form {
+    background-color: rgba(245, 245, 245, 0.548);
+    border-radius: 1em;
+    width: 95%;
+    font-family: 'Asap', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-form {
+    margin: 3em;
+}
+
+.container-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em 0;
+}
+
+p {
+    font-size: 16pt;
+    font-weight: 400;
+}
+
+.container-input input {
+    border-radius: 0.5em;
+    height: 3em;
+    width: 30em;
+}
+
+.cont-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 4em 0 0 0;
+}
+
+.container-input button {
+    width: 45%; 
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 25px; 
+    background: #DF4723;
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Asap', sans-serif;    
+}
+
+#botaoCadastrar {
+  background: #006641;
+}
