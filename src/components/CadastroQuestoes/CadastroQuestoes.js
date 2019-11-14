@@ -46,9 +46,9 @@ export default function CadastroQuestoes() {
 
     return (
         <div className="container-questao">
-            <form onSubmit={cadastrarQuestao}>
+            <form className="form" onSubmit={cadastrarQuestao}>
                 <div className="container-form">
-                    <h1>Cadastre a questão e marque a alternativa correta:</h1>
+                    <h1 className="text-h1">Cadastre a questão e marque a alternativa correta:</h1>
                     <div className="item-cadastro-questao-sem-radio">
                         <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
                             <option value="Selecione">Selecione uma categoria:</option>
