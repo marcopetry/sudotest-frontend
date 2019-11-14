@@ -58,7 +58,7 @@ export default function CadastroQuestoes() {
                         </select>
                     </div>
 
-                    <div className="item-cadastro-questao">
+                    <div className="item-cadastro-questao-sem-radio">
                         <textarea
                             className="form-control"
                             id="inputEnunciado"
