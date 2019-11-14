@@ -3,7 +3,7 @@ import './Questoes.css';
 import Respostas from '../Resposta/Resposta'
 
 export default function Questoes(props) {
-const [pergunta, setPergunta] = useState(''),
+    const [pergunta, setPergunta] = useState(''),
         [res1, setRes1] = useState(''),
         [res2, setRes2] = useState(''),
         [res3, setRes3] = useState(''),
@@ -30,8 +30,8 @@ const [pergunta, setPergunta] = useState(''),
                 <Respostas />
                 <Respostas />
                 <div className="container-buttons">
-                    <button type="submit">Cadastrar</button>
                     <button type="button">Voltar</button>
+                    <button id="botaoCadastrar" type="button">Avançar</button>
                 </div>            
             </div>
         </div>
