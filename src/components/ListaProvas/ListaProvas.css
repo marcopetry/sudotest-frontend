@@ -10,43 +10,55 @@
     border-radius: 1em;
     font-family: 'Asap', sans-serif;
     text-align: center;
-    width: 60%;
+    width: 80%;
     padding: 1em;
     margin-top: 2em;
+    overflow: auto;
 }
 
 .cabecalho-tabela {
     background-color: rgba(245, 245, 245, 1);
-    border-radius: 0.5em;
+}
+
+.border-left {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+.border-right {
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
 
 thead tr th, tbody tr td{
     padding: 1em;
-    border-radius: 0.5em;
 }
 
 tbody tr:hover {
     background-color: white;
 }
 
-.container-btn{
+tbody tr input {
+    height: 2em;
+    width: 2em;
+}
+
+.col-btn{
     padding: 0;
     margin: 0;
 }
 
-.btn-ver-mais {
-    height: 2.5em;
-    width: 8em;
-    border-radius: 0.5em;
+.btn-table {
+    height: 2em;
+    width: 95%;
+    border-radius: 0.4em;
     border-width: 0;
     background: #006641;
     color: #FFF;
     cursor: pointer;
     font-weight: 700;
     font-size: 16pt;
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-.container-btn:hover {
-    background-color: rgba(245, 245, 245, 0);
-}

@@ -6,8 +6,7 @@
 }
 
 .container-dash{
-    min-width: 500px;
-    max-width: 500px;
+    width: 30em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
