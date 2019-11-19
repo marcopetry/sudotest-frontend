@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Dashboard.css';
-import ControlerAdm from '../ControlerAdm/ControlerAdm';
+import './DashboardAluno.css';
+import ControlerAluno from '../ControlerAluno/ControlerAluno';
 
-export default function Dashboard({ history }) {
+export default function DashboardAluno({ history }) {
     const [atividade, setAtividade] = useState('home');
 
     const mudaAtividade = (e) => {
@@ -20,14 +20,13 @@ export default function Dashboard({ history }) {
                 <div className="container-dash">
                     <ul>
                         <li id="home" onClick={() => mudaAtividade('home')}>Home</li>
-                        <li id="cadastrar-questao" onClick={() => mudaAtividade('cadastrar-questao')}>Cadastrar de questão</li>
-                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Criar de prova</li>
-                        <li id="home" onClick={() => mudaAtividade('home')}>Provas abertas</li>
-                        <li id="home" onClick={() => mudaAtividade('home')}>Provas encerradas</li>
+                        <li id="inserir-token" onClick={() => mudaAtividade('inserir-token')}>Fazer prova</li>
+                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Meus resultados</li>
+                        <li id="home" onClick={() => mudaAtividade('home')}>Editar perfil</li>
                         <li onClick={() => history.push('/')}>Sair</li>
                     </ul>
                 </div>
-                <ControlerAdm atividade={atividade}/>
+                <ControlerAluno atividade={atividade}/>
             </div>
     );
 }
