@@ -1,4 +1,4 @@
-import React, { useState, Redirect } from 'react';
+import React, { useState } from 'react';
 import './CadastroQuestoes.css';
 import api from '../../services/api';
 
@@ -10,42 +10,45 @@ export default function CadastroQuestoes() {
         [alternativa4, setAlternativa4] = useState(''),
         [alternativa5, setAlternativa5] = useState(''),
         [alternativacorreta, setAlternativaCorreta] = useState(''),
-        [voltar, setVoltar] = useState(false),
         [categoria, setCategoria] = useState('Selecione');
 
+        async function cadastrarQuestao(e) {
+            e.preventDefault();
+            const response = await api.post('/cadastroQuestao', {
+                enunciado,
+                alternativa1,
+                alternativa2,
+                alternativa3,
+                alternativa4,
+                alternativa5,
+                alternativacorreta,
+                categoria
+            })
 
-    //const voltar = () => alert('precisamos implementar o voltar'); 
-    //const cadastrarQuestao = () => alert('Falta implementar questao');
-
-    async function cadastrarQuestao(e) {
-        e.preventDefault();
-
-        const response = await api.post('/cadastroQuestao', {
-            enunciado,
-            alternativa1,
-            alternativa2,
-            alternativa3,
-            alternativa4,
-            alternativa5,
-            alternativacorreta,
-            categoria
-        })
-
-        if (response.data.Erro) {
-            alert(response.data.Erro)
-        } else{
-            alert('Questão cadastrada com sucesso')
+            if (response.data.Erro) {
+                alert(response.data.Erro)
+            } else{
+                alert('Questão cadastrada com sucesso')
+            }
         }
+
+    const limpar = () => {
+        setEnunciado('');
+        setAlternativa1('');
+        setAlternativa2('');
+        setAlternativa3('');
+        setAlternativa4('');
+        setAlternativa5('');
+        setCategoria('Selecione');
+        setAlternativaCorreta('');
     }
 
-
     return (
-        <div className="main-container">
-            <div className="cadastro-questoes-container">
-                <form onSubmit={cadastrarQuestao}>
-                    <h1>Cadastre a questão e marque a alternativaposta correta:</h1>
-
-                    <div className="item-cadastro-questao">
+        <div className="container-questao">
+            <form className="form" onSubmit={cadastrarQuestao}>
+                <div className="container-form">
+                    <h1 className="text-h1">Cadastre a questão e marque a alternativa correta:</h1>
+                    <div className="item-cadastro-questao-sem-radio">
                         <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
                             <option value="Selecione">Selecione uma categoria:</option>
                             <option value="portugues">Português</option>
@@ -55,8 +58,7 @@ export default function CadastroQuestoes() {
                         </select>
                     </div>
 
-
-                    <div className="item-cadastro-questao">
+                    <div className="item-cadastro-questao-sem-radio">
                         <textarea
                             className="form-control"
                             id="inputEnunciado"
@@ -146,13 +148,13 @@ export default function CadastroQuestoes() {
                         />
                     </div>
 
-                    <div className="container-buttons">
-                        <button type="button" onClick={e => setVoltar(true)}>Voltar</button>
+                    <div className="cont-buttons">
+                        <button type="button" onClick={limpar}>Limpar campos</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
-                </form>
-            </div >
-
+                </div>
+            </form>
         </div>
+
     );
 }
