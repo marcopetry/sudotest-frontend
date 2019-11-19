@@ -3,6 +3,7 @@ import logo from '../../assets/logo.png';
 import CadastroQuestoes from '../CadastroQuestoes/CadastroQuestoes';
 import CadastroProva from '../CadastroProva/CadastroProva';
 import './ControleAdm.css';
+import ListaProvas from '../ListaProvas/ListaProvas';
 
 export default function ControlerAdm(props){
 
@@ -15,6 +16,12 @@ export default function ControlerAdm(props){
     if(props.atividade === 'cadastrar-prova'){
         return (
             <CadastroProva />
+        );
+    }
+
+    if(props.atividade === 'listar-provas'){
+        return (
+            <ListaProvas />
         );
     }
 
