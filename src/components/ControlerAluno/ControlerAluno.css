@@ -1,0 +1,34 @@
+.dashboard-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Asap', sans-serif;
+    align-self: center;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+.text-container h1 {
+    font-weight: 400;
+    font-size: 80px;
+}
+
+.container-text-painel h1 {
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+}
+
+#sudo {
+    color: #2C70F8;
+}
+
+#test {
+    color: #fb9c4b;
+}
