@@ -1,0 +1,14 @@
+.tela-espera-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tela-espera-container img {
+    display: block;
+    text-align: center;
+    margin-bottom: 5em;
+}
+

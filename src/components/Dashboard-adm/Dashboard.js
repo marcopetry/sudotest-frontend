@@ -3,7 +3,8 @@ import './Dashboard.css';
 import ControlerAdm from '../ControlerAdm/ControlerAdm';
 
 export default function Dashboard({ history }) {
-    const [atividade, setAtividade] = useState('home');
+    const [atividade, setAtividade] = useState('home'),
+          [espera, setEspera] = useState(false);
 
     const mudaAtividade = (e) => {
         setAtividade(e);
@@ -22,12 +23,13 @@ export default function Dashboard({ history }) {
                         <li id="home" onClick={() => mudaAtividade('home')}>Home</li>
                         <li id="cadastrar-questao" onClick={() => mudaAtividade('cadastrar-questao')}>Cadastrar de questão</li>
                         <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Criar de prova</li>
-                        <li id="listar-provas" onClick={() => mudaAtividade('listar-provas')}>Provas abertas</li>
-                        <li id="home" onClick={() => mudaAtividade('home')}>Provas encerradas</li>
+                        <li id="listar-alunos" onClick={() => mudaAtividade('listar-alunos')}>Listar alunos</li>
+                        <li id="listar-provas-abertas" onClick={() => mudaAtividade('listar-provas-abertas')}>Provas abertas</li>
+                        <li id="listar-provas-encerradas" onClick={() => mudaAtividade('listar-provas-encerradas')}>Provas encerradas</li>
                         <li onClick={() => history.push('/')}>Sair</li>
                     </ul>
                 </div>
-                <ControlerAdm atividade={atividade}/>
+                <ControlerAdm atividade={atividade} espera={espera}/>
             </div>
     );
 }
