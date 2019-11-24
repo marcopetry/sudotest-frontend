@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Resposta.css'
 
 export default function Reposta(props) {
+    const [resposta, setResposta] = useState('');
     
     return (
         <div className="resposta">            

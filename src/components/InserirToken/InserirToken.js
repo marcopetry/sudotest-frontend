@@ -3,12 +3,12 @@ import './InserirToken.css';
 
 import logo from '../../assets/logo.png';
 
-export default function InserirToken({ history }) {
+export default function InserirToken(props, { history }) {
     const [token, setToken] = useState('');
 
     return (
         <div className="token-container">
-            <form onSubmit={() => alert('clicou')}>
+            <form>
                 <div className="img-form">
                     <img src={logo} alt="Sudotec Logo" />
                 </div>

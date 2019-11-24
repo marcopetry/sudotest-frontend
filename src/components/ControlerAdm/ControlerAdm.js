@@ -1,11 +1,21 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
+import './ControleAdm.css';
 import CadastroQuestoes from '../CadastroQuestoes/CadastroQuestoes';
 import CadastroProva from '../CadastroProva/CadastroProva';
-import './ControleAdm.css';
 import ListaProvas from '../ListaProvas/ListaProvas';
+import TelaEspera from '../TelaEspera/TelaEspera';
+import ListaAlunos from '../ListaAlunos/ListaAlunos';
 
 export default function ControlerAdm(props){
+    const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
+
+    //setar se os dados tbm estiverem vazios depois de testar
+    if(props.espera) {
+        return (
+            <TelaEspera />
+        );
+    }
 
     if(props.atividade === 'cadastrar-questao'){
         return (
@@ -19,9 +29,15 @@ export default function ControlerAdm(props){
         );
     }
 
-    if(props.atividade === 'listar-provas'){
+    if(props.atividade === 'listar-alunos'){
         return (
-            <ListaProvas />
+            <ListaAlunos />
+        );
+    }
+
+    if(props.atividade === 'listar-provas-abertas' || props.atividade === 'listar-provas-encerradas'){
+        return (
+            <ListaProvas funcao={() => alert('clicou bocó')} cabecalhoTabela={cabecalhoProvasAbertas}/>
         );
     }
 

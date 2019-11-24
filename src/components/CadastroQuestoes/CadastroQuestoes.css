@@ -9,20 +9,14 @@
 .form {
     background-color: rgba(245, 245, 245, 0.548);
     border-radius: 1em;
-    width: 95%;
+    width: 90%;
     font-family: 'Asap', sans-serif;
     display: flex;
     flex-direction: column;
 }
 
 .container-form {
-    margin: 3em;
-}
-
-.text-h1 {
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
+    margin: 2em;
 }
 
 .item-cadastro-questao, .item-cadastro-questao-sem-radio {
