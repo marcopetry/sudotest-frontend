@@ -21,8 +21,8 @@ export default function DashboardAluno({ history }) {
                     <ul>
                         <li id="home" onClick={() => mudaAtividade('home')}>Home</li>
                         <li id="inserir-token" onClick={() => mudaAtividade('inserir-token')}>Fazer prova</li>
-                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Meus resultados</li>
-                        <li id="home" onClick={() => mudaAtividade('home')}>Editar perfil</li>
+                        <li id="meus-resultados" onClick={() => mudaAtividade('meus-resultados')}>Meus resultados</li>
+                        <li id="prova" onClick={() => mudaAtividade('prova')}>Editar perfil</li>
                         <li onClick={() => history.push('/')}>Sair</li>
                     </ul>
                 </div>

@@ -1,22 +1,39 @@
-.main-container {
+.container-questoes {
     height: 100%;
-    background: url(../../assets/fundo.png);
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .form-questoes {
-    width: 70%;    
+    width: 90%;    
     background-color: rgba(245, 245, 245, 0.548);
     border-radius: 1em;
+    margin: 3em 0;
 }
 
-.questao {
+.info-prova {
+    justify-content: space-between;
+}
+
+.container-info {
     margin: 2em;
-    padding: 2em;
+    padding: 1.5em;
     background-color:#fff;
     border-radius: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.alinhar-esquerda {
+    margin-left: 3.5em;
+}
+
+.check-resposta {
+    height: 7em;
+    width: 7em;
+    margin-right: 2em;       
 }
 
 .container-buttons {

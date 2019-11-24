@@ -2,13 +2,26 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import './ControlerAluno.css';
 import InserirToken from '../InserirToken/InserirToken';
-import Questoes from '../Questoes/Questoes';
+import Resultado from '../Resultado/Resultado';
+import Prova from '../Prova/Prova';
 
 export default function ControlerAluno(props){
 
     if(props.atividade === 'inserir-token'){
         return (
             <InserirToken />
+        );
+    }
+
+    if(props.atividade === 'meus-resultados'){
+        return(
+            <Resultado />
+        );
+    }
+
+    if(props.atividade === 'prova'){
+        return (
+            <Prova />
         );
     }
 

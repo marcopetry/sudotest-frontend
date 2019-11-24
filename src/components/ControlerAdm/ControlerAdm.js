@@ -35,7 +35,7 @@ export default function ControlerAdm(props){
         );
     }
 
-    if(props.atividade === 'listar-provas-abertas' || props.atividade === 'listar-provas-encerradas'){
+    if(props.atividade === 'listar-provas-abertas'){
         return (
             <ListaProvas funcao={() => alert('clicou bocó')} cabecalhoTabela={cabecalhoProvasAbertas}/>
         );
