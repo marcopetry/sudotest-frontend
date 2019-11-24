@@ -16,13 +16,7 @@
 }
 
 .container-form {
-    margin: 3em;
-}
-
-.text-h1 {
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
+    margin: 2em;
 }
 
 .item-cadastro-questao, .item-cadastro-questao-sem-radio {

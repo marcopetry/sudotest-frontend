@@ -48,7 +48,6 @@ export default function CadastroQuestoes() {
         <div className="container-questao">
             <form className="form" onSubmit={cadastrarQuestao}>
                 <div className="container-form">
-                    <h1 className="text-h1">Cadastre a questão e marque a alternativa correta:</h1>
                     <div className="item-cadastro-questao-sem-radio">
                         <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
                             <option value="Selecione">Selecione uma categoria:</option>
@@ -79,7 +78,7 @@ export default function CadastroQuestoes() {
                         <textarea
                             className="form-control"
                             id="inputAlternativa1"
-                            placeholder="Digite a primeira alternativa:"
+                            placeholder="Digite a primeira alternativa e marque se esta for a correta:"
                             value={alternativa1}
                             onChange={e => setAlternativa1(e.target.value)}
                         />
@@ -95,7 +94,7 @@ export default function CadastroQuestoes() {
                         <textarea
                             className="form-control"
                             id="inputalternativa2"
-                            placeholder="Digite a segunda alternativa:"
+                            placeholder="Digite a segunda alternativa e marque se esta for a correta:"
                             value={alternativa2}
                             onChange={e => setAlternativa2(e.target.value)}
                         />
@@ -111,7 +110,7 @@ export default function CadastroQuestoes() {
                         <textarea
                             className="form-control"
                             id="inputalternativa3"
-                            placeholder="Digite a terceira alternativa:"
+                            placeholder="Digite a terceira alternativa e marque se esta for a correta:"
                             value={alternativa3}
                             onChange={e => setAlternativa3(e.target.value)}
                         />
@@ -127,7 +126,7 @@ export default function CadastroQuestoes() {
                         <textarea
                             className="form-control"
                             id="inputalternativa4"
-                            placeholder="Digite a quarta alternativa:"
+                            placeholder="Digite a quarta alternativa e marque se esta for a correta:"
                             value={alternativa4}
                             onChange={e => setAlternativa4(e.target.value)}
                         />
@@ -143,7 +142,7 @@ export default function CadastroQuestoes() {
                         <textarea
                             className="form-control"
                             id="inputalternativa5"
-                            placeholder="Digite a quinta alternativa :"
+                            placeholder="Digite a quinta alternativa e marque se esta for a correta:"
                             value={alternativa5}
                             onChange={e => setAlternativa5(e.target.value)}
                         />

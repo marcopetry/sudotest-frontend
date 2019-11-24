@@ -21,9 +21,9 @@ export default function Dashboard({ history }) {
                 <div className="container-dash">
                     <ul>
                         <li id="home" onClick={() => mudaAtividade('home')}>Home</li>
+                        <li id="listar-alunos" onClick={() => mudaAtividade('listar-alunos')}>Alunos Cadastrados</li>
                         <li id="cadastrar-questao" onClick={() => mudaAtividade('cadastrar-questao')}>Cadastrar de questão</li>
-                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Criar de prova</li>
-                        <li id="listar-alunos" onClick={() => mudaAtividade('listar-alunos')}>Listar alunos</li>
+                        <li id="cadastrar-prova" onClick={() => mudaAtividade('cadastrar-prova')}>Cadastrar prova</li>
                         <li id="listar-provas-abertas" onClick={() => mudaAtividade('listar-provas-abertas')}>Provas abertas</li>
                         <li id="listar-provas-encerradas" onClick={() => mudaAtividade('listar-provas-encerradas')}>Provas encerradas</li>
                         <li onClick={() => history.push('/')}>Sair</li>
