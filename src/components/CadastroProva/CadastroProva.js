@@ -1,5 +1,7 @@
+/* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import './CadastroProva.css';
+import api from '../../services/api'
 
 export default function CadastroProva() {
     const   [horaInicio, setHoraInicio] = useState(''),
@@ -18,17 +20,52 @@ export default function CadastroProva() {
         setHoraInicio('');
         setHoraTerminio('');
         setData('');
-        setQtdQuestoesMatematica('');
-        setQtdQuestoesPortugues('');
-        setQtdQuestoesInformatica('');
-        setQtdQuestoesConhecimentosGerais('');
+        setQtdMatematica('');
+        setQtdPortugues('');
+        setQtdInformatica('');
+        setQtdConhecimentosGerais('');
         setPorcentagemAprovacao('');
         setVagasDisponiveis('');
     }
 
-    const cadastrarProva = (e) => {
+    async function cadastrarProva(e) {
         e.preventDefault();
-        alert('Falta implementar cadastro!');
+        var token = await gerarToken();
+        
+        const response = await api.post('/cadastroProva', {
+            tempoExecucao,
+            qtdMatematica,
+            qtdPortugues,
+            qtdInformatica,
+            qtdConhecimentosGerais,
+            porcentagemAprovacao,
+            dataRealizacao,
+            qtdVagas,
+            token,
+            status: "Aberta",
+        })
+        console.log(response)
+    }
+
+    async function gerarToken() {
+        var min = Math.ceil(0);
+        var max = Math.floor(10);
+        for(var i = 0; i < 4; i++){
+            var random = Math.floor(Math.random() * (max - min) + min);
+            if(i == 0) {
+                var token = random;
+            }else {
+                token = "" + token + random;
+            }
+        };
+        const response = await api.post('/token', {
+            token: token
+        })
+        if (response.data == null) {
+            return token;
+        } else {
+            gerarToken();
+        }
     }
 
     return (
@@ -36,18 +73,11 @@ export default function CadastroProva() {
             <form className="form" onSubmit={cadastrarProva}>
                 <div className="container-form">
                     <div className="container-input">
-                        <p>Nome da prova:</p>
-                        <input  type="text"
-                                placeholder="Digite aqui o nome do prova:"
-                                value={nomeProva}
-                                onChange={e => setNomeProva(e.target.value)}/>
-                    </div>
-                    <div className="container-input">
                         <p>Data de realização:</p>
-                        <input  type="date"
-                                placeholder="dia/mês/ano"
-                                value={dataRealizacao}
-                                onChange={e => setData(e.target.value)}/>
+                        <input type="date"
+                            placeholder="dia/mês/ano"
+                            value={dataRealizacao}
+                            onChange={e => setData(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Hora de início:</p>
@@ -65,38 +95,38 @@ export default function CadastroProva() {
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de matemática:</p>
-                        <input  type="number"
-                                placeholder="Questões de matemática:"
-                                value={qtdQuestoesMatematica}
-                                onChange={e => setQtdQuestoesMatematica(e.target.value)}/>
+                        <input type="number"
+                            placeholder="Questões de matemática:"
+                            value={qtdMatematica}
+                            onChange={e => setQtdMatematica(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de português:</p>
-                        <input  type="number"
-                                placeholder="Questões de português:"
-                                value={qtdQuestoesPortugues}
-                                onChange={e => setQtdQuestoesPortugues(e.target.value)}/>
+                        <input type="number"
+                            placeholder="Questões de português:"
+                            value={qtdPortugues}
+                            onChange={e => setQtdPortugues(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de informática:</p>
-                        <input  type="number"
-                                placeholder="Questões de informática:"
-                                value={qtdQuestoesInformatica}
-                                onChange={e => setQtdQuestoesInformatica(e.target.value)}/>
+                        <input type="number"
+                            placeholder="Questões de informática:"
+                            value={qtdInformatica}
+                            onChange={e => setQtdInformatica(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de conhecimentos gerais:</p>
-                        <input  type="number"
-                                placeholder="Questões de conhecimentos gerais:"
-                                value={qtdQuestoesConhecimentosGerais}
-                                onChange={e => setQtdQuestoesConhecimentosGerais(e.target.value)}/>
+                        <input type="number"
+                            placeholder="Questões de conhecimentos gerais:"
+                            value={qtdConhecimentosGerais}
+                            onChange={e => setQtdConhecimentosGerais(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Porcentagem para aprovação:</p>
-                        <input  type="number"
-                                placeholder="Digite a nota mínima para aprovação:"
-                                value={porcentagemAprovacao}
-                                onChange={e => setPorcentagemAprovacao(e.target.value)}/>
+                        <input type="number"
+                            placeholder="Digite a nota mínima para aprovação:"
+                            value={porcentagemAprovacao}
+                            onChange={e => setPorcentagemAprovacao(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Número de vagas:</p>
@@ -104,10 +134,11 @@ export default function CadastroProva() {
                                 placeholder="Digite a quantidade de vagas disponíveis:"
                                 value={vagasDisponiveis}
                                 onChange={e => setVagasDisponiveis(e.target.value)}/>
+
                     </div>
                     <div className="container-input cont-buttons">
                         <button onClick={limparCampos}>Limpar campos</button>
-                        <button id="botaoCadastrar">Cadastrar</button>                    
+                        <button id="botaoCadastrar">Cadastrar</button>
                     </div>
                 </div>
             </form>

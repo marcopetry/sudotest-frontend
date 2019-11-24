@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Autocadastro.css';
@@ -6,13 +7,13 @@ import api from '../../services/api'
 
 import logo from '../../assets/logo.png';
 
-export default function Autocadastro() {
+export default function Autocadastro({history}) {
     const [nome, setNome] = useState(''),
-          [email, setEmail] = useState(''),
-          [senha, setSenha] = useState(''),
-          [telefone, setTelefone] = useState(''),
-          [idade, setIdade] = useState(''),
-          [cpf, setCpf] = useState('');
+        [email, setEmail] = useState(''),
+        [senha, setSenha] = useState(''),
+        [telefone, setTelefone] = useState(''),
+        [idade, setIdade] = useState(''),
+        [cpf, setCpf] = useState('');
 
     async function handleCadastrar(e) {
         e.preventDefault();
@@ -26,6 +27,12 @@ export default function Autocadastro() {
             cpf
 
         });
+
+        if (response.data.Erro) {
+            alert(response.data.Erro)
+        } else {
+            history.push('/')
+        }
 
         console.log(response.data);
     }
@@ -109,7 +116,7 @@ export default function Autocadastro() {
 
                     <button type="submit">Cadastrar</button>
 
-                    <Link to="/" style={{ textDecoration: 'none'}}>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
                         <p className="p-link">Já é cadastrado? Faça o login</p>
                     </Link>
                 </form>
