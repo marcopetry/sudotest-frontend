@@ -4,25 +4,28 @@ import './CadastroProva.css';
 import api from '../../services/api'
 
 export default function CadastroProva() {
-    const [tempoExecucao, setTempoExecucao] = useState(''),
-        [dataRealizacao, setData] = useState(''),
-        [qtdMatematica, setQtdMatematica] = useState(''),
-        [qtdPortugues, setQtdPortugues] = useState(''),
-        [qtdInformatica, setQtdInformatica] = useState(''),
-        [qtdConhecimentosGerais, setQtdConhecimentosGerais] = useState(''),
-        [porcentagemAprovacao, setPorcentagemAprovacao] = useState(''),
-        [qtdVagas, setQtdVagas] = useState('');
-
+    const   [horaInicio, setHoraInicio] = useState(''),
+            [nomeProva, setNomeProva] = useState(''),
+            [horaTermino, setHoraTerminio] = useState(''),
+            [dataRealizacao, setData] = useState(''), 
+            [qtdQuestoesMatematica, setQtdQuestoesMatematica] = useState(''),
+            [qtdQuestoesPortugues, setQtdQuestoesPortugues] = useState(''),
+            [qtdQuestoesInformatica, setQtdQuestoesInformatica] = useState('') ,
+            [qtdQuestoesConhecimentosGerais, setQtdQuestoesConhecimentosGerais] = useState(''),
+            [porcentagemAprovacao, setPorcentagemAprovacao] = useState(''),
+            [vagasDisponiveis, setVagasDisponiveis] = useState('');
+    
     const limparCampos = (e) => {
         e.preventDefault();
-        setTempoExecucao('');
+        setHoraInicio('');
+        setHoraTerminio('');
         setData('');
         setQtdMatematica('');
         setQtdPortugues('');
         setQtdInformatica('');
         setQtdConhecimentosGerais('');
         setPorcentagemAprovacao('');
-        setQtdVagas('');
+        setVagasDisponiveis('');
     }
 
     async function cadastrarProva(e) {
@@ -69,20 +72,26 @@ export default function CadastroProva() {
         <div className="container-prova">
             <form className="form" onSubmit={cadastrarProva}>
                 <div className="container-form">
-                    <h1 className="text-h1">Cadastro de prova:</h1>
-                    <div className="container-input">
-                        <p>Tempo de execução em minutos:</p>
-                        <input type="number"
-                            placeholder="Digite os minutos aqui:"
-                            value={tempoExecucao}
-                            onChange={e => setTempoExecucao(e.target.value)} />
-                    </div>
                     <div className="container-input">
                         <p>Data de realização:</p>
                         <input type="date"
                             placeholder="dia/mês/ano"
                             value={dataRealizacao}
                             onChange={e => setData(e.target.value)} />
+                    </div>
+                    <div className="container-input">
+                        <p>Hora de início:</p>
+                        <input  type="time" 
+                                placeholder="Digite os minutos aqui:"
+                                value={horaInicio}
+                                onChange={e => setHoraInicio(e.target.value)}/>
+                    </div>
+                    <div className="container-input">
+                        <p>Hora de término:</p>
+                        <input  type="time" 
+                                placeholder="Digite os minutos aqui:"
+                                value={horaTermino}
+                                onChange={e => setHoraTerminio(e.target.value)}/>
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de matemática:</p>
@@ -120,11 +129,12 @@ export default function CadastroProva() {
                             onChange={e => setPorcentagemAprovacao(e.target.value)} />
                     </div>
                     <div className="container-input">
-                        <p>Número de Vagas:</p>
-                        <input type="number"
-                            placeholder="Digite a quantidade máxima de Vagas:"
-                            value={qtdVagas}
-                            onChange={e => setQtdVagas(e.target.value)} />
+                        <p>Número de vagas:</p>
+                        <input  type="number"
+                                placeholder="Digite a quantidade de vagas disponíveis:"
+                                value={vagasDisponiveis}
+                                onChange={e => setVagasDisponiveis(e.target.value)}/>
+
                     </div>
                     <div className="container-input cont-buttons">
                         <button onClick={limparCampos}>Limpar campos</button>

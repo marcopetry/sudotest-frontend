@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import './ControlerAluno.css';
 import InserirToken from '../InserirToken/InserirToken';
+import Questoes from '../Questoes/Questoes';
 
 export default function ControlerAluno(props){
 
