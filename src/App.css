@@ -11,8 +11,17 @@ html, body, #root {
 
 body {
   background: #f5f5f5;
+  background: url(../src/assets/fundo.png);
 }
 
 body, input, button {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container-tela-fundo {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /* background: url(../src/assets/fundo.png); */
+  font-family: 'Asap', sans-serif;
 }

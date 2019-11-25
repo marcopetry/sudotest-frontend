@@ -27,7 +27,6 @@ export default function ListaProvas(props) {
                 </thead>
 
                 <tbody>
-                    {}
                     <tr className="row-table" onClick={props.funcao}>
                         <td>Aprender e crescer 2019</td>
                         <td>20/12/2020</td>

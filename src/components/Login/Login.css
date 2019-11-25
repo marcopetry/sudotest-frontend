@@ -1,9 +1,10 @@
 .login-container {
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../../assets/fundo.png);
+    /* background: url(../../assets/fundo.png); */
 }
 
 .login-container form {
