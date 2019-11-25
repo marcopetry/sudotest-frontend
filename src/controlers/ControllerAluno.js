@@ -4,6 +4,7 @@ import Prova from '../components/Prova/Prova';
 import Resultado from '../components/Resultado/Resultado';
 import Home from '../components/Home/Home';
 
+//as acoes da dashboard estão no final deste arquivo
 export default function ControllerAluno(props){
 
     if(props.acaoEscolhida === 'inserir-token') return <InserirToken />
