@@ -1,7 +1,7 @@
 import React from 'react';
 import './Resultado.css';
 
-export default function(props){
+export default function Resultado(props){
 
     return (
         <div className="container-resposta">

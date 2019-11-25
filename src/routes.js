@@ -6,7 +6,7 @@ import Autocadastro from './components/Autocadastro/Autocadastro';
 import Dashboard from './components/Dashboard-adm/Dashboard';
 import DashboardAluno from './components/Dashboard-aluno/DashboardAluno';
 import Prova from './components/Prova/Prova';
-import ControlerInicial from './controlers/ControlerInicial';
+import ControlerInicial from './controlers/ControllerInicial';
 
 export default function Routes() {
     return (
