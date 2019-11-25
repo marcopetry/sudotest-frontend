@@ -73,14 +73,14 @@ export default function CadastroProva() {
     return (
         <div className="container-prova">
             <form className="form" onSubmit={cadastrarProva}>
-                <div className="container-input">
-                    <p>Nome da prova:</p>
-                    <input type="text"
-                        placeholder="Digite aqui o nome do prova:"
-                        value={nomeProva}
-                        onChange={e => setNomeProva(e.target.value)} />
-                </div>
                 <div className="container-form">
+                    <div className="container-input">
+                        <p>Nome da prova:</p>
+                        <input type="text"
+                            placeholder="Digite aqui o nome do prova:"
+                            value={nomeProva}
+                            onChange={e => setNomeProva(e.target.value)} />
+                    </div>
                     <div className="container-input">
                         <p>Data de realização:</p>
                         <input type="date"
