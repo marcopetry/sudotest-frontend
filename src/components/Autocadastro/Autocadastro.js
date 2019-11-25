@@ -7,13 +7,13 @@ import api from '../../services/api'
 
 import logo from '../../assets/logo.png';
 
-export default function Autocadastro({history}) {
-    const [nome, setNome] = useState(''),
-        [email, setEmail] = useState(''),
-        [senha, setSenha] = useState(''),
-        [telefone, setTelefone] = useState(''),
-        [idade, setIdade] = useState(''),
-        [cpf, setCpf] = useState('');
+export default function Autocadastro(props, history) {
+    const [nome, setNome] = useState(props.nome),
+          [email, setEmail] = useState(props.email),
+          [senha, setSenha] = useState(props.senha),
+          [telefone, setTelefone] = useState(props.telefone),
+          [idade, setIdade] = useState(props.idade),
+          [cpf, setCpf] = useState(props.cpf);
 
     async function handleCadastrar(e) {
         e.preventDefault();
