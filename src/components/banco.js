@@ -1,4 +1,4 @@
-const dados = [
+export const dados = [
     {
       "id": 1,
       "horaInicio": "12:00:00",
@@ -15,8 +15,6 @@ const dados = [
       "vagasDisponiveis": 10,
       "qtdAprovados": null,
       "mediaGeral": null,
-      "createdAt": 2019-11-24T14: 18: 02.170Z,
-      "updatedAt": 2019-11-24T14: 18: 02.170Z
     },
     {
       "id": 2,
@@ -34,8 +32,6 @@ const dados = [
       "vagasDisponiveis": 10,
       "qtdAprovados": null,
       "mediaGeral": null,
-      "createdAt": 2019-11-24T14: 18: 02.170Z,
-      "updatedAt": 2019-11-24T14: 18: 02.170Z
     },
     {
       "id": 3,
@@ -53,8 +49,6 @@ const dados = [
       "vagasDisponiveis": 10,
       "qtdAprovados": null,
       "mediaGeral": null,
-      "createdAt": 2019-11-24T14: 18: 02.170Z,
-      "updatedAt": 2019-11-24T14: 18: 02.170Z
     },
     {
       "id": 4,
@@ -72,9 +66,5 @@ const dados = [
       "vagasDisponiveis": 10,
       "qtdAprovados": null,
       "mediaGeral": null,
-      "createdAt": 2019-11-24T14: 18: 02.170Z,
-      "updatedAt": 2019-11-24T14: 18: 02.170Z
     },
   ];
-
-  export default dados;

@@ -8,10 +8,10 @@ export default function CadastroProva() {
         [nomeProva, setNomeProva] = useState(''),
         [horaTermino, setHoraTerminio] = useState(''),
         [dataRealizacao, setData] = useState(''),
-        [qtdMatematica, setQtdMatematica] = useState(''),
-        [qtdPortugues, setQtdPortugues] = useState(''),
-        [qtdInformatica, setQtdInformatica] = useState(''),
-        [qtdConhecimentosGerais, setQtdConhecimentosGerais] = useState(''),
+        [qtdQuestoesMatematica, setQtdQuestoesMatematica] = useState(''),
+        [qtdQuestoesPortugues, setQtdQuestoesPortugues] = useState(''),
+        [qtdQuestoesInformatica, setQtdQuestoesInformatica] = useState(''),
+        [qtdQuestoesConhecimentosGerais, setQtdQuestoesConhecimentosGerais] = useState(''),
         [porcentagemAprovacao, setPorcentagemAprovacao] = useState(''),
         [vagasDisponiveis, setVagasDisponiveis] = useState('');
 
@@ -20,10 +20,10 @@ export default function CadastroProva() {
         setHoraInicio('');
         setHoraTerminio('');
         setData('');
-        setQtdMatematica('');
-        setQtdPortugues('');
-        setQtdInformatica('');
-        setQtdConhecimentosGerais('');
+        setQtdQuestoesMatematica('');
+        setQtdQuestoesPortugues('');
+        setQtdQuestoesInformatica('');
+        setQtdQuestoesConhecimentosGerais('');
         setPorcentagemAprovacao('');
         setVagasDisponiveis('');
     }
@@ -34,12 +34,12 @@ export default function CadastroProva() {
 
         const response = await api.post('/cadastroProva', {
             horaInicio,
-            horaTermino,
             nomeProva,
-            qtdMatematica,
-            qtdPortugues,
-            qtdInformatica,
-            qtdConhecimentosGerais,
+            horaTermino,
+            qtdQuestoesMatematica,
+            qtdQuestoesPortugues,
+            qtdQuestoesInformatica,
+            qtdQuestoesConhecimentosGerais,
             porcentagemAprovacao,
             dataRealizacao,
             vagasDisponiveis,
@@ -73,6 +73,13 @@ export default function CadastroProva() {
     return (
         <div className="container-prova">
             <form className="form" onSubmit={cadastrarProva}>
+                <div className="container-input">
+                    <p>Nome da prova:</p>
+                    <input type="text"
+                        placeholder="Digite aqui o nome do prova:"
+                        value={nomeProva}
+                        onChange={e => setNomeProva(e.target.value)} />
+                </div>
                 <div className="container-form">
                     <div className="container-input">
                         <p>Nome da prova:</p>
@@ -106,29 +113,29 @@ export default function CadastroProva() {
                         <p>Quantidade de questões de matemática:</p>
                         <input type="number"
                             placeholder="Questões de matemática:"
-                            value={qtdMatematica}
-                            onChange={e => setQtdMatematica(e.target.value)} />
+                            value={qtdQuestoesMatematica}
+                            onChange={e => setQtdQuestoesMatematica(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de português:</p>
                         <input type="number"
                             placeholder="Questões de português:"
-                            value={qtdPortugues}
-                            onChange={e => setQtdPortugues(e.target.value)} />
+                            value={qtdQuestoesPortugues}
+                            onChange={e => setQtdQuestoesPortugues(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de informática:</p>
                         <input type="number"
                             placeholder="Questões de informática:"
-                            value={qtdInformatica}
-                            onChange={e => setQtdInformatica(e.target.value)} />
+                            value={qtdQuestoesInformatica}
+                            onChange={e => setQtdQuestoesInformatica(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Quantidade de questões de conhecimentos gerais:</p>
                         <input type="number"
                             placeholder="Questões de conhecimentos gerais:"
-                            value={qtdConhecimentosGerais}
-                            onChange={e => setQtdConhecimentosGerais(e.target.value)} />
+                            value={qtdQuestoesConhecimentosGerais}
+                            onChange={e => setQtdQuestoesConhecimentosGerais(e.target.value)} />
                     </div>
                     <div className="container-input">
                         <p>Porcentagem para aprovação:</p>

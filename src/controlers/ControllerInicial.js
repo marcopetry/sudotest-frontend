@@ -8,7 +8,7 @@ import { acoesAluno } from './ControllerAluno';
 export default function ControlerInicial() {
     //verificar se é usuário ou adm e passar informações pra dash
     const [acao, setAcao] = useState('home'),
-        [tipoUsuario, setUsuario] = useState('adm');
+        [tipoUsuario, setUsuario] = useState('user');
     
     let acoes;
     if(tipoUsuario === 'adm'){
