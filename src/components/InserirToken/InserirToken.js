@@ -23,9 +23,9 @@ export default function InserirToken(props) {
             alert('Token Inválido');
         } else {
             localStorage.setItem('Usuario', 'user-prova');
-            console.log(response);
             props.history.push('/prova');
             localStorage.setItem('prova', JSON.stringify(response.data));
+            console.log(localStorage);
         }
     }
 

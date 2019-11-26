@@ -6,9 +6,12 @@ import api from '../services/api';
 
 export default function ControllerProva(props) {
     const [emExecucao, setExecucao] = useState(true),
+        [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [acao, setAcao] = useState(props.acaoEscolhida), 
         [questoesProva, setQuestoes] = useState(),
         [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova')));
+
+    console.log(prova.id);
 
     useEffect(() => {
         setAcao(props.acaoEscolhida);
