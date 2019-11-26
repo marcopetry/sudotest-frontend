@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
+import api from '../../services/api';
 
 let data = new Date();
 
@@ -20,6 +21,15 @@ export default function Prova(props) {
     };
     
     setInterval(atualizaHorario, 60000);
+
+    async function buscarQuestoes(e) {
+        const response = api.get('/buscaProvasQuestoes', {
+            params: {
+                //PRECISA DO ID DA PROVA
+            }
+        })
+        console.log(response);
+    }
         
     return (
         <Scrollbar>
