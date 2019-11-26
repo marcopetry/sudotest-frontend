@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import './InserirToken.css';
+import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
 
 export default function InserirToken({ history }) {
     const [token, setToken] = useState('');
 
+    async function buscarToken (e) {
+        e.preventDefault();
+        const response = await api.get('/buscaToken', {
+            params: {
+                token,
+            }
+        });
+        
+        if(response.data == null) {
+            alert('Token Inválido');
+        } else {
+            console.log(response.data);
+        }
+    }
+
     return (
         <div className="token-container">
-            <form>
+            <form onSubmit={buscarToken}>
                 <div className="img-form">
                     <img src={logo} alt="Sudotec Logo" />
                 </div>
