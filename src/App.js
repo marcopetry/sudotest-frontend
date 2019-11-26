@@ -5,7 +5,9 @@ import Routes from './routes';
 
 function App() {
   return (
-    <Routes />
+    <div className="container-tela-fundo">
+      <Routes />
+    </div>
   );
 }
 
