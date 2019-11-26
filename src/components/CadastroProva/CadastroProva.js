@@ -1,10 +1,11 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import './CadastroProva.css';
-import api from '../../services/api'
+import api from '../../services/api';
 
 export default function CadastroProva() {
     const [id, setId] = useState(''),
+        [token, setToken] = useState(''),
         [horaInicio, setHoraInicio] = useState(''),
         [nomeProva, setNomeProva] = useState(''),
         [horaTermino, setHoraTerminio] = useState(''),
@@ -50,13 +51,33 @@ export default function CadastroProva() {
         console.log(response)
     }
 
-    const cadastrar = (e) => {
-        if(id === ''){
-            cadastrarProva(e)
-        } else {
-            //atualiza
-        }
+    async function atualizarProva(e) {
+        e.preventDefault();
 
+        const response = await api.post('/atualizaProva', {
+            id,
+            horaInicio,
+            nomeProva,
+            horaTermino,
+            qtdQuestoesMatematica,
+            qtdQuestoesPortugues,
+            qtdQuestoesInformatica,
+            qtdQuestoesConhecimentosGerais,
+            porcentagemAprovacao,
+            dataRealizacao,
+            vagasDisponiveis,
+            token,
+            status: 'Aberta'
+        })
+        console.log(response)
+    }
+
+    const cadastrarAtualizar = (e) => {
+        if(id === ''){
+            cadastrarProva(e);
+        } else {
+            atualizarProva(e);
+        }
     }
 
     async function gerarToken() {
@@ -82,7 +103,7 @@ export default function CadastroProva() {
 
     return (
         <div className="container-prova">
-            <form className="form" onSubmit={cadastrar}>
+            <form className="form" onSubmit={cadastrarAtualizar}>
                 <div className="container-input">
                     <p>Nome da prova:</p>
                     <input type="text"

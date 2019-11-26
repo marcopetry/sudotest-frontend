@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './InfoProva.css';
+import api from '../../services/api';
 
 export default function InfoProva(props) {
+    const [id, setId] = useState('');
+
+    async function excluirProva(e) {
+        e.preventDefault(e);
+
+        const response = await api.post('/deletaProva', {
+            id,
+        });
+        console.log(response);
+    }
 
     return (
         <div className="container-info-prova">
@@ -57,7 +68,7 @@ export default function InfoProva(props) {
                     </div>
                 </div>
                 <div className="container-buttons-editar-prova">
-                    <button>Excluir</button>
+                    <button onClick={excluirProva}>Excluir</button>
                     <button id="botaoEditar">Editar</button>
                 </div>
             </div>
