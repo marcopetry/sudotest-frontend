@@ -5,10 +5,10 @@ import { acoesADM } from './ControllerADM';
 import ControllerAluno from './ControllerAluno';
 import { acoesAluno, acoesProva } from './ControllerAluno';
 
-export default function ControlerInicial() {
+export default function ControlerInicial({ history }) {
     //verificar se é usuário ou adm e passar informações pra dash
     const [acao, setAcao] = useState('home'),
-        [tipoUsuario, setUsuario] = useState('user');
+        [tipoUsuario, setUsuario] = useState(localStorage.getItem('Usuario'));
     
     let acoes;
     if(tipoUsuario === 'adm'){
@@ -20,6 +20,13 @@ export default function ControlerInicial() {
     }
 
     const trocarAcao = (e) => setAcao(e);
+
+
+
+    if(acao === 'sair'){
+        localStorage.clear();
+        history.push('/');
+    }
 
     //vou fazer uma leitura da rota para prova
     console.log(window.location.pathname);

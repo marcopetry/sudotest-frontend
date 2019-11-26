@@ -11,6 +11,7 @@
     text-align: center;
     padding: 2em;
     background-color: rgba(245, 245, 245, 0.5);
+    width: 50%;
 }
 
 .container-texto-confirmacao h1 {

@@ -6,18 +6,32 @@ import './Autocadastro.css';
 import api from '../../services/api'
 
 import logo from '../../assets/logo.png';
+import TelaEspera from '../TelaEspera/TelaEspera';
 
-export default function Autocadastro(props, history) {
-    const [nome, setNome] = useState(props.nome),
-          [email, setEmail] = useState(props.email),
-          [senha, setSenha] = useState(props.senha),
-          [telefone, setTelefone] = useState(props.telefone),
-          [idade, setIdade] = useState(props.idade),
-          [cpf, setCpf] = useState(props.cpf);
+export default function Autocadastro({ history }) {
+    const [nome, setNome] = useState(''),
+          [email, setEmail] = useState(''),
+          [senha, setSenha] = useState(''),
+          [telefone, setTelefone] = useState(''),
+          [idade, setIdade] = useState(''),
+          [cpf, setCpf] = useState(''),
+          [espera, setEspera] = useState(false);
 
     async function handleCadastrar(e) {
         e.preventDefault();
 
+        if(!(nome && email && senha && telefone && cpf && idade)){
+            const inputs = document.getElementsByClassName('form-control');
+            for(let i = 0; i < inputs.length; i++){
+                if(inputs[i].value === ''){
+                    alert('O campo ' + inputs[i].name + ' é obrigatório.');
+                    break;
+                }
+            }
+            return;
+        }
+
+        setEspera(true);
         const response = await api.post('/cadastroAluno', {
             nome,
             email,
@@ -28,14 +42,17 @@ export default function Autocadastro(props, history) {
 
         });
 
+        setEspera(false)
         if (response.data.Erro) {
-            alert(response.data.Erro)
+            alert(response.data.Erro);
         } else {
             history.push('/')
         }
 
         console.log(response.data);
     }
+
+    if(espera) return <TelaEspera />
 
     return (
         <div className="main-container">
@@ -59,6 +76,7 @@ export default function Autocadastro(props, history) {
                         placeholder="Digite seu nome"
                         value={nome}
                         onChange={e => setNome(e.target.value)}
+                        name="Nome"
                     />
 
                     <p>E-mail</p>
@@ -69,6 +87,7 @@ export default function Autocadastro(props, history) {
                         placeholder="Email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        name="Email"
                     />
 
                     <p>Senha</p>
@@ -79,6 +98,7 @@ export default function Autocadastro(props, history) {
                         placeholder="Senha"
                         value={senha}
                         onChange={e => setSenha(e.target.value)}
+                        name="Senha"
                     />
 
                     <p>Telefone</p>
@@ -88,6 +108,7 @@ export default function Autocadastro(props, history) {
                         placeholder="Digite seu telefone"
                         value={telefone}
                         onChange={e => setTelefone(e.target.value)}
+                        name="Telefone"
                     />
 
                     <div className="number-input">
@@ -99,6 +120,7 @@ export default function Autocadastro(props, history) {
                                 placeholder="Idade"
                                 value={idade}
                                 onChange={e => setIdade(e.target.value)}
+                                name="Idade"
                             />
                         </div>
 
@@ -110,6 +132,7 @@ export default function Autocadastro(props, history) {
                                 placeholder="Digite seu CPF"
                                 value={cpf}
                                 onChange={e => setCpf(e.target.value)}
+                                name="CPF"
                             />
                         </div>
                     </div>

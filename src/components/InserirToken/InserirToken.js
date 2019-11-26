@@ -13,7 +13,7 @@ export default function InserirToken(props, { history }) {
                     <img src={logo} alt="Sudotec Logo" />
                 </div>
                 <input
-                    type="password" 
+                    type="text" 
                     placeholder="Digite seu token:" 
                     value={token}
                     onChange={e => setToken(e.target.value)}

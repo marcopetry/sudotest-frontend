@@ -26,7 +26,7 @@ export default function ControllerADM(props) {
     if (props.acaoEscolhida === 'listar-provas-encerradas') return <InfoProva />
     
     if(props.acaoEscolhida === 'listar-questoes') return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados} />
-            
+
     if(espera) return <TelaEspera />
 
     return (

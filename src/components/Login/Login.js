@@ -5,25 +5,44 @@ import './Login.css';
 import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
+import TelaEspera from '../TelaEspera/TelaEspera';
 
 export default function Login({ history }) {
     const [email, setEmail] = useState(''),
-          [senha, setSenha] = useState('');
+          [senha, setSenha] = useState(''),
+          [espera, setEspera] = useState(false);
+
+        
 
     async function handleLogin(e) {
         e.preventDefault();
+        if(email === '' || senha === '') return alert('Campo email e/ou senha vazios.')
 
+        setEspera(true);
         const response = await api.post('/aluno', {
             email,
             senha,
         });
 
         if(response.data.login === true){
-            history.push(`/adm`);
+            setUsuario(email);            
+            setEspera(false);
+            history.push(`/home`);
         }else{
-            console.log('Email ou Senha Inválidos')
+            alert('Email ou Senha Inválidos');
+            setEspera(false);
         }
     }
+
+    function setUsuario(user){
+        if(user === 'adm@adm.com'){
+            localStorage.setItem('Usuario', 'adm');
+        }else{
+            localStorage.setItem('Usuario', 'user');
+        }
+    }
+
+    if(espera) return <TelaEspera />
 
     return (
         <div className="login-container">
