@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Home from '../components/Home/Home';
-import ListaAlunos from '../components/ListaAlunos/ListaAlunos';
 import CadastroProva from '../components/CadastroProva/CadastroProva';
 import CadastroQuestoes from '../components/CadastroQuestoes/CadastroQuestoes';
-import ListaProva from '../components/ListaProvas/ListaProvas';
 import InfoProva from '../components/InfoProva/InfoProva';
+import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
+import TelaEspera from '../components/TelaEspera/TelaEspera';
+import { dados } from  '../components/banco';
+
+console.log(dados);
 
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
+const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
+const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"];
+
 //as acoes da dashboard estão no final deste arquivo
 export default function ControllerADM(props) {
-    console.log(props.acaoEscolhida);
+    const [espera] = useState(false);
 
-    if (props.acaoEscolhida === 'listar-alunos') return <ListaAlunos />
+    if (props.acaoEscolhida === 'listar-alunos') return <ListarInformacoes cabecalhoTabela={cabecalhoAlunosCadastrados} />
     
     if (props.acaoEscolhida === 'cadastrar-prova') return <CadastroProva />
         
     if (props.acaoEscolhida === 'cadastrar-questao') return <CadastroQuestoes />
 
-    if (props.acaoEscolhida === 'listar-provas-abertas') return <ListaProva cabecalhoTabela={cabecalhoProvasAbertas}/>
+    if (props.acaoEscolhida === 'listar-provas-abertas') return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados}/>
 
     if (props.acaoEscolhida === 'listar-provas-encerradas') return <InfoProva />
             
+    if(espera) return <TelaEspera />
+
     return (
         <Home />
     );
