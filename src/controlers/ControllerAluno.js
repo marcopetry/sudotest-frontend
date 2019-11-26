@@ -1,52 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import InserirToken from '../components/InserirToken/InserirToken';
-import Prova from '../components/Prova/Prova';
 import Resultado from '../components/Resultado/Resultado';
 import Home from '../components/Home/Home';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 
 //as acoes da dashboard estão no final deste arquivo
-export default function ControllerAluno(props){
+export default function ControllerAluno(props) {
+    const [sessao, setSessao] = useState(props.acaoEscolhida);
 
-    if(props.acaoEscolhida === 'inserir-token') return <InserirToken />
-        
-    if(props.acaoEscolhida === 'questoes') return <Prova />
+    useEffect(() => {
+        setSessao(props.acaoEscolhida)
+    }, [props.acaoEscolhida]);
+    
+    const encerrarSessao = () => {
+        localStorage.clear();
+        props.history.push('/');
+    }
+    
+    const cancelar = () => {
+        setSessao('home');
+        console.log(sessao);
+    } 
+    const mensagemSaida = "Você tem certeza que quer sair do sistema?";
 
-    if(props.acaoEscolhida === 'meus-resultados') return <Resultado />
+    if (sessao === 'inserir-token') return <InserirToken history={props.history} />
 
-    if(props.acaoEscolhida === 'editar-perfil') return <TelaConfirmacao />
+    if (sessao === 'meus-resultados') return <Resultado />
 
+    if (sessao === 'editar-perfil') return <TelaConfirmacao />
+
+    if (sessao === 'sair')
+        return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
+                                funcaoCancelar={cancelar}
+                                mensagem={mensagemSaida} />
     return <Home />
 
 }
 
-export const acoesAluno = 
-[
-    {
-        acao: 'home',
-        texto: 'Home'
-    },
-    {
-        acao: 'inserir-token',
-        texto: 'Fazer Prova'
-    },
-    {
-        acao: 'questoes',
-        texto: 'Questões'
-    },
-    {
-        acao: 'meus-resultados',
-        texto: 'Meus Resultados'
-    },
-    {
-        acao: 'editar-perfil',
-        texto: 'Editar Perfil'
-    },
-    {
-        acao: 'sair',
-        texto: 'Sair'
-    },
-];
+export const acoesAluno =
+    [
+        {
+            acao: 'home',
+            texto: 'Home'
+        },
+        {
+            acao: 'inserir-token',
+            texto: 'Fazer Prova'
+        },
+        {
+            acao: 'meus-resultados',
+            texto: 'Meus Resultados'
+        },
+        {
+            acao: 'editar-perfil',
+            texto: 'Editar Perfil'
+        },
+        {
+            acao: 'sair',
+            texto: 'Sair'
+        },
+    ];
 
 export const acoesProva = [
     {
@@ -64,5 +77,9 @@ export const acoesProva = [
     {
         acao: 'conhecimentos',
         texto: 'Conhecimentos Gerais'
+    },
+    {
+        acao: 'sair',
+        texto: 'Sair'
     }
 ];

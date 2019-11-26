@@ -4,5 +4,4 @@ import Prova from '../components/Prova/Prova';
 export default function ControllerProva(){
 
     return <Prova />;
-
 }

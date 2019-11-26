@@ -4,7 +4,8 @@ import './CadastroProva.css';
 import api from '../../services/api'
 
 export default function CadastroProva() {
-    const [horaInicio, setHoraInicio] = useState(''),
+    const [id, setId] = useState(''),
+        [horaInicio, setHoraInicio] = useState(''),
         [nomeProva, setNomeProva] = useState(''),
         [horaTermino, setHoraTerminio] = useState(''),
         [dataRealizacao, setData] = useState(''),
@@ -49,6 +50,15 @@ export default function CadastroProva() {
         console.log(response)
     }
 
+    const cadastrar = (e) => {
+        if(id === ''){
+            cadastrarProva(e)
+        } else {
+            //atualiza
+        }
+
+    }
+
     async function gerarToken() {
         var min = Math.ceil(0);
         var max = Math.floor(10);
@@ -72,7 +82,7 @@ export default function CadastroProva() {
 
     return (
         <div className="container-prova">
-            <form className="form" onSubmit={cadastrarProva}>
+            <form className="form" onSubmit={cadastrar}>
                 <div className="container-input">
                     <p>Nome da prova:</p>
                     <input type="text"
