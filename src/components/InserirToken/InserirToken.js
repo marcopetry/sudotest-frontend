@@ -3,24 +3,33 @@ import './InserirToken.css';
 import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
+import { tsPropertySignature } from '@babel/types';
+import TelaEspera from '../TelaEspera/TelaEspera';
 
-export default function InserirToken(props, { history }) {
-    const [token, setToken] = useState('');
+export default function InserirToken(props) {
+    const [token, setToken] = useState(''),
+        [espera, setEspera] = useState(false);
 
     async function buscarToken (e) {
         e.preventDefault();
+        setEspera(true);
         const response = await api.get('/buscaToken', {
             params: {
                 token,
             }
         });
         
+        setEspera(false);
         if(response.data == null) {
             alert('Token Inválido');
         } else {
+            localStorage.setItem('Usuario', 'user-prova');
+            props.history.push('/prova');
             console.log(response.data);
         }
     }
+
+    if(espera) return <TelaEspera />
 
     return (
         <div className="token-container">
@@ -29,7 +38,7 @@ export default function InserirToken(props, { history }) {
                     <img src={logo} alt="Sudotec Logo" />
                 </div>
                 <input
-                    type="password" 
+                    type="text" 
                     placeholder="Digite seu token:" 
                     value={token}
                     onChange={e => setToken(e.target.value)}

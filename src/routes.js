@@ -3,8 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
-import Prova from './components/Prova/Prova';
 import ControlerInicial from './controlers/ControllerInicial';
+import ControllerProva from './controlers/ControllerProva';
 
 export default function Routes() {
     return (
@@ -12,7 +12,7 @@ export default function Routes() {
             <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/home" exact component={ControlerInicial} />
-            <Route path="/prova" exact component={Prova} />
+            <Route path="/prova" exact component={ControlerInicial} />
         </BrowserRouter>
     );
 }

@@ -1,4 +1,4 @@
-.container-resposta {
+.container-confirmacao {
     width: 100%;
     height: 100%;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.container-texto {
+.container-texto-confirmacao {
     border-radius: 1em;
     text-align: center;
     padding: 2em;
@@ -14,15 +14,20 @@
     width: 50%;
 }
 
-.container-texto h1, .container-texto h2 {
+.container-texto-confirmacao h1 {
     font-family: 'Asap', sans-serif;
     font-weight: 500;
     margin: 0.5em;
 }
 
-.button {
+.container-botoes-confirmacao {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botoes-confirmacao {
     margin-top: 2em;
-    width: 100%; 
+    width: 40%; 
     border: 0;
     border-radius: 4px;
     height: 48px;
@@ -34,3 +39,6 @@
     font-family: 'Asap', sans-serif;    
 }
 
+#botaoCancelarExclusao {
+    background: #DF4723;
+}

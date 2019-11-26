@@ -37,7 +37,7 @@ export default function Prova(props) {
                 <div className="form-questoes">
                     <div className="container-info info-prova">
                         <h3 className="alinhar-esquerda">Questão número 1:</h3>
-                        <h3>Tempo restante de prova: {tempoRestanteProva}</h3>
+                        <h3>Tempo restante: {tempoRestanteProva}</h3>
                     </div>
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>
