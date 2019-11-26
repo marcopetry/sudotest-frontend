@@ -27,7 +27,7 @@ export default function ControllerAluno(props) {
 
     if (sessao === 'meus-resultados') return <Resultado />
 
-    if (sessao === 'editar-perfil') return <TelaConfirmacao />
+    if (sessao === 'editar-perfil') return <Home />
 
     if (sessao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
@@ -63,6 +63,10 @@ export const acoesAluno =
 
 export const acoesProva = [
     {
+        acao: 'prova',
+        texto: 'Prova'
+    },
+    {
         acao: 'portugues',
         texto: 'Português'
     },
@@ -80,6 +84,6 @@ export const acoesProva = [
     },
     {
         acao: 'sair',
-        texto: 'Sair'
+        texto: 'Encerrar Prova'
     }
 ];

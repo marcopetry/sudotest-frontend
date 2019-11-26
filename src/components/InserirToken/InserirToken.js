@@ -3,7 +3,6 @@ import './InserirToken.css';
 import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
-import { tsPropertySignature } from '@babel/types';
 import TelaEspera from '../TelaEspera/TelaEspera';
 
 export default function InserirToken(props) {
@@ -24,8 +23,9 @@ export default function InserirToken(props) {
             alert('Token Inválido');
         } else {
             localStorage.setItem('Usuario', 'user-prova');
+            console.log(response);
             props.history.push('/prova');
-            console.log(response.data);
+            localStorage.setItem('prova', JSON.stringify(response.data));
         }
     }
 
