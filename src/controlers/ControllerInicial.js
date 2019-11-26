@@ -4,6 +4,7 @@ import ControlerAdm from './ControllerADM';
 import { acoesADM } from './ControllerADM';
 import ControllerAluno from './ControllerAluno';
 import { acoesAluno, acoesProva } from './ControllerAluno';
+import ControllerProva from './ControllerProva';
 
 export default function ControlerInicial({ history }) {
     //verificar se é usuário ou adm e passar informações pra dash
@@ -21,22 +22,17 @@ export default function ControlerInicial({ history }) {
 
     const trocarAcao = (e) => setAcao(e);
 
-
-
     if(acao === 'sair'){
         localStorage.clear();
         history.push('/');
     }
 
-    //vou fazer uma leitura da rota para prova
-    console.log(window.location.pathname);
-
     return (
-        
         <>
             <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} />
             {tipoUsuario === 'adm' && <ControlerAdm acaoEscolhida={acao} />}
             {tipoUsuario === 'user' && <ControllerAluno acaoEscolhida={acao} />}
+            {tipoUsuario === 'prova' && <ControllerProva acaoEscolhida={acao}/>}
         </>
     );
 }

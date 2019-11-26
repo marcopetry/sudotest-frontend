@@ -3,8 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
-import Prova from './components/Prova/Prova';
 import ControlerInicial from './controlers/ControllerInicial';
+import ControllerProva from './controlers/ControllerProva';
 
 export default function Routes() {
     return (

@@ -3,7 +3,7 @@ import './InserirToken.css';
 
 import logo from '../../assets/logo.png';
 
-export default function InserirToken(props, { history }) {
+export default function InserirToken({ history }) {
     const [token, setToken] = useState('');
 
     return (
