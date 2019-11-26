@@ -4,6 +4,7 @@ import ListaAlunos from '../components/ListaAlunos/ListaAlunos';
 import CadastroProva from '../components/CadastroProva/CadastroProva';
 import CadastroQuestoes from '../components/CadastroQuestoes/CadastroQuestoes';
 import ListaProva from '../components/ListaProvas/ListaProvas';
+import InfoProva from '../components/InfoProva/InfoProva';
 
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
 //as acoes da dashboard estão no final deste arquivo
@@ -18,7 +19,7 @@ export default function ControllerADM(props) {
 
     if (props.acaoEscolhida === 'listar-provas-abertas') return <ListaProva cabecalhoTabela={cabecalhoProvasAbertas}/>
 
-    if (props.acaoEscolhida === 'listar-provas-encerradas') return <Home />
+    if (props.acaoEscolhida === 'listar-provas-encerradas') return <InfoProva />
             
     return (
         <Home />
