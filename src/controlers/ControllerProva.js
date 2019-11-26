@@ -8,8 +8,7 @@ export default function ControllerProva(props) {
     const [emExecucao, setExecucao] = useState(true),
         [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [acao, setAcao] = useState(props.acaoEscolhida), 
-        [questoesProva, setQuestoes] = useState(),
-        [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova')));
+        [questoesProva, setQuestoes] = useState();
 
     console.log(prova.id);
 
@@ -18,14 +17,14 @@ export default function ControllerProva(props) {
     }, [props.acaoEscolhida]);
 
     async function buscarQuestoes(e) {
-        //e.preventDefault(e);
+        //e.preventDefault();
 
         const response = await api.get('/buscaProvasQuestoes', {
             params: {
                 idProva: prova.id
             }
         })
-        console.log(response);
+        console.log(response.data);
     }
     buscarQuestoes();
     const encerrarSessao = () => {
