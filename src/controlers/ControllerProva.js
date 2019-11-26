@@ -3,13 +3,13 @@ import Prova from '../components/Prova/Prova';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 
-const prova = localStorage.getItem('prova');
-localStorage.removeItem('prova');
-
 export default function ControllerProva(props) {
     const [emExecucao, setExecucao] = useState(true),
+        [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [acao, setAcao] = useState(props.acaoEscolhida), 
         [questoesProva, setQuestoes] = useState();
+
+    console.log(prova.id);
 
     useEffect(() => {
         setAcao(props.acaoEscolhida);
