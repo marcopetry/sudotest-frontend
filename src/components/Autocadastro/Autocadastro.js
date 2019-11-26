@@ -47,6 +47,7 @@ export default function Autocadastro({ history }) {
             alert(response.data.Erro);
         } else {
             history.push('/')
+            alert('Usuário cadastrado com sucesso! Faça o login!');
         }
 
         console.log(response.data);
