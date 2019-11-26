@@ -31,7 +31,7 @@ export default function ListarInformacoes(props) {
                 <tbody>
                     {props.dadosTabela.map(elemento => {
                         return (
-                            <tr className="row-table" key={elemento.id}>
+                            <tr className="row-table" key={elemento.id} onClick={() => alert('clicou em ' + elemento.id)}>
                                 <td>{elemento.nomeProva}</td>
                                 <td>{elemento.dataRealizacao}</td>
                                 <td>{elemento.horaInicio}</td>

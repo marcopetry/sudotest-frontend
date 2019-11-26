@@ -12,7 +12,7 @@ export default function Routes() {
             <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/home" exact component={ControlerInicial} />
-            <Route path="/prova" exact component={Prova} />
+            <Route path="/prova" exact component={ControlerInicial} />
         </BrowserRouter>
     );
 }

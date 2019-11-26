@@ -1,0 +1,43 @@
+.container-confirmacao {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-texto-confirmacao {
+    border-radius: 1em;
+    text-align: center;
+    padding: 2em;
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
+.container-texto-confirmacao h1 {
+    font-family: 'Asap', sans-serif;
+    font-weight: 500;
+    margin: 0.5em;
+}
+
+.container-botoes-confirmacao {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botoes-confirmacao {
+    margin-top: 2em;
+    width: 40%; 
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 25px; 
+    background: #006641;
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Asap', sans-serif;    
+}
+
+#botaoCancelarExclusao {
+    background: #DF4723;
+}

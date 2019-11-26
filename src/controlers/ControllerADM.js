@@ -7,8 +7,6 @@ import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import { dados } from  '../components/banco';
 
-console.log(dados);
-
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
 const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
 const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"];
@@ -17,7 +15,7 @@ const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"]
 export default function ControllerADM(props) {
     const [espera] = useState(false);
 
-    if (props.acaoEscolhida === 'listar-alunos') return <ListarInformacoes cabecalhoTabela={cabecalhoAlunosCadastrados} />
+    if (props.acaoEscolhida === 'listar-alunos') return <ListarInformacoes cabecalhoTabela={cabecalhoAlunosCadastrados} dadosTabela={dados}/>
     
     if (props.acaoEscolhida === 'cadastrar-prova') return <CadastroProva />
         
@@ -26,6 +24,8 @@ export default function ControllerADM(props) {
     if (props.acaoEscolhida === 'listar-provas-abertas') return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados}/>
 
     if (props.acaoEscolhida === 'listar-provas-encerradas') return <InfoProva />
+    
+    if(props.acaoEscolhida === 'listar-questoes') return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados} />
             
     if(espera) return <TelaEspera />
 
@@ -59,6 +59,10 @@ export const acoesADM =
             {
                 acao: 'listar-provas-encerradas',
                 texto: 'Provas Encerradas'
+            },
+            {
+                acao: 'listar-questoes',
+                texto: 'Questôes Cadastradas',
             },
             {
                 acao: 'sair',
