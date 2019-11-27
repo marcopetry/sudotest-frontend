@@ -6,7 +6,7 @@ import api from '../../services/api';
 let data = new Date();
 
 export default function Prova(props) {
-    
+    const termino = props.horaTermino;
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
@@ -17,9 +17,8 @@ export default function Prova(props) {
         [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativaCorreta),
         [respostaMarcadaSalva, setRespostaMarcadaSalva] = useState(''),
         [respostaMarcada, setRespostaMarcada] = useState(''),
-        [tempoRestanteProva, setTempo] = useState(data.getHours() + ' : ' + data.getMinutes());
+        [tempoRestanteProva, setTempo] = useState();
 
-    console.log(props.questao[numeroQuestao].id);
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
         setRes1(props.questao[numeroQuestao].alternativa1);
@@ -34,10 +33,13 @@ export default function Prova(props) {
     
     const atualizaHorario = () => {
         data = new Date();
-        setTempo(data.getHours() + ' : ' + data.getMinutes());
+        const horaSeparada = termino.toString().split(':');
+        let hora = parseInt(horaSeparada[0] - data.getHours());
+        let minutos = parseInt(horaSeparada[1]) - data.getMinutes();
+        setTempo(hora + ' : ' + minutos);
     };
     
-    setInterval(atualizaHorario, 60000);
+    setInterval(atualizaHorario, 10000);
 
     async function buscarQuestoes(e) {
         const response = api.get('/buscaProvasQuestoes', {
