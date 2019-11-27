@@ -5,6 +5,7 @@ import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relógio';
 
 export default function Prova(props) {
+    
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
@@ -16,9 +17,10 @@ export default function Prova(props) {
         [respostaMarcada, setRespostaMarcada] = useState(''),
         [tempoRestanteProva, setTempo] = useState();
 
-    console.log(props.questao[numeroQuestao]);
-    console.log(respostaCerta);
-    console.log(respostaMarcada);
+    const idAluno = localStorage.getItem('idUsuario');
+    const idProva = props.idProva;
+    const idQuestao = props.questao[numeroQuestao].id;
+    console.log(idQuestao);
 
     /* 
         idAluno
@@ -55,7 +57,7 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
-        if (numeroQuestao > 0) setNumero(numeroQuestao - 1)
+        if (numeroQuestao > 0) setNumero(numeroQuestao - 1);
     }
 
 
