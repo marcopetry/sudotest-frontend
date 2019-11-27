@@ -5,7 +5,7 @@ export function horarioRestanteProva(horaTerminoProva) {
     let minutosTermino = parseInt(horaSeparada[1]);
     let horaAtual = horaTermino - data.getHours();
     let minutosAtuais = data.getMinutes();
-    if(minutosTermino < minutosAtuais) minutosAtuais = minutosAtuais - 60 + minutosTermino;
+    if(minutosTermino < minutosAtuais) minutosAtuais = 60 - minutosAtuais + minutosTermino;
     else minutosAtuais = minutosTermino - minutosAtuais;
 
     return horaAtual + ' : ' + minutosAtuais;
