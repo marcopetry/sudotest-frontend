@@ -16,7 +16,7 @@ export default function ControllerADM(props) {
     const [sessao, setSessao] = useState(props.acaoEscolhida);
 
     useEffect(() => {
-        setSessao(props.acaoEscolhida)
+        setSessao(props.acaoEscolhida);
     }, [props.acaoEscolhida]);
     
     const encerrarSessao = () => {
@@ -27,6 +27,7 @@ export default function ControllerADM(props) {
     const cancelar = () => {
         setSessao('home');
     } 
+
     const mensagemSaida = "Você tem certeza que quer sair do sistema?";
 
     if (sessao === 'listar-alunos') return <ListarInformacoes cabecalhoTabela={cabecalhoAlunosCadastrados} dadosTabela={dados}/>

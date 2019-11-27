@@ -47,5 +47,5 @@ export default function ControllerProva(props) {
 
     if(espera) return <TelaEspera />
     
-    return <Prova questao={questoesProva} horaTermino={prova.horaTermino} idProva={prova.id}/>;
+    return <Prova questao={questoesProva} horaTermino={prova.horaTermino} idProva={prova.id} history={props.history}/>;
 }

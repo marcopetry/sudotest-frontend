@@ -3,12 +3,27 @@ import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relógio';
-import { monitorarQuestoesProva } from '../../helpers/MonitorQuestoesProva';
+import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas } from '../../helpers/MonitorQuestoesProva';
+import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
+import Home from '../Home/Home';
+import { Redirect } from 'react-router-dom';
 
 let listaRespostas = [];
 
+async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
+    //e.preventDefault();
+
+    const response = await api.post('/cadastraAlunosProvasQuestoes', {
+        idAluno,
+        idProva,
+        idQuestao,
+        resposta,
+        alternativaMarcada,
+    })
+    console.log(response);
+}
+
 export default function Prova(props) {
-    
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
@@ -18,19 +33,12 @@ export default function Prova(props) {
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
         [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
         [alternativaMarcada, setAlternativaMarcada] = useState(''),
+        [execucao, setExecucao] = useState(false),
         [tempoRestanteProva, setTempo] = useState();
 
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
     const idQuestao = props.questao[numeroQuestao].id;
-
-    /* 
-        idAluno
-        idProva
-        idQuestao
-        correta/errada
-        alternativaMarcada
-    */
 
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
@@ -40,9 +48,9 @@ export default function Prova(props) {
         setRes4(props.questao[numeroQuestao].alternativa4);
         setRes5(props.questao[numeroQuestao].alternativa5);
         setAlternativaCerta(props.questao[numeroQuestao].alternativacorreta);
-        if(listaRespostas.length > 0 && numeroQuestao < listaRespostas.length){
+        if (listaRespostas.length > 0 && numeroQuestao < listaRespostas.length) {
             setAlternativaMarcada(listaRespostas[numeroQuestao].alternativaMarcada);
-        }else{
+        } else {
             setAlternativaMarcada('');
         }
     }, [numeroQuestao]);
@@ -52,18 +60,6 @@ export default function Prova(props) {
     };
 
     //setInterval(atualizaHorario, 10000);
-
-    async function cadastrarResposta(e) {
-        e.preventDefault();
-        const response = await api.post('/cadastraAlunosProvasQuestoes', {
-            idAluno,
-            idProva,
-            idQuestao,
-            //resposta,
-            alternativaMarcada,
-        })
-        console.log(response);
-    }
 
     async function buscarResposta(e) {
         e.preventDefault();
@@ -78,16 +74,58 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
-        listaRespostas = monitorarQuestoesProva(listaRespostas, numeroQuestao, props.questao[numeroQuestao].id, alternativaMarcada)
+        listaRespostas = monitorarQuestoesProva(
+            listaRespostas,
+            numeroQuestao,
+            alternativaMarcada,
+            idAluno,
+            idProva,
+            idQuestao,
+            alternativaCerta)
         if (numeroQuestao > 0) setNumero(numeroQuestao - 1);
     }
 
 
     const encrementaQuestao = () => {
-        listaRespostas = monitorarQuestoesProva(listaRespostas, numeroQuestao, props.questao[numeroQuestao].id, alternativaMarcada)
+        listaRespostas = monitorarQuestoesProva(
+            listaRespostas,
+            numeroQuestao,
+            alternativaMarcada,
+            idAluno,
+            idProva,
+            idQuestao,
+            alternativaCerta)
         if (numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
+        else {
+            if (conferirSeTodasRespostasEstaoMarcadas(listaRespostas)) {
+                setExecucao(true);
+                //tela de confirmação, banco pra guardar, apresenta a nota
+            }
+        }
     }
 
+    const terminouProva = () => setExecucao('Terminada');
+    if (execucao)
+        return <TelaConfirmacao funcaoCancelar={() => setExecucao(false)}
+            funcaoConfirmacao={() => {
+                localStorage.setItem('Usuario', 'user');
+                setExecucao('concluida');
+                console.log(execucao);
+                listaRespostas.map(resposta =>
+                    cadastrarResposta(
+                        resposta.idAluno,
+                        resposta.idProva,
+                        resposta.idQuestao,
+                        resposta.resposta,
+                        resposta.alternativaMarcada)
+                    )
+                }
+            }
+            mensagem={"Tem certeza que deseja encerrar a prova?"}
+            history={props.history}/>
+    
+    if(execucao === 'concluida') return <Home />
+    
     return (
         <Scrollbar>
             <div className="container-questoes">
