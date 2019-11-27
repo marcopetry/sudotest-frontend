@@ -13,8 +13,8 @@ export default function Prova(props) {
         [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
         [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
-        [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
-        [respostaMarcada, setRespostaMarcada] = useState(''),
+        [alternativaCerta, setalternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
+        [alternativaMarcada, setAlternativaMarcada] = useState(''),
         [tempoRestanteProva, setTempo] = useState();
 
     const idAluno = localStorage.getItem('idUsuario');
@@ -37,8 +37,8 @@ export default function Prova(props) {
         setRes3(props.questao[numeroQuestao].alternativa3);
         setRes4(props.questao[numeroQuestao].alternativa4);
         setRes5(props.questao[numeroQuestao].alternativa5);
-        setRespostaCerta(props.questao[numeroQuestao].alternativacorreta);
-        setRespostaMarcada('');
+        setalternativaCerta(props.questao[numeroQuestao].alternativacorreta);
+        setAlternativaMarcada('');
     }, [numeroQuestao]);
 
     const atualizaHorario = () => {
@@ -47,10 +47,25 @@ export default function Prova(props) {
 
     setInterval(atualizaHorario, 10000);
 
+    async function cadastraralternativa(e) {
+        e.preventDefault();
+        const response = await api.post('/cadastraAlunosProvasQuestoes', {
+            idAluno,
+            idProva,
+            idQuestao,
+            //alternativa,
+            alternativaMarcada,
+        })
+        console.log(response);
+    }
+
     async function buscarQuestoes(e) {
-        const response = api.get('/buscaProvasQuestoes', {
+        e.preventDefault();
+        const response = await api.get('/buscaAlunosProvasQuestoes', {
             params: {
-                //PRECISA DO ID DA PROVA
+                idAluno,
+                idProva,
+                idQuestao,
             }
         })
         console.log(response);
@@ -79,52 +94,52 @@ export default function Prova(props) {
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa1"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res1}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa1'} />
-                        <label className="texto-resposta">{res1}</label>
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa1'} />
+                        <label className="texto-alternativa">{res1}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa2"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res2}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa2'} />
-                        <label className="texto-resposta">{res2}</label>
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa2'} />
+                        <label className="texto-alternativa">{res2}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa3"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res3}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa3'} />
-                        <label className="texto-resposta">{res3}</label>
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa3'} />
+                        <label className="texto-alternativa">{res3}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa4"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res4}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa4'} />
-                        <label className="texto-resposta">{res4}</label>
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa4'} />
+                        <label className="texto-alternativa">{res4}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa5"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res5}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa5'} />
-                        <label className="texto-resposta">{res5}</label>
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa5'} />
+                        <label className="texto-alternativa">{res5}</label>
                     </div>
                     <div className="container-buttons">
                         <button onClick={decrementaQuestao} type="button">Voltar</button>
