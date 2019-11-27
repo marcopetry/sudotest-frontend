@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dashboards.css';
+import Scrollbar from 'react-scrollbars-custom';
 
 export default function Dashboards(props) {
 
@@ -15,9 +16,11 @@ export default function Dashboards(props) {
 
     return (
         <div className="container-dash">
-            <ul>
-                {props.acoesUsuario.map((e) => <li id={e.acao} onClick={() => mudaAtividade(e.acao)}>{e.texto}</li>)}
-            </ul>
+            <Scrollbar>
+                <ul>
+                    {props.acoesUsuario.map((e) => <li id={e.acao} onClick={() => mudaAtividade(e.acao)}>{e.texto}</li>)}
+                </ul>
+            </Scrollbar>
         </div>
     );
 }

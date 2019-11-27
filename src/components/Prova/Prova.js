@@ -3,6 +3,9 @@ import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relógio';
+import { monitorarQuestoesProva } from '../../helpers/MonitorQuestoesProva';
+
+let listaRespostas = [];
 
 export default function Prova(props) {
     
@@ -13,14 +16,13 @@ export default function Prova(props) {
         [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
         [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
-        [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
-        [respostaMarcada, setRespostaMarcada] = useState(''),
+        [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
+        [alternativaMarcada, setAlternativaMarcada] = useState(''),
         [tempoRestanteProva, setTempo] = useState();
 
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
     const idQuestao = props.questao[numeroQuestao].id;
-    console.log(idQuestao);
 
     /* 
         idAluno
@@ -37,15 +39,19 @@ export default function Prova(props) {
         setRes3(props.questao[numeroQuestao].alternativa3);
         setRes4(props.questao[numeroQuestao].alternativa4);
         setRes5(props.questao[numeroQuestao].alternativa5);
-        setRespostaCerta(props.questao[numeroQuestao].alternativacorreta);
-        setRespostaMarcada('');
+        setAlternativaCerta(props.questao[numeroQuestao].alternativacorreta);
+        if(listaRespostas.length > 0 && numeroQuestao < listaRespostas.length){
+            setAlternativaMarcada(listaRespostas[numeroQuestao].alternativaMarcada);
+        }else{
+            setAlternativaMarcada('');
+        }
     }, [numeroQuestao]);
 
     const atualizaHorario = () => {
         setTempo(horarioRestanteProva(props.horaTermino));
     };
 
-    setInterval(atualizaHorario, 10000);
+    //setInterval(atualizaHorario, 10000);
 
     async function buscarQuestoes(e) {
         const response = api.get('/buscaProvasQuestoes', {
@@ -57,11 +63,13 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
+        listaRespostas = monitorarQuestoesProva(listaRespostas, numeroQuestao, props.questao[numeroQuestao].id, alternativaMarcada)
         if (numeroQuestao > 0) setNumero(numeroQuestao - 1);
     }
 
 
     const encrementaQuestao = () => {
+        listaRespostas = monitorarQuestoesProva(listaRespostas, numeroQuestao, props.questao[numeroQuestao].id, alternativaMarcada)
         if (numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
     }
 
@@ -82,8 +90,8 @@ export default function Prova(props) {
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res1}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa1'} />
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa1'} />
                         <label className="texto-resposta">{res1}</label>
                     </div>
                     <div className="container-info">
@@ -92,8 +100,8 @@ export default function Prova(props) {
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res2}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa2'} />
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa2'} />
                         <label className="texto-resposta">{res2}</label>
                     </div>
                     <div className="container-info">
@@ -102,8 +110,8 @@ export default function Prova(props) {
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res3}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa3'} />
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa3'} />
                         <label className="texto-resposta">{res3}</label>
                     </div>
                     <div className="container-info">
@@ -112,8 +120,8 @@ export default function Prova(props) {
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res4}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa4'} />
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa4'} />
                         <label className="texto-resposta">{res4}</label>
                     </div>
                     <div className="container-info">
@@ -122,8 +130,8 @@ export default function Prova(props) {
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res5}
-                            onChange={(e) => setRespostaMarcada(e.target.id)}
-                            checked={respostaMarcada === 'alternativa5'} />
+                            onChange={(e) => setAlternativaMarcada(e.target.id)}
+                            checked={alternativaMarcada === 'alternativa5'} />
                         <label className="texto-resposta">{res5}</label>
                     </div>
                     <div className="container-buttons">
