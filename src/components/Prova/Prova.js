@@ -6,15 +6,32 @@ import api from '../../services/api';
 let data = new Date();
 
 export default function Prova(props) {
-    const [pergunta, setPergunta] = useState('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
-        [res1, setRes1] = useState('2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
-        [res2, setRes2] = useState('3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
-        [res3, setRes3] = useState('4 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
-        [res4, setRes4] = useState('5 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
-        [res5, setRes5] = useState('6 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem'),
+    
+    const [numeroQuestao, setNumero] = useState(0),
+        [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
+        [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
+        [res2, setRes2] = useState(props.questao[numeroQuestao].alternativa2),
+        [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
+        [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
+        [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
+        [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativaCorreta),
+        [respostaMarcadaSalva, setRespostaMarcadaSalva] = useState(''),
         [respostaMarcada, setRespostaMarcada] = useState(''),
         [tempoRestanteProva, setTempo] = useState(data.getHours() + ' : ' + data.getMinutes());
 
+    console.log(props.questao[numeroQuestao].id);
+    useEffect(() => {
+        setPergunta(props.questao[numeroQuestao].enunciado);
+        setRes1(props.questao[numeroQuestao].alternativa1);
+        setRes2(props.questao[numeroQuestao].alternativa2);
+        setRes3(props.questao[numeroQuestao].alternativa3);
+        setRes4(props.questao[numeroQuestao].alternativa4);
+        setRes5(props.questao[numeroQuestao].alternativa5);
+        setRespostaMarcadaSalva(respostaMarcada);
+        setRespostaCerta(props.questao[numeroQuestao].alternativaCorreta);
+        setRespostaMarcada('');
+    }, [numeroQuestao]);
+    
     const atualizaHorario = () => {
         data = new Date();
         setTempo(data.getHours() + ' : ' + data.getMinutes());
@@ -30,13 +47,22 @@ export default function Prova(props) {
         })
         console.log(response);
     }
+
+    const decrementaQuestao = () => {
+        if(numeroQuestao > 0) setNumero(numeroQuestao - 1)
+    }
+
+
+    const encrementaQuestao = () => {
+        if(numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
+    }
         
     return (
         <Scrollbar>
             <div className="container-questoes">
                 <div className="form-questoes">
                     <div className="container-info info-prova">
-                        <h3 className="alinhar-esquerda">Questão número 1:</h3>
+                        <h3 className="alinhar-esquerda">Questão número {numeroQuestao + 1}:</h3>
                         <h3>Tempo restante: {tempoRestanteProva}</h3>
                     </div>
                     <div className="container-info">
@@ -85,11 +111,11 @@ export default function Prova(props) {
                             value={res5}
                             onChange={() => setRespostaMarcada(res5)}
                             checked={respostaMarcada === res5} />
-                        <label className="texto-resposta">{res5}v></label>
+                        <label className="texto-resposta">{res5}</label>
                     </div>
                     <div className="container-buttons">
-                        <button type="button">Voltar</button>
-                        <button id="botaoCadastrar" type="button">Avançar</button>
+                        <button onClick={decrementaQuestao}type="button">Voltar</button>
+                        <button onClick={encrementaQuestao} id="botaoCadastrar" type="button">Avançar</button>
                     </div>
                 </div>
             </div>

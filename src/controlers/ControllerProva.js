@@ -8,25 +8,28 @@ export default function ControllerProva(props) {
     const [emExecucao, setExecucao] = useState(true),
         [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [acao, setAcao] = useState(props.acaoEscolhida), 
-        [questoesProva, setQuestoes] = useState();
-
-    console.log(prova.id);
-
+        [espera, setEspera] = useState(true),
+        [questoesProva, setQuestoes] = useState(''),
+        [numeroQuestao, setNumeroQuestao] = useState(0);
+    
     useEffect(() => {
         setAcao(props.acaoEscolhida);
     }, [props.acaoEscolhida]);
 
+
     async function buscarQuestoes(e) {
         //e.preventDefault();
-
         const response = await api.get('/buscaProvasQuestoes', {
             params: {
                 idProva: prova.id
             }
         })
-        console.log(response.data);
+        setQuestoes(response.data);
+        setEspera(false);
     }
-    buscarQuestoes();
+
+    if(questoesProva === '') buscarQuestoes();
+
     const encerrarSessao = () => {
         localStorage.setItem('Usuario', 'user');
         props.history.push('/home');
@@ -37,13 +40,26 @@ export default function ControllerProva(props) {
     }
     const mensagemSaida = "Você tem certeza que deseja encerrar a prova?";
 
+    console.log('questoes', questoesProva);
+
+    const decrementaQuestao = () => {
+        if(numeroQuestao > 0) setNumeroQuestao(numeroQuestao - 1)
+    }
+
+
+    const encrementaQuestao = () => {
+        if(numeroQuestao < questoesProva.length - 1) setNumeroQuestao(numeroQuestao + 1)
+    }
 
     if (acao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
             funcaoCancelar={cancelar}
             mensagem={mensagemSaida} />
 
-    if(acao === 'espera') return <TelaEspera />
+    if(espera) return <TelaEspera />
 
-    return <Prova />;
+    return <Prova questao={questoesProva} 
+                  numeroQuestaoCorrente={numeroQuestao}
+                  voltar={() => decrementaQuestao} 
+                  avancar={() => encrementaQuestao}/>;
 }
