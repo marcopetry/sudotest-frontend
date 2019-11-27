@@ -40,8 +40,6 @@ export default function ControllerProva(props) {
     }
     const mensagemSaida = "Você tem certeza que deseja encerrar a prova?";
 
-    console.log('questoes', questoesProva);
-
     if (acao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
             funcaoCancelar={cancelar}
