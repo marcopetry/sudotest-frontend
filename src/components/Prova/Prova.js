@@ -53,10 +53,25 @@ export default function Prova(props) {
 
     //setInterval(atualizaHorario, 10000);
 
-    async function buscarQuestoes(e) {
-        const response = api.get('/buscaProvasQuestoes', {
+    async function cadastrarResposta(e) {
+        e.preventDefault();
+        const response = await api.post('/cadastraAlunosProvasQuestoes', {
+            idAluno,
+            idProva,
+            idQuestao,
+            //resposta,
+            alternativaMarcada,
+        })
+        console.log(response);
+    }
+
+    async function buscarResposta(e) {
+        e.preventDefault();
+        const response = await api.get('/buscaAlunosProvasQuestoes', {
             params: {
-                //PRECISA DO ID DA PROVA
+                idAluno,
+                idProva,
+                idQuestao,
             }
         })
         console.log(response);
@@ -87,8 +102,8 @@ export default function Prova(props) {
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa1"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res1}
                             onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa1'} />
@@ -97,42 +112,46 @@ export default function Prova(props) {
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa2"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res2}
                             onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa2'} />
                         <label className="texto-resposta">{res2}</label>
+                        <label className="texto-alternativa">{res2}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa3"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res3}
                             onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa3'} />
                         <label className="texto-resposta">{res3}</label>
+                        <label className="texto-alternativa">{res3}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa4"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res4}
                             onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa4'} />
                         <label className="texto-resposta">{res4}</label>
+                        <label className="texto-alternativa">{res4}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
                             id="alternativa5"
-                            className="check-resposta"
-                            name="resposta-marcada"
+                            className="check-alternativa"
+                            name="alternativa-marcada"
                             value={res5}
                             onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa5'} />
                         <label className="texto-resposta">{res5}</label>
+                        <label className="texto-alternativa">{res5}</label>
                     </div>
                     <div className="container-buttons">
                         <button onClick={decrementaQuestao} type="button">Voltar</button>
