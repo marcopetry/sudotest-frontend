@@ -22,10 +22,9 @@ export default function InserirToken(props) {
         if(response.data == null) {
             alert('Token Inválido');
         } else {
+            localStorage.setItem('prova', JSON.stringify(response.data));
             localStorage.setItem('Usuario', 'user-prova');
             props.history.push('/prova');
-            localStorage.setItem('prova', JSON.stringify(response.data));
-            console.log(localStorage);
         }
     }
 
