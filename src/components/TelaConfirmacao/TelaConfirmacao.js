@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TelaConfirmacao.css';
-import Home from '../Home/Home';
 
 export default function TelaConfirmacao(props) {
     const [confirmado, setConfirmado] = useState(false);
@@ -22,5 +21,3 @@ export default function TelaConfirmacao(props) {
         </div>
     );
 }
-
-//funcaoConfirmacao, funcaoCancelar, mensagem
