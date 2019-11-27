@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
-
-let data = new Date();
+import { horarioRestanteProva } from '../../helpers/Relógio';
 
 export default function Prova(props) {
-    
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
@@ -14,12 +12,22 @@ export default function Prova(props) {
         [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
         [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
-        [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativaCorreta),
-        [respostaMarcadaSalva, setRespostaMarcadaSalva] = useState(''),
+        [respostaCerta, setRespostaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
         [respostaMarcada, setRespostaMarcada] = useState(''),
-        [tempoRestanteProva, setTempo] = useState(data.getHours() + ' : ' + data.getMinutes());
+        [tempoRestanteProva, setTempo] = useState();
 
-    console.log(props.questao[numeroQuestao].id);
+    console.log(props.questao[numeroQuestao]);
+    console.log(respostaCerta);
+    console.log(respostaMarcada);
+
+    /* 
+        idAluno
+        idProva
+        idQuestao
+        correta/errada
+        alternativaMarcada
+    */
+
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
         setRes1(props.questao[numeroQuestao].alternativa1);
@@ -27,17 +35,15 @@ export default function Prova(props) {
         setRes3(props.questao[numeroQuestao].alternativa3);
         setRes4(props.questao[numeroQuestao].alternativa4);
         setRes5(props.questao[numeroQuestao].alternativa5);
-        setRespostaMarcadaSalva(respostaMarcada);
-        setRespostaCerta(props.questao[numeroQuestao].alternativaCorreta);
+        setRespostaCerta(props.questao[numeroQuestao].alternativacorreta);
         setRespostaMarcada('');
     }, [numeroQuestao]);
-    
+
     const atualizaHorario = () => {
-        data = new Date();
-        setTempo(data.getHours() + ' : ' + data.getMinutes());
+        setTempo(horarioRestanteProva(props.horaTermino));
     };
-    
-    setInterval(atualizaHorario, 60000);
+
+    setInterval(atualizaHorario, 10000);
 
     async function buscarQuestoes(e) {
         const response = api.get('/buscaProvasQuestoes', {
@@ -49,14 +55,14 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
-        if(numeroQuestao > 0) setNumero(numeroQuestao - 1)
+        if (numeroQuestao > 0) setNumero(numeroQuestao - 1)
     }
 
 
     const encrementaQuestao = () => {
-        if(numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
+        if (numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
     }
-        
+
     return (
         <Scrollbar>
             <div className="container-questoes">
@@ -70,51 +76,56 @@ export default function Prova(props) {
                     </div>
                     <div className="container-info">
                         <input type="radio"
+                            id="alternativa1"
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res1}
-                            onChange={() => setRespostaMarcada(res1)}
-                            checked={respostaMarcada === res1} />
+                            onChange={(e) => setRespostaMarcada(e.target.id)}
+                            checked={respostaMarcada === 'alternativa1'} />
                         <label className="texto-resposta">{res1}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
+                            id="alternativa2"
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res2}
-                            onChange={() => setRespostaMarcada(res2)}
-                            checked={respostaMarcada === res2} />
+                            onChange={(e) => setRespostaMarcada(e.target.id)}
+                            checked={respostaMarcada === 'alternativa2'} />
                         <label className="texto-resposta">{res2}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
+                            id="alternativa3"
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res3}
-                            onChange={() => setRespostaMarcada(res3)}
-                            checked={respostaMarcada === res3} />
+                            onChange={(e) => setRespostaMarcada(e.target.id)}
+                            checked={respostaMarcada === 'alternativa3'} />
                         <label className="texto-resposta">{res3}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
+                            id="alternativa4"
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res4}
-                            onChange={() => setRespostaMarcada(res4)}
-                            checked={respostaMarcada === res4} />
+                            onChange={(e) => setRespostaMarcada(e.target.id)}
+                            checked={respostaMarcada === 'alternativa4'} />
                         <label className="texto-resposta">{res4}</label>
                     </div>
                     <div className="container-info">
                         <input type="radio"
+                            id="alternativa5"
                             className="check-resposta"
                             name="resposta-marcada"
                             value={res5}
-                            onChange={() => setRespostaMarcada(res5)}
-                            checked={respostaMarcada === res5} />
+                            onChange={(e) => setRespostaMarcada(e.target.id)}
+                            checked={respostaMarcada === 'alternativa5'} />
                         <label className="texto-resposta">{res5}</label>
                     </div>
                     <div className="container-buttons">
-                        <button onClick={decrementaQuestao}type="button">Voltar</button>
+                        <button onClick={decrementaQuestao} type="button">Voltar</button>
                         <button onClick={encrementaQuestao} id="botaoCadastrar" type="button">Avançar</button>
                     </div>
                 </div>

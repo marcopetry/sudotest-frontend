@@ -23,9 +23,9 @@ export default function Login({ history }) {
             email,
             senha,
         });
-
+        console.log(response.data)
         if(response.data.login === true){
-            setUsuario(email);            
+            setUsuario(email, response.data.idAluno);            
             setEspera(false);
             history.push(`/home`);
         }else{
@@ -34,11 +34,12 @@ export default function Login({ history }) {
         }
     }
 
-    function setUsuario(user){
+    function setUsuario(user, idAluno){
         if(user === 'adm@adm.com'){
             localStorage.setItem('Usuario', 'adm');
         }else{
             localStorage.setItem('Usuario', 'user');
+            localStorage.setItem('idUsuario', idAluno);
         }
     }
 

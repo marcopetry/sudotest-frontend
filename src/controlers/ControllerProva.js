@@ -40,26 +40,12 @@ export default function ControllerProva(props) {
     }
     const mensagemSaida = "Você tem certeza que deseja encerrar a prova?";
 
-    console.log('questoes', questoesProva);
-
-    const decrementaQuestao = () => {
-        if(numeroQuestao > 0) setNumeroQuestao(numeroQuestao - 1)
-    }
-
-
-    const encrementaQuestao = () => {
-        if(numeroQuestao < questoesProva.length - 1) setNumeroQuestao(numeroQuestao + 1)
-    }
-
     if (acao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
             funcaoCancelar={cancelar}
             mensagem={mensagemSaida} />
 
     if(espera) return <TelaEspera />
-
-    return <Prova questao={questoesProva} 
-                  numeroQuestaoCorrente={numeroQuestao}
-                  voltar={() => decrementaQuestao} 
-                  avancar={() => encrementaQuestao}/>;
+    
+    return <Prova questao={questoesProva} horaTermino={prova.horaTermino}/>;
 }
