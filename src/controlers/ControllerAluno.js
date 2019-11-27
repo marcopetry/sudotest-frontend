@@ -85,5 +85,54 @@ export const acoesProva = [
     {
         acao: 'sair',
         texto: 'Encerrar Prova'
+    },
+    {
+        acao: 'prova',
+        texto: 'Prova'
+    },
+    {
+        acao: 'portugues',
+        texto: 'Português'
+    },
+    {
+        acao: 'matematica',
+        texto: 'Matemática'
+    },
+    {
+        acao: 'informatica',
+        texto: 'Informática'
+    },
+    {
+        acao: 'conhecimentos',
+        texto: 'Conhecimentos Gerais'
+    },
+    {
+        acao: 'sair',
+        texto: 'Encerrar Prova'
+    },
+    {
+        acao: 'prova',
+        texto: 'Prova'
+    },
+    {
+        acao: 'portugues',
+        texto: 'Português'
+    },
+    {
+        acao: 'matematica',
+        texto: 'Matemática'
+    },
+    {
+        acao: 'informatica',
+        texto: 'Informática'
+    },
+    {
+        acao: 'conhecimentos',
+        texto: 'Conhecimentos Gerais'
+    },
+    {
+        acao: 'sair',
+        texto: 'Encerrar Prova'
     }
+
 ];

@@ -20,7 +20,7 @@ export default function ControllerADM(props) {
         [dados, setDados] = useState('');
 
     useEffect(() => {
-        setSessao(props.acaoEscolhida)
+        setSessao(props.acaoEscolhida);
     }, [props.acaoEscolhida]);
 
     async function buscarProvas(sessao) {
@@ -56,7 +56,8 @@ export default function ControllerADM(props) {
 
     const cancelar = () => {
         setSessao('home');
-    }
+    } 
+
     const mensagemSaida = "Você tem certeza que quer sair do sistema?";
 
     if (espera) return <TelaEspera />
