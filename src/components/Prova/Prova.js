@@ -13,7 +13,7 @@ export default function Prova(props) {
         [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
         [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
-        [alternativaCerta, setalternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
+        [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
         [alternativaMarcada, setAlternativaMarcada] = useState(''),
         [tempoRestanteProva, setTempo] = useState();
 
@@ -37,7 +37,7 @@ export default function Prova(props) {
         setRes3(props.questao[numeroQuestao].alternativa3);
         setRes4(props.questao[numeroQuestao].alternativa4);
         setRes5(props.questao[numeroQuestao].alternativa5);
-        setalternativaCerta(props.questao[numeroQuestao].alternativacorreta);
+        setAlternativaCerta(props.questao[numeroQuestao].alternativacorreta);
         setAlternativaMarcada('');
     }, [numeroQuestao]);
 
@@ -47,19 +47,19 @@ export default function Prova(props) {
 
     setInterval(atualizaHorario, 10000);
 
-    async function cadastraralternativa(e) {
+    async function cadastrarResposta(e) {
         e.preventDefault();
         const response = await api.post('/cadastraAlunosProvasQuestoes', {
             idAluno,
             idProva,
             idQuestao,
-            //alternativa,
+            //resposta,
             alternativaMarcada,
         })
         console.log(response);
     }
 
-    async function buscarQuestoes(e) {
+    async function buscarResposta(e) {
         e.preventDefault();
         const response = await api.get('/buscaAlunosProvasQuestoes', {
             params: {
