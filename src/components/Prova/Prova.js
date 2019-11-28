@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
-import { horarioRestanteProva } from '../../helpers/Relógio';
+import { horarioRestanteProva } from '../../helpers/Relogio';
 import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas } from '../../helpers/MonitorQuestoesProva';
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Home from '../Home/Home';
@@ -59,7 +59,7 @@ export default function Prova(props) {
         setTempo(horarioRestanteProva(props.horaTermino));
     };
 
-    //setInterval(atualizaHorario, 10000);
+    setInterval(atualizaHorario, 10000);
 
     async function buscarResposta(e) {
         e.preventDefault();
@@ -104,13 +104,10 @@ export default function Prova(props) {
         }
     }
 
-    const terminouProva = () => setExecucao('Terminada');
     if (execucao)
         return <TelaConfirmacao funcaoCancelar={() => setExecucao(false)}
             funcaoConfirmacao={() => {
                 localStorage.setItem('Usuario', 'user');
-                setExecucao('concluida');
-                console.log(execucao);
                 listaRespostas.map(resposta =>
                     cadastrarResposta(
                         resposta.idAluno,
@@ -119,12 +116,10 @@ export default function Prova(props) {
                         resposta.resposta,
                         resposta.alternativaMarcada)
                     )
+                    props.history.push('/home');
                 }
             }
-            mensagem={"Tem certeza que deseja encerrar a prova?"}
-            history={props.history}/>
-    
-    if(execucao === 'concluida') return <Home />
+            mensagem={"Tem certeza que deseja encerrar a prova?"}/>
     
     return (
         <Scrollbar>
