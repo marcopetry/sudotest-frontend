@@ -18,7 +18,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
         idQuestao,
         resposta,
         alternativaMarcada,
-    })
+    });
     console.log(response)
 }
 
@@ -65,6 +65,16 @@ export default function Prova(props) {
         console.log(response);
     }
 
+    async function calcularMedia() {
+        const response = await api.get('/calculaMedia', {
+            params: {
+                idAluno,
+                idProva,
+            }
+        })
+        console.log(response);
+    }
+    
     const decrementaQuestao = () => {
         listaRespostas = monitorarQuestoesProva(
             listaRespostas,
