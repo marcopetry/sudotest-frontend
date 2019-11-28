@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import InserirToken from '../components/InserirToken/InserirToken';
-import Resultado from '../components/Resultado/Resultado';
 import Home from '../components/Home/Home';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
+import Feedback from '../components/Feedback/Feedback';
 
 //as acoes da dashboard estão no final deste arquivo
 export default function ControllerAluno(props) {
@@ -25,7 +25,7 @@ export default function ControllerAluno(props) {
 
     if (sessao === 'inserir-token') return <InserirToken history={props.history} />
 
-    if (sessao === 'meus-resultados') return <Resultado />
+    if (sessao === 'meus-resultados') return <Feedback />
 
     if (sessao === 'editar-perfil') return <Home />
 

@@ -4,11 +4,12 @@ import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import api from '../services/api';
 import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProva';
+import Feedback from '../components/Feedback/Feedback';
 
 let listaRespostasVazias = [];
 
 export default function ControllerProva(props) {
-    const [emExecucao, setExecucao] = useState(true),
+    const [emExecucao, setExecucao] = useState(''),
         [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [acao, setAcao] = useState(props.acaoEscolhida),
         [espera, setEspera] = useState(true),
@@ -33,6 +34,7 @@ export default function ControllerProva(props) {
             });
         }else{
             //validar quando questões não são retornadas
+            setExecucao('feedback');
             console.log(response, ' deu problema');
         }
         
@@ -57,5 +59,14 @@ export default function ControllerProva(props) {
             mensagem={mensagemSaida} />
 
     if (espera) return <TelaEspera />
-    return <Prova questao={questoesProva} horaTermino={prova.horaTermino} history={props.history} listaRespostas={listaRespostasVazias} idProva={prova.id}/>;
+        
+    if(emExecucao === 'feedback') return <Feedback />
+    
+    return (
+        <Prova  questao={questoesProva} 
+                horaTermino={prova.horaTermino} 
+                history={props.history} 
+                listaRespostas={listaRespostasVazias} 
+                idProva={prova.id}/>
+    );
 }

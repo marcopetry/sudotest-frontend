@@ -22,7 +22,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
 
 export default function Prova(props) {
     listaRespostas = props.listaRespostas;
-    const [numeroQuestao, setNumero] = useState(0),
+    const [numeroQuestao, setNumero] = useState(props.numeroQuestao || 0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
         [res2, setRes2] = useState(props.questao[numeroQuestao].alternativa2),
@@ -64,20 +64,27 @@ export default function Prova(props) {
         console.log(response);
     }
 
+    //altera classe da div marcada como resposta
+    const elementoMarcado = document.getElementsByClassName('opcao-marcada');
+    if(alternativaMarcada === ''){
+        if(elementoMarcado[0] !== undefined)
+            elementoMarcado[0].classList.remove('opcao-marcada');
+    }else {
+        if(elementoMarcado[0] !== undefined)
+            elementoMarcado[0].classList.remove('opcao-marcada');
+        document.getElementById(alternativaMarcada).classList.add('opcao-marcada');
+    }
+
     const marcarAlternativaUsuario = (e) => {
-        setAlternativaMarcada(e.target.id);
+        setAlternativaMarcada(e);
         listaRespostas = monitorarQuestoesProva(
             props.listaRespostas,
             numeroQuestao,
-            e.target.id,
+            e,
             idAluno,
             props.idProva,
             idQuestao,
             alternativaCerta);
-        const elementoMarcado = document.getElementsByClassName('opcao-marcada');
-        if(elementoMarcado[0] !== undefined)
-            elementoMarcado[0].classList.remove('opcao-marcada');
-        document.getElementById(e.target.id).classList.add('opcao-marcada');
     }
 
     const decrementaQuestao = () => {
@@ -129,32 +136,37 @@ export default function Prova(props) {
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>
                     </div>
-                    <div id="alternativa1" className="container-info" onClick={(e) => marcarAlternativaUsuario(e)}>
+                    <div id="alternativa1" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa1')}>
                         <input type="radio"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa1')}
                             className="check-alternativa"
                             checked={alternativaMarcada === 'alternativa1'} />
                         <label className="texto-alternativa">{res1}</label>
                     </div>
-                    <div id="alternativa2" className="container-info" onClick={(e) => marcarAlternativaUsuario(e)}>
+                    <div id="alternativa2" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa2')}>
                         <input type="radio"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa2')}
                             className="check-alternativa"
                             checked={alternativaMarcada === 'alternativa2'} />
                         <label className="texto-alternativa">{res2}</label>
                     </div>
-                    <div id="alternativa3" className="container-info" onClick={(e) => marcarAlternativaUsuario(e)}>
+                    <div id="alternativa3" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa3')}>
                         <input type="radio"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa3')}
                             className="check-alternativa"
                             checked={alternativaMarcada === 'alternativa3'} />
                         <label className="texto-alternativa">{res3}</label>
                     </div>
-                    <div id="alternativa4" className="container-info" onClick={(e) => marcarAlternativaUsuario(e)}>
+                    <div id="alternativa4" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa4')}>
                         <input type="radio"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa4')}
                             className="check-alternativa"
                             checked={alternativaMarcada === 'alternativa4'} />
                         <label className="texto-alternativa">{res4}</label>
                     </div>
-                    <div id="alternativa5" className="container-info" onClick={(e) => marcarAlternativaUsuario(e)}>
+                    <div id="alternativa5" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa5')}>
                         <input type="radio"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa5')}
                             className="check-alternativa"
                             checked={alternativaMarcada === 'alternativa5'} />
                         <label className="texto-alternativa">{res5}</label>
