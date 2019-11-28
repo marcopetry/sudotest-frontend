@@ -13,42 +13,14 @@ import { buscarQuestoes } from './ControllerProva';
 
 let listaRespostasVazias = [];
 
-/* async function buscarQuestoesProva() {
-    listaRespostasVazias = await buscarQuestoes();
-} */
-
 export default function ControlerInicial({ history }) {
     //verificar se é usuário ou adm e passar informações pra dash
     const [acao, setAcao] = useState('home'),
-        [tipoUsuario, setUsuario] = useState(localStorage.getItem('Usuario')), 
-        [questoes, setQuestoes] = useState(''), 
+        [tipoUsuario, setUsuario] = useState(localStorage.getItem('Usuario')),
         [execucao, setExecucao] = useState('');
 
     let acoes;
-    
 
-    /* async function buscarQuestoes(e) {
-        const prova = JSON.parse(localStorage.getItem('prova'));
-        console.log('prova', prova);
-        const response = await api.get('/buscaProvasQuestoes', {
-            params: {
-                idProva: prova.id
-            }
-        })
-        if (response) {
-            const idAluno = localStorage.getItem('idUsuario');
-            response.data.map( questao => {
-                preencherListaComRespostasVazias(idAluno, prova.id, questao.id, listaRespostasVazias)
-            });
-            console.log('lista no inicio', listaRespostasVazias);
-        }else{
-            //validar quando questões não são retornadas
-            setExecucao('feedback');
-            console.log(response, ' deu problema');
-        }
-    } */
-
-    
     if (tipoUsuario === 'adm') {
         acoes = acoesADM;
     } else if (tipoUsuario === 'user') {
@@ -58,25 +30,36 @@ export default function ControlerInicial({ history }) {
             listaRespostasVazias = [];
             listaRespostasVazias = await buscarQuestoes();
             setAcao('resposta');
-            console.log(listaRespostasVazias);
         }
-        console.log('lista', listaRespostasVazias)
-        if(listaRespostasVazias.length === 0){
+        if (listaRespostasVazias.length === 0) {
             buscarQuestoesProva();
         }
-        
-        console.log(acao);
-        acoes = acoesProva;
+        acoes = [];
+        let i = 0;
+        listaRespostasVazias.map(elemento => {
+            i++;
+            acoes.push({
+                acao: 'questao-selecionada-' + (i - 0),
+                texto: 'Questão ' + i,
+                indiceQuestao: i
+            })
+        });
+        acoes.push({
+            acao: 'sair',
+            texto: 'Encerrar prova'
+        })
+
     } else {
         history.push('/');
         return <Login />
     }
 
     const trocarAcao = (e) => setAcao(e);
-    
+    console.log('acao na inicial', acao);
+
     return (
         <>
-            <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} history={history} />
+            <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} history={history} listaRespostas={listaRespostasVazias} />
             {tipoUsuario === 'adm' && <ControlerAdm acaoEscolhida={acao} history={history} />}
             {tipoUsuario === 'user' && <ControllerAluno acaoEscolhida={acao} history={history} />}
             {tipoUsuario === 'user-prova' && <ControllerProva acaoEscolhida={acao} history={history} />}

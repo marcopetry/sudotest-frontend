@@ -3,7 +3,7 @@ import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relogio';
-import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas } from '../../helpers/MonitorQuestoesProva';
+import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas, alterarQuestaoPelaDashboard } from '../../helpers/MonitorQuestoesProva';
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Relogio from '../Relogio/Relogio';
 
@@ -22,7 +22,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
 
 export default function Prova(props) {
     listaRespostas = props.listaRespostas;
-    const [numeroQuestao, setNumero] = useState(props.numeroQuestao || 0),
+    const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
         [res2, setRes2] = useState(props.questao[numeroQuestao].alternativa2),
@@ -36,6 +36,12 @@ export default function Prova(props) {
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
     const idQuestao = props.questao[numeroQuestao].id;
+    let numero;
+    console.log('acao do cara', props.acao);
+
+    if(props.acao.indexOf('selecionada') !== -1 && numero !== numeroQuestao){
+        numero = alterarQuestaoPelaDashboard(props.acao);
+    }
 
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
@@ -50,7 +56,11 @@ export default function Prova(props) {
         } else {
             setAlternativaMarcada('');
         }
-    }, [numeroQuestao]);
+        if(numero !== numeroQuestao && numero !== undefined){
+            setNumero(numero);
+            props.trocarAcao('resposta');
+        }
+    }, [numeroQuestao, numero]);
 
     async function buscarResposta(e) {
         e.preventDefault();
@@ -88,8 +98,10 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
-        if (numeroQuestao > 0) 
+        if (numeroQuestao > 0){
+            numero--;
             setNumero(numeroQuestao - 1);
+        } 
         else {
             alert('Essa é a primeira questão, não tem como voltar!')
         }
@@ -97,8 +109,11 @@ export default function Prova(props) {
 
 
     const encrementaQuestao = () => {
-        if (numeroQuestao < props.questao.length - 1) 
+        if (numeroQuestao < props.questao.length - 1){
+            //seta o número para acompanhar o state caso não seja clicado no dashboard
+            numero++;
             setNumero(numeroQuestao + 1)
+        }
         else {
             if (conferirSeTodasRespostasEstaoMarcadas(listaRespostas)) {
                 setExecucao(true);

@@ -36,16 +36,18 @@ export async function buscarQuestoes() {
 export default function ControllerProva(props) {
     const [emExecucao, setExecucao] = useState(''),
         [acao, setAcao] = useState(props.acaoEscolhida),
-        [espera, setEspera] = useState(false);
+        [questoes, setQuestoes] = useState(questoesProva);
 
-    console.log('questoes', questoesProva);
-    console.log('respostas vazias', listaRespostasVazias);
+    console.log('acao', acao);
+
+    //vou usar para não amarrar a dashboard a questão
+    const trocarAcaoExecucaoProva = (e) => setAcao(e);
 
     //pra mandar o id da prova como props para gerenciar o front de respostas    
     const prova = useState(JSON.parse(localStorage.getItem('prova')));
     useEffect(() => {
         setAcao(props.acaoEscolhida);
-    }, [props.acaoEscolhida]);
+    }, [props.acaoEscolhida, questoesProva, listaRespostasVazias]);
 
     const encerrarSessao = () => {
         localStorage.setItem('Usuario', 'user');
@@ -70,7 +72,9 @@ export default function ControllerProva(props) {
                 horaTermino={prova[0].horaTermino}
                 history={props.history}
                 listaRespostas={listaRespostasVazias}
-                idProva={prova.id} />
+                idProva={prova.id} 
+                acao={acao}
+                trocarAcao={trocarAcaoExecucaoProva}/>
         );
 
 

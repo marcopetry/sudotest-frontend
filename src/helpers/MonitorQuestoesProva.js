@@ -50,3 +50,8 @@ export function preencherListaComRespostasVazias(
     });
     return listaRespostas;
 }
+
+export function alterarQuestaoPelaDashboard(selecionada){
+    const string = selecionada.split('-');
+    return parseInt(string[2]) - 1;
+}
