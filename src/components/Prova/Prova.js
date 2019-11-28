@@ -87,6 +87,8 @@ export default function Prova(props) {
 
     const marcarAlternativaUsuario = (e) => {
         setAlternativaMarcada(e);
+    }
+
     async function calcularMedia() {
         const response = await api.get('/calculaMedia', {
             params: {
@@ -97,17 +99,6 @@ export default function Prova(props) {
         console.log(response);
     }
     
-    const decrementaQuestao = () => {
-        listaRespostas = monitorarQuestoesProva(
-            props.listaRespostas,
-            numeroQuestao,
-            e,
-            idAluno,
-            props.idProva,
-            idQuestao,
-            alternativaCerta);
-    }
-
     const decrementaQuestao = () => {
         if (numeroQuestao > 0){
             numero--;
