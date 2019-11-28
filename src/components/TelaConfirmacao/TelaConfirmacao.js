@@ -6,7 +6,7 @@ export default function TelaConfirmacao(props) {
 
     const funcaoConfirmar = () => {
         props.funcaoConfirmacao();
-        props.history.push('/home');
+        /* props.history.push('/home'); */
     }
 
     return (
