@@ -8,34 +8,23 @@ export function monitorarQuestoesProva(
     alternativaCerta) {
     
     let resposta;
-    if(alternativaMarcada === alternativaCerta){
+    if (alternativaMarcada === alternativaCerta) {
         resposta = "correta";
-    }else {
+    } else {
         resposta = "errada";
     }
-    
-    if (indiceQuestao < listaRespostas.lenght) {
-        listaRespostas.push({
-            idAluno,
-            idProva,
-            idQuestao,
-            resposta,
-            alternativaMarcada
-        });
-    } else {
-        listaRespostas[indiceQuestao] = {
-            idAluno,
-            idProva,
-            idQuestao,
-            resposta,
-            alternativaMarcada
-        };
-    }
+
+    listaRespostas[indiceQuestao] = {
+        idAluno,
+        idProva,
+        idQuestao,
+        resposta,
+        alternativaMarcada
+    };
     return listaRespostas;
 }
 
 export function conferirSeTodasRespostasEstaoMarcadas(listaRespostas) {
-    console.log(listaRespostas);
     for (let i = 0; i < listaRespostas.length; i++) {
         if (listaRespostas[i].alternativaMarcada === "") {
             let numeroQuestao = i + 1;
@@ -46,8 +35,18 @@ export function conferirSeTodasRespostasEstaoMarcadas(listaRespostas) {
     return true;
 }
 
-/*  idAluno,
+export function preencherListaComRespostasVazias(
+    idAluno,
     idProva,
-    idQuestao,
-    //resposta,
-    alternativaMarcada,*/
+    idQuestao, 
+    listaRespostas) {
+
+    listaRespostas.push({
+        idAluno,
+        idProva,
+        idQuestao,
+        resposta: "errada",
+        alternativaMarcada: ""
+    });
+    return listaRespostas;
+}
