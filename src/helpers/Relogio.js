@@ -15,6 +15,6 @@ export function horarioRestanteProva(horaTerminoProva) {
         horaAtual = 24 - horaAtual + horaTermino
     else 
         horaAtual = horaTermino - horaAtual;
-
-    return horaAtual + ' : ' + minutosAtuais;
+    
+    return (horaAtual * 3600000) + (minutosAtuais * 60000);
 }

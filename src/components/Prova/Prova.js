@@ -5,14 +5,13 @@ import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relogio';
 import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas } from '../../helpers/MonitorQuestoesProva';
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
-import Home from '../Home/Home';
-import { Redirect } from 'react-router-dom';
+import Relogio from '../Relogio/Relogio';
 
 let listaRespostas = [];
 
 async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
     //e.preventDefault();
-
+    console.log('entrou gravar')
     const response = await api.post('/cadastraAlunosProvasQuestoes', {
         idAluno,
         idProva,
@@ -20,7 +19,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
         resposta,
         alternativaMarcada,
     })
-    console.log(response);
+    console.log(response)
 }
 
 export default function Prova(props) {
@@ -33,8 +32,7 @@ export default function Prova(props) {
         [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
         [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
         [alternativaMarcada, setAlternativaMarcada] = useState(''),
-        [execucao, setExecucao] = useState(false),
-        [tempoRestanteProva, setTempo] = useState();
+        [execucao, setExecucao] = useState(false);
 
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
@@ -54,12 +52,6 @@ export default function Prova(props) {
             setAlternativaMarcada('');
         }
     }, [numeroQuestao]);
-
-    const atualizaHorario = () => {
-        setTempo(horarioRestanteProva(props.horaTermino));
-    };
-
-    setInterval(atualizaHorario, 10000);
 
     async function buscarResposta(e) {
         e.preventDefault();
@@ -104,30 +96,31 @@ export default function Prova(props) {
         }
     }
 
+    const cadastrarProvaConcluida = () => {
+        localStorage.setItem('Usuario', 'user');
+        listaRespostas.map(resposta =>
+            cadastrarResposta(
+                resposta.idAluno,
+                resposta.idProva,
+                resposta.idQuestao,
+                resposta.resposta,
+                resposta.alternativaMarcada)
+            )
+            props.history.push('/home');
+        }
+
     if (execucao)
         return <TelaConfirmacao funcaoCancelar={() => setExecucao(false)}
-            funcaoConfirmacao={() => {
-                localStorage.setItem('Usuario', 'user');
-                listaRespostas.map(resposta =>
-                    cadastrarResposta(
-                        resposta.idAluno,
-                        resposta.idProva,
-                        resposta.idQuestao,
-                        resposta.resposta,
-                        resposta.alternativaMarcada)
-                    )
-                    props.history.push('/home');
-                }
-            }
+            funcaoConfirmacao={cadastrarProvaConcluida}
             mensagem={"Tem certeza que deseja encerrar a prova?"}/>
     
     return (
         <Scrollbar>
             <div className="container-questoes">
                 <div className="form-questoes">
-                    <div className="container-info info-prova">
+                    <div id="cabecalho-prova" className="container-info info-prova">
                         <h3 className="alinhar-esquerda">Questão número {numeroQuestao + 1}:</h3>
-                        <h3>Tempo restante: {tempoRestanteProva}</h3>
+                        <Relogio horaTermino={props.horaTermino} terminouTempoProva={cadastrarProvaConcluida}/>
                     </div>
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>

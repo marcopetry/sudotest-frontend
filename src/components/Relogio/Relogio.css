@@ -1,0 +1,23 @@
+.container-relogio {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.8em;
+}
+
+.container-relogio strong {
+    margin: 0 0.25em;
+    font-size: 1.5em;
+    background-color: #696969;
+    color: white;
+    padding: 0.3em;
+    border-radius: 0.25em;
+    width: 1.7em;
+}
+
+.container-relogio label {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}

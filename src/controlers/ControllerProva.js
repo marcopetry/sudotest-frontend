@@ -25,6 +25,7 @@ export default function ControllerProva(props) {
             }
         })
         setQuestoes(response.data);
+        //validar quando questões não são retornadas
         setEspera(false);
     }
 
