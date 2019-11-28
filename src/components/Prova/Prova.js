@@ -87,6 +87,17 @@ export default function Prova(props) {
 
     const marcarAlternativaUsuario = (e) => {
         setAlternativaMarcada(e);
+    async function calcularMedia() {
+        const response = await api.get('/calculaMedia', {
+            params: {
+                idAluno,
+                idProva,
+            }
+        })
+        console.log(response);
+    }
+    
+    const decrementaQuestao = () => {
         listaRespostas = monitorarQuestoesProva(
             props.listaRespostas,
             numeroQuestao,

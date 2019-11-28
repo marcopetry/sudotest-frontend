@@ -1,3 +1,5 @@
+import api from '../services/api';
+
 export function monitorarQuestoesProva(
     listaRespostas,
     indiceQuestao,
@@ -6,7 +8,18 @@ export function monitorarQuestoesProva(
     idProva,
     idQuestao,
     alternativaCerta) {
-    
+
+    async function atualizarResposta(resposta) {
+        const response = await api.put('/atualizaAlunosProvasQuestoes', {
+            idAluno,
+            idProva,
+            idQuestao,
+            resposta,
+            alternativaMarcada
+        })
+        console.log(response);
+    }
+
     let resposta;
     if (alternativaMarcada === alternativaCerta) {
         resposta = "correta";

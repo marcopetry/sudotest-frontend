@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ListarInformacoes.css';
 
 export default function ListarInformacoes(props) {
-
+    const [espera, setEspera] = useState(false);
+    
     useEffect(() => {
         //coloca as bordas no cabecalho da tabela
         const cabecalho = document.getElementsByTagName('th');
