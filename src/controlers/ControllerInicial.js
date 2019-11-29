@@ -55,14 +55,13 @@ export default function ControlerInicial({ history }) {
     }
 
     const trocarAcao = (e) => setAcao(e);
-    console.log('acao na inicial', acao);
 
     return (
         <>
             <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} history={history} listaRespostas={listaRespostasVazias} />
             {tipoUsuario === 'adm' && <ControlerAdm acaoEscolhida={acao} history={history} />}
             {tipoUsuario === 'user' && <ControllerAluno acaoEscolhida={acao} history={history} />}
-            {tipoUsuario === 'user-prova' && <ControllerProva acaoEscolhida={acao} history={history} />}
+            {tipoUsuario === 'user-prova' && <ControllerProva acaoEscolhida={acao} history={history} mudarAtividade={trocarAcao}/>}
         </>
     );
 }

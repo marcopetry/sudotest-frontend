@@ -13,7 +13,6 @@ let questoesProva = [];
 
 export async function buscarQuestoes() {
     const prova = JSON.parse(localStorage.getItem('prova'));
-
     const response = await api.get('/buscaProvasQuestoes', {
         params: {
             idProva: prova.id
@@ -21,8 +20,9 @@ export async function buscarQuestoes() {
     })
     if (response) {
         const idAluno = localStorage.getItem('idUsuario');
-        questoesProva = response.data;
         listaRespostasVazias = [];
+        questoesProva = [];
+        questoesProva = response.data;
         response.data.map(questao => {
             preencherListaComRespostasVazias(idAluno, prova.id, questao.id, listaRespostasVazias)
         });
@@ -38,10 +38,12 @@ export default function ControllerProva(props) {
         [acao, setAcao] = useState(props.acaoEscolhida),
         [questoes, setQuestoes] = useState(questoesProva);
 
-    console.log('acao', acao);
-
     //vou usar para não amarrar a dashboard a questão
     const trocarAcaoExecucaoProva = (e) => setAcao(e);
+    const mudarAtividade = (acao) => {
+        setAcao(acao);
+        props.mudarAtividade(acao);
+    }
 
     //pra mandar o id da prova como props para gerenciar o front de respostas    
     const prova = useState(JSON.parse(localStorage.getItem('prova')));
@@ -72,11 +74,11 @@ export default function ControllerProva(props) {
                 horaTermino={prova[0].horaTermino}
                 history={props.history}
                 listaRespostas={listaRespostasVazias}
-                idProva={prova.id} 
+                idProva={prova[0].id}
                 acao={acao}
-                trocarAcao={trocarAcaoExecucaoProva}/>
+                trocarAcao={trocarAcaoExecucaoProva} 
+                mudarAtividade={mudarAtividade}/>
         );
-
 
     return <TelaEspera />
 

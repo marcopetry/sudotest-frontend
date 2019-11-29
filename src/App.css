@@ -10,8 +10,8 @@ html, body, #root {
 }
 
 body {
-  background: #f5f5f5;
-  background: url(../src/assets/fundo.png);
+  background: #d9a1e9;
+  /* background: url(../src/assets/fundo.png); */
 }
 
 body, input, button {

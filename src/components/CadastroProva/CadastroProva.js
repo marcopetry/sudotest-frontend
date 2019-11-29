@@ -1,9 +1,10 @@
 /* eslint-disable eqeqeq */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CadastroProva.css';
 import api from '../../services/api';
 
-export default function CadastroProva() {
+export default function CadastroProva(props) {
+    /* console.log(props.prova.id) */
     const [id, setId] = useState(''),
         [token, setToken] = useState(''),
         [horaInicio, setHoraInicio] = useState(''),
@@ -28,7 +29,28 @@ export default function CadastroProva() {
         setQtdQuestoesConhecimentosGerais('');
         setPorcentagemAprovacao('');
         setVagasDisponiveis('');
+        setNomeProva('');
     }
+
+    //seta os campos quando vem para edição
+    console.log(props.prova);
+    useEffect(() => {
+        if(props.prova !==  undefined) {
+            setId(props.prova.id);
+            setToken(props.prova.token);
+            setHoraInicio(props.prova.horaInicio);
+            setHoraTerminio(props.prova.horaTermino);
+            setData(props.prova.dataRealizacao);
+            setQtdQuestoesMatematica(props.prova.qtdQuestoesMatematica);
+            setQtdQuestoesPortugues(props.prova.qtdQuestoesPortugues);
+            setQtdQuestoesInformatica(props.prova.qtdQuestoesInformatica);
+            setQtdQuestoesConhecimentosGerais(props.prova.qtdQuestoesConhecimentosGerais);
+            setPorcentagemAprovacao(props.prova.porcentagemAprovacao);
+            setVagasDisponiveis(props.prova.vagasDisponiveis);
+            setNomeProva(props.prova.nomeProva);
+        }
+
+    }, [props.prova])
 
     async function cadastrarProva(e) {
         e.preventDefault();
