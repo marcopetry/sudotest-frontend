@@ -3,7 +3,7 @@ import Dashboards from '../components/Dashboards/Dashboards';
 import ControlerAdm from './ControllerADM';
 import { acoesADM } from './ControllerADM';
 import ControllerAluno from './ControllerAluno';
-import { acoesAluno, acoesProva } from './ControllerAluno';
+import { acoesAluno } from './ControllerAluno';
 import ControllerProva from './ControllerProva';
 import Login from '../components/Login/Login';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';

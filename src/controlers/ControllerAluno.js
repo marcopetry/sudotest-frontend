@@ -21,7 +21,6 @@ export default function ControllerAluno(props) {
         setSessao('home');
         console.log(sessao);
     } 
-    const mensagemSaida = "Você tem certeza que quer sair do sistema?";
 
     if (sessao === 'inserir-token') return <InserirToken history={props.history} />
 
@@ -32,7 +31,7 @@ export default function ControllerAluno(props) {
     if (sessao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
                                 funcaoCancelar={cancelar}
-                                mensagem={mensagemSaida} />
+                                mensagem={"Você tem certeza que quer sair do sistema?"} />
     return <Home />
 
 }
@@ -60,79 +59,3 @@ export const acoesAluno =
             texto: 'Sair'
         },
     ];
-
-export const acoesProva = [
-    {
-        acao: 'prova',
-        texto: 'Prova'
-    },
-    {
-        acao: 'portugues',
-        texto: 'Português'
-    },
-    {
-        acao: 'matematica',
-        texto: 'Matemática'
-    },
-    {
-        acao: 'informatica',
-        texto: 'Informática'
-    },
-    {
-        acao: 'conhecimentos',
-        texto: 'Conhecimentos Gerais'
-    },
-    {
-        acao: 'sair',
-        texto: 'Encerrar Prova'
-    },
-    {
-        acao: 'prova',
-        texto: 'Prova'
-    },
-    {
-        acao: 'portugues',
-        texto: 'Português'
-    },
-    {
-        acao: 'matematica',
-        texto: 'Matemática'
-    },
-    {
-        acao: 'informatica',
-        texto: 'Informática'
-    },
-    {
-        acao: 'conhecimentos',
-        texto: 'Conhecimentos Gerais'
-    },
-    {
-        acao: 'sair',
-        texto: 'Encerrar Prova'
-    },
-    {
-        acao: 'prova',
-        texto: 'Prova'
-    },
-    {
-        acao: 'portugues',
-        texto: 'Português'
-    },
-    {
-        acao: 'matematica',
-        texto: 'Matemática'
-    },
-    {
-        acao: 'informatica',
-        texto: 'Informática'
-    },
-    {
-        acao: 'conhecimentos',
-        texto: 'Conhecimentos Gerais'
-    },
-    {
-        acao: 'sair',
-        texto: 'Encerrar Prova'
-    }
-
-];

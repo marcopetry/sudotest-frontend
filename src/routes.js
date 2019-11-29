@@ -7,6 +7,7 @@ import ControlerInicial from './controlers/ControllerInicial';
 import ControllerProva from './controlers/ControllerProva';
 import Feedback from './components/Feedback/Feedback';
 import Dashboards from './components/Dashboards/Dashboards';
+import TelaEspera from './components/TelaEspera/TelaEspera';
 
 export default function Routes() {
     return (

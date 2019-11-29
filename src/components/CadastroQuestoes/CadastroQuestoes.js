@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './CadastroQuestoes.css';
 import api from '../../services/api';
+import Feedback from '../Feedback/Feedback';
+import TelaEspera from '../TelaEspera/TelaEspera';
 
 export default function CadastroQuestoes() {
     const [enunciado, setEnunciado] = useState(''),
@@ -10,27 +12,55 @@ export default function CadastroQuestoes() {
         [alternativa4, setAlternativa4] = useState(''),
         [alternativa5, setAlternativa5] = useState(''),
         [alternativacorreta, setAlternativaCorreta] = useState(''),
-        [categoria, setCategoria] = useState('Selecione');
+        [categoria, setCategoria] = useState('Selecione'),
+        [espera, setEspera] = useState(false),
+        [feedback, setFeedback] = useState('');
 
-        async function cadastrarQuestao(e) {
-            e.preventDefault();
-            const response = await api.post('/cadastroQuestao', {
-                enunciado,
-                alternativa1,
-                alternativa2,
-                alternativa3,
-                alternativa4,
-                alternativa5,
-                alternativacorreta,
-                categoria
-            })
+    function pegarPrimeiroCampoVazio() {
+        if (categoria === 'Selecione')
+            return 'Categoria não está selecionada.';
+        if (!enunciado)
+            return 'Enunciado da questão não está preenchido.';
+        if (!alternativa1)
+            return 'Primeira alternativa da questão não está preenchida.';
+        if (!alternativa2)
+            return 'Segunda alternativa da questão não está preenchida.';
+        if (!alternativa3)
+            return 'Terceira alternativa da questão não está preenchida.';
+        if (!alternativa4)
+            return 'Quarta alternativa da questão não está preenchida.';
+        if (!alternativa5)
+            return 'Quinta alternativa da questão não está preenchida.';
+        if (!alternativacorreta)
+            return 'Alternativa correta não foi selecionada.';
+    }
 
-            if (response.data.Erro) {
-                alert(response.data.Erro)
-            } else{
-                alert('Questão cadastrada com sucesso')
-            }
+    async function cadastrarQuestao(e) {
+        e.preventDefault();
+        if (!(enunciado && alternativa1 && alternativa2 && alternativa3 && alternativa4 && alternativa5 && alternativacorreta && categoria)) {
+            alert(pegarPrimeiroCampoVazio());
+            return;
         }
+        setEspera(true);
+        const response = await api.post('/cadastroQuestao', {
+            enunciado,
+            alternativa1,
+            alternativa2,
+            alternativa3,
+            alternativa4,
+            alternativa5,
+            alternativacorreta,
+            categoria
+        })
+
+        setEspera(false);
+        if (response.data.Erro) {
+            setFeedback(response.data.Erro)
+        } else {
+            setFeedback('Questão cadastrada com sucesso');
+            limpar();
+        }
+    }
 
     const limpar = () => {
         setEnunciado('');
@@ -42,6 +72,13 @@ export default function CadastroQuestoes() {
         setCategoria('Selecione');
         setAlternativaCorreta('');
     }
+
+    if (feedback !== '') {
+        setTimeout(() => setFeedback(''), 2000)
+        return <Feedback msgPrimaria={feedback} />
+    }
+
+    if (espera) return <TelaEspera />
 
     return (
         <div className="container-questao">

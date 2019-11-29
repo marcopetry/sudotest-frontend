@@ -6,6 +6,7 @@ import { horarioRestanteProva } from '../../helpers/Relogio';
 import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas, alterarQuestaoPelaDashboard, calcularMediaProva } from '../../helpers/MonitorQuestoesProva';
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Relogio from '../Relogio/Relogio';
+import Feedback from '../Feedback/Feedback';
 
 let listaRespostas = [];
 async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
@@ -32,7 +33,8 @@ export default function Prova(props) {
         [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
         [alternativaMarcada, setAlternativaMarcada] = useState(''),
         [execucao, setExecucao] = useState(false),
-        [porcentagemMedia, setMedia] = useState('');
+        [porcentagemMedia, setMedia] = useState(''), 
+        [notaAluno, setNota] = useState('');
 
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
@@ -83,7 +85,8 @@ export default function Prova(props) {
     } else {
         if (elementoMarcado[0] !== undefined)
             elementoMarcado[0].classList.remove('opcao-marcada');
-        document.getElementById(alternativaMarcada).classList.add('opcao-marcada');
+        if(document.getElementById(alternativaMarcada) !== null)
+            document.getElementById(alternativaMarcada).classList.add('opcao-marcada');
     }
 
     const marcarAlternativaUsuario = (e) => {
@@ -99,13 +102,12 @@ export default function Prova(props) {
     }
 
     async function calcularMedia() {
-        console.log('prova', idProva);
-        console.log('aluno', idAluno)
-        console.log('media');
+        const porcentagemMedia = notaAluno;
         const response = await api.get('/calculaMedia', {
             params: {
                 idAluno,
                 idProva,
+                porcentagemMedia
             }
         })
         console.log(response);
@@ -147,12 +149,14 @@ export default function Prova(props) {
                 resposta.alternativaMarcada)
         )
         //chamar função cadastrar prova com a média
-        const media = calcularMediaProva(listaRespostas);
-        props.history.push({
-            pathname: '/resultado',
-            //search: '?query=abc',
-            state: media
-        });
+        setNota(calcularMediaProva(listaRespostas));
+    }
+
+    if(notaAluno !== ''){
+        const mensagemPrimaria = "Parabéns " + localStorage.getItem('nomeUsuario') + ", você concluiu a prova!";
+        const mensagemSecundaria = "Você acertou " + notaAluno + "% das questões!";
+        setTimeout(() => props.history.push('/home'), 3000);
+        return <Feedback msgPrimaria={mensagemPrimaria} msgSecundaria={mensagemSecundaria} />
     }
 
     if (execucao)

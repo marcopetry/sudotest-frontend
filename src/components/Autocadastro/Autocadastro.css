@@ -2,7 +2,6 @@
 .main-container {
     height: 100%;
     width: 100%;
-    /* background: url(../../assets/fundo.png); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +9,7 @@
 
 /* Form autocadastro */
 .autocadastro-container {
+    width: 100%;
     height: 100%;
     display: flex;
     flex: 1;
@@ -77,35 +77,11 @@
 
 /* Mensagem flutuante */
 .sudotest-container {
-    /* width: 100%; */
-    /* max-width: 300px; */
     display: flex;
     flex: 2;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.sudotest-container img {
-    width: 100px;
-}
-
-.sudotest-container .titulo {
-    display: flex;
-    flex-direction: row; 
-    align-items: center;
-    letter-spacing: 3px;   
-}
-
-.sudotest-container .titulo .sudo {
-    font-size: 62px;
-    color: #3F3A7F;
-    font-weight: bold;  
-}
-
-.sudotest-container .titulo .test {
-    font-size: 50px;
-    color: #EF7733;
 }
 
 .sudotest-container .sudotest-texto {

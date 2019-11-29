@@ -12,3 +12,7 @@
     margin-bottom: 5em;
 }
 
+.loader {
+    display: flex;
+    justify-content: center;
+}
