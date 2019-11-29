@@ -4,7 +4,7 @@ import './Login.css';
 
 import api from '../../services/api';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
 
 export default function Login({ history }) {

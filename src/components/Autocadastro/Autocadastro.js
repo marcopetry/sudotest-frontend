@@ -5,7 +5,7 @@ import './Autocadastro.css';
 
 import api from '../../services/api'
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
 
@@ -77,10 +77,6 @@ export default function Autocadastro({ history }) {
         <div className="main-container">
             <div className="sudotest-container">
                 <img src={logo} alt="Sudotec Logo" />
-                <div className="titulo">
-                    <p className="sudo">SUDO</p>
-                    <p className="test">TEST</p>
-                </div>
                 <p className="sudotest-texto">Sistema de provas online</p>
             </div>
 
