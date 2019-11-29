@@ -3,8 +3,6 @@ import './Feedback.css';
 
 export default function Feedback(props) {
 
-    //mensagem primaria, mensagem secundária, função pro botão
-
     return (
         <div className="container-resposta">
             <div className="container-texto">

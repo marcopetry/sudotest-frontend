@@ -25,7 +25,7 @@ export default function Login({ history }) {
         });
         console.log(response.data)
         if(response.data.login === true){
-            setUsuario(email, response.data.idAluno);            
+            setUsuario(email, response.data.idAluno, response.data.nomeAluno);            
             setEspera(false);
             history.push(`/home`);
         }else{
@@ -34,12 +34,13 @@ export default function Login({ history }) {
         }
     }
 
-    function setUsuario(user, idAluno){
+    function setUsuario(user, idAluno, nomeAluno){
         if(user === 'adm@adm.com'){
             localStorage.setItem('Usuario', 'adm');
         }else{
             localStorage.setItem('Usuario', 'user');
             localStorage.setItem('idUsuario', idAluno);
+            localStorage.setItem('nomeUsuario', nomeAluno);
         }
     }
 
