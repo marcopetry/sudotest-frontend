@@ -1,8 +1,9 @@
 import React from 'react';
-import './Resultado.css';
+import './Feedback.css';
 
-export default function Resultado(props){
+export default function Feedback(props){
 
+    //mensagem primaria, mensagem secundária, função pro botão
     return (
         <div className="container-resposta">
             <div className="container-texto">

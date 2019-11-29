@@ -26,6 +26,14 @@
     align-items: center;
 }
 
+.info-hover:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.opcao-marcada {
+    background-color: #afafaf;
+}
+
 .alinhar-esquerda {
     margin-left: 3.5em;
 }

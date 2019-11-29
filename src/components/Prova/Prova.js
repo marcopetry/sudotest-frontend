@@ -3,15 +3,14 @@ import './Prova.css';
 import Scrollbar from 'react-scrollbars-custom';
 import api from '../../services/api';
 import { horarioRestanteProva } from '../../helpers/Relogio';
-import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas } from '../../helpers/MonitorQuestoesProva';
+import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas, alterarQuestaoPelaDashboard } from '../../helpers/MonitorQuestoesProva';
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Relogio from '../Relogio/Relogio';
 
 let listaRespostas = [];
-
+//props.listaRespostas
 async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
     //e.preventDefault();
-    console.log('entrou gravar')
     const response = await api.post('/cadastraAlunosProvasQuestoes', {
         idAluno,
         idProva,
@@ -23,6 +22,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
 }
 
 export default function Prova(props) {
+    listaRespostas = props.listaRespostas;
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
         [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
@@ -37,6 +37,12 @@ export default function Prova(props) {
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
     const idQuestao = props.questao[numeroQuestao].id;
+    let numero;
+    console.log('acao do cara', props.acao);
+
+    if(props.acao.indexOf('selecionada') !== -1 && numero !== numeroQuestao){
+        numero = alterarQuestaoPelaDashboard(props.acao);
+    }
 
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
@@ -51,7 +57,11 @@ export default function Prova(props) {
         } else {
             setAlternativaMarcada('');
         }
-    }, [numeroQuestao]);
+        if(numero !== numeroQuestao && numero !== undefined){
+            setNumero(numero);
+            props.trocarAcao('resposta');
+        }
+    }, [numeroQuestao, numero]);
 
     async function buscarResposta(e) {
         e.preventDefault();
@@ -74,30 +84,48 @@ export default function Prova(props) {
         })
         console.log(response);
     }
-    
-    const decrementaQuestao = () => {
+
+   
+    //altera classe da div marcada como resposta
+    const elementoMarcado = document.getElementsByClassName('opcao-marcada');
+    if(alternativaMarcada === ''){
+        if(elementoMarcado[0] !== undefined)
+            elementoMarcado[0].classList.remove('opcao-marcada');
+    }else {
+        if(elementoMarcado[0] !== undefined)
+            elementoMarcado[0].classList.remove('opcao-marcada');
+        document.getElementById(alternativaMarcada).classList.add('opcao-marcada');
+    }
+
+    const marcarAlternativaUsuario = (e) => {
+        setAlternativaMarcada(e);
         listaRespostas = monitorarQuestoesProva(
-            listaRespostas,
+            props.listaRespostas,
             numeroQuestao,
-            alternativaMarcada,
+            e,
             idAluno,
-            idProva,
+            props.idProva,
             idQuestao,
-            alternativaCerta)
-        if (numeroQuestao > 0) setNumero(numeroQuestao - 1);
+            alternativaCerta);
+    }
+
+    const decrementaQuestao = () => {
+        if (numeroQuestao > 0){
+            numero--;
+            setNumero(numeroQuestao - 1);
+        } 
+        else {
+            alert('Essa é a primeira questão, não tem como voltar!')
+        }
     }
 
 
     const encrementaQuestao = () => {
-        listaRespostas = monitorarQuestoesProva(
-            listaRespostas,
-            numeroQuestao,
-            alternativaMarcada,
-            idAluno,
-            idProva,
-            idQuestao,
-            alternativaCerta)
-        if (numeroQuestao < props.questao.length - 1) setNumero(numeroQuestao + 1)
+        if (numeroQuestao < props.questao.length - 1){
+            //seta o número para acompanhar o state caso não seja clicado no dashboard
+            numero++;
+            setNumero(numeroQuestao + 1)
+        }
         else {
             if (conferirSeTodasRespostasEstaoMarcadas(listaRespostas)) {
                 setExecucao(true);
@@ -135,58 +163,39 @@ export default function Prova(props) {
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>
                     </div>
-                    <div className="container-info">
+                    <div id="alternativa1" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa1')}>
                         <input type="radio"
-                            id="alternativa1"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa1')}
                             className="check-alternativa"
-                            name="alternativa-marcada"
-                            value={res1}
-                            onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa1'} />
-                        <label className="texto-resposta">{res1}</label>
+                        <label className="texto-alternativa">{res1}</label>
                     </div>
-                    <div className="container-info">
+                    <div id="alternativa2" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa2')}>
                         <input type="radio"
-                            id="alternativa2"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa2')}
                             className="check-alternativa"
-                            name="alternativa-marcada"
-                            value={res2}
-                            onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa2'} />
-                        <label className="texto-resposta">{res2}</label>
                         <label className="texto-alternativa">{res2}</label>
                     </div>
-                    <div className="container-info">
+                    <div id="alternativa3" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa3')}>
                         <input type="radio"
-                            id="alternativa3"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa3')}
                             className="check-alternativa"
-                            name="alternativa-marcada"
-                            value={res3}
-                            onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa3'} />
-                        <label className="texto-resposta">{res3}</label>
                         <label className="texto-alternativa">{res3}</label>
                     </div>
-                    <div className="container-info">
+                    <div id="alternativa4" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa4')}>
                         <input type="radio"
-                            id="alternativa4"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa4')}
                             className="check-alternativa"
-                            name="alternativa-marcada"
-                            value={res4}
-                            onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa4'} />
-                        <label className="texto-resposta">{res4}</label>
                         <label className="texto-alternativa">{res4}</label>
                     </div>
-                    <div className="container-info">
+                    <div id="alternativa5" className="container-info info-hover" onClick={(e) => marcarAlternativaUsuario('alternativa5')}>
                         <input type="radio"
-                            id="alternativa5"
+                            onChange={(e) => marcarAlternativaUsuario('alternativa5')}
                             className="check-alternativa"
-                            name="alternativa-marcada"
-                            value={res5}
-                            onChange={(e) => setAlternativaMarcada(e.target.id)}
                             checked={alternativaMarcada === 'alternativa5'} />
-                        <label className="texto-resposta">{res5}</label>
                         <label className="texto-alternativa">{res5}</label>
                     </div>
                     <div className="container-buttons">
