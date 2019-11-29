@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Home from '../components/Home/Home';
 import CadastroProva from '../components/CadastroProva/CadastroProva';
 import CadastroQuestoes from '../components/CadastroQuestoes/CadastroQuestoes';
-import InfoProva from '../components/InfoProva/InfoProva';
 import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
@@ -21,12 +20,13 @@ export default function ControllerADM(props) {
 
     useEffect(() => {
         setSessao(props.acaoEscolhida);
+        setDados('');
     }, [props.acaoEscolhida]);
 
     async function buscarProvas(sessao) {
+        setEspera(true);
         if (sessao === 'listar-provas-abertas') {
             let status = 'Aberta';
-            setEspera(true);
             const response = await api.get('/buscaProvas', {
                 params: {
                     status,
@@ -37,7 +37,6 @@ export default function ControllerADM(props) {
             return;
         } else if (sessao === 'listar-provas-encerradas') {
             let status = 'Encerrada';
-            setEspera(true);
             const response = await api.get('/buscaProvas', {
                 params: {
                     status,
@@ -123,29 +122,58 @@ export default function ControllerADM(props) {
         setSessao('home');
     } 
 
-    const mensagemSaida = "Você tem certeza que quer sair do sistema?";
-
     if (espera) return <TelaEspera />
 
-    if (sessao === 'listar-alunos') return <ListarInformacoes cabecalhoTabela={cabecalhoAlunosCadastrados} dadosTabela={dados} />
+    if (sessao === 'listar-alunos') {
+        return <ListarInformacoes 
+            cabecalhoTabela={cabecalhoAlunosCadastrados} 
+            dadosTabela={dados} 
+            acaoClick={sessao}
+            />
+    }
 
     if (sessao === 'cadastrar-prova') return <CadastroProva />
 
     if (sessao === 'cadastrar-questao') return <CadastroQuestoes />
 
     if (sessao === 'listar-provas-abertas') {
-        if (dados === '') buscarProvas(props.acaoEscolhida);
-
-        return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados} />
+        let funcaoClick; 
+        if (dados === '') 
+            buscarProvas(props.acaoEscolhida);
+        
+        return (
+            <ListarInformacoes 
+                cabecalhoTabela={cabecalhoProvasAbertas} 
+                dadosTabela={dados} 
+                acaoClick={sessao}
+                history={props.history}
+            />
+        );
     }
-    if (sessao === 'listar-provas-encerradas') return <InfoProva />
 
-    if (sessao === 'listar-questoes') return <ListarInformacoes cabecalhoTabela={cabecalhoProvasAbertas} dadosTabela={dados} />
+    if (sessao === 'listar-provas-encerradas'){
+        if(dados === '')
+            buscarProvas(props.acaoEscolhida);
+        return (
+            <ListarInformacoes 
+                cabecalhoTabela={cabecalhoProvasFechadas} 
+                dadosTabela={dados} />
+        ); 
+    }
+
+    if (sessao === 'listar-questoes') {
+        return (
+            <ListarInformacoes 
+                cabecalhoTabela={cabecalhoProvasAbertas} 
+                dadosTabela={dados}
+                />
+        );
+    }
 
     if (sessao === 'sair')
         return <TelaConfirmacao funcaoConfirmacao={encerrarSessao}
             funcaoCancelar={cancelar}
-            mensagem={mensagemSaida} />
+            mensagem={"Você tem certeza que quer sair do sistema?"} />
 
     return (
         <Home />

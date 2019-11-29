@@ -68,3 +68,12 @@ export function alterarQuestaoPelaDashboard(selecionada){
     const string = selecionada.split('-');
     return parseInt(string[2]) - 1;
 }
+
+export function calcularMediaProva(listaRespostas){
+    let quantidadeCorretas = 0;
+    listaRespostas.map(resposta => {
+        if(resposta.resposta === 'correta') 
+            quantidadeCorretas++;
+    });
+    return quantidadeCorretas / listaRespostas.length * 100;
+}

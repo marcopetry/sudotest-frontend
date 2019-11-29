@@ -1,26 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import './ListarInformacoes.css';
-import Axios from 'axios';
-import api from '../../services/api';
+import Feedback from '../Feedback/Feedback';
+import InfoProva from '../InfoProva/InfoProva';
+
+let prova = null;
 
 export default function ListarInformacoes(props) {
-    const [espera, setEspera] = useState(false);
-    
-    useEffect(() => {
-        //coloca as bordas no cabecalho da tabela
-        const cabecalho = document.getElementsByTagName('th');
-        cabecalho[0].classList.add('border-left');
-        cabecalho[cabecalho.length - 1].classList.add('border-right');
-        const linhasTabela = document.getElementsByClassName('row-table');
+    const [executar, setExecutar] = useState('');
+    let funcaoClick;
 
-        //coloca as bordas nas linhas da tabela
-        for (let i = 0; i < linhasTabela.length; i++) {
-            linhasTabela[i].firstChild.classList.add('border-left');
-            linhasTabela[i].lastChild.classList.add('border-right');
+    useEffect(() => {
+        if(props.dadosTabela.length > 0){
+            //coloca as bordas no cabecalho da tabela
+            const cabecalho = document.getElementsByTagName('th');
+            cabecalho[0].classList.add('border-left');
+            cabecalho[cabecalho.length - 1].classList.add('border-right');
+            const linhasTabela = document.getElementsByClassName('row-table');
+    
+            //coloca as bordas nas linhas da tabela
+            for (let i = 0; i < linhasTabela.length; i++) {
+                linhasTabela[i].firstChild.classList.add('border-left');
+                linhasTabela[i].lastChild.classList.add('border-right');
+            }
         }
     }, []);
 
-    console.log(props.dadosTabela);
+    if(props.dadosTabela.length === 0){
+        return <Feedback msgPrimaria={"Sua busca não retornou dados!"}/>
+    }
+
+    if(props.acaoClick === 'listar-provas-abertas'){
+        funcaoClick = idProva => {
+            console.log(idProva);
+            props.dadosTabela.map(elemento => {
+                if(idProva === elemento.id){
+                    prova = elemento
+                    setExecutar('mostrar-info-prova')
+                }
+            });
+        }
+    }
+
+    if(executar === 'mostrar-info-prova'){
+        return <InfoProva prova={prova} history={props.history}/>
+    }
 
     return (
         <div className="container-lista-provas">
@@ -34,7 +57,7 @@ export default function ListarInformacoes(props) {
                 <tbody>
                     {props.dadosTabela.map(elemento => {
                         return (
-                            <tr className="row-table" key={elemento.id} onClick={() => alert('clicou em ' + elemento.id)}>
+                            <tr className="row-table" key={elemento.id} onClick={() => funcaoClick(elemento.id)}>
                                 <td>{elemento.nomeProva}</td>
                                 <td>{elemento.dataRealizacao}</td>
                                 <td>{elemento.horaInicio}</td>
