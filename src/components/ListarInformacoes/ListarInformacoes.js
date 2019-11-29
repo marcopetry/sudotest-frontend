@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListarInformacoes.css';
+import Axios from 'axios';
+import api from '../../services/api';
 
 export default function ListarInformacoes(props) {
     const [espera, setEspera] = useState(false);

@@ -49,6 +49,71 @@ export default function ControllerADM(props) {
         }
     }
 
+    async function gerarRelatorio(idAluno, idProva) {
+        const response = await api.get('/geraRelatorio', {
+            params: {
+                idAluno,
+                idProva
+            }
+        })
+    }
+
+    async function buscarQuestoesCadastradas() {
+        const response = await api.get('/buscaQuestoesCadastradas');
+        console.log(response);
+    }
+
+    async function deletarQuestaoCadastrada() {
+        const response1 = await api.get('/buscaTodasProvasQuestoes', {
+            params: {
+                //idQuestao
+            }
+        });
+        console.log(response1);
+        if (response1 === []) {
+            const response2 = await api.post('/deletaQuestaoCadastrada', {
+                //id: idQuestao,
+            });
+            console.log(response2);
+        } else {
+            const response3 = await api.get('/buscaProvasDeletarQuestoes', {
+                params: {
+                    idProva: response1,
+                    status: 'Aberta',
+                }
+            })
+            if(response3 === []) {
+                const response2 = await api.post('/deletaQuestaoCadastrada', {
+                    //id: idQuestao,
+                });
+                console.log(response2);
+            } else {
+                alert('Existem provas abertas cadastradas com essa questão');
+                if(true) { //Se quiser deletar
+                    const response4 = await api.get('/buscaQuestaoDeletarQuestao', {
+                        params: {
+                            //id: idQuestao
+                        }
+                    })
+                    console.log(response4);
+                }
+            }
+
+        }
+    }
+
+    async function atualizarQuestaoCadastrada() {
+        const response = await api.post('/atualizaQuestaoCadastrada', {
+            //id: idQuestao,
+        });
+        console.log(response);
+    }
+
+    async function buscarAlunosCadastrados() {
+        const response = await api.get('/buscaAlunosCadastrados');
+        console.log(response);
+    }
+
     const encerrarSessao = () => {
         localStorage.clear();
         props.history.push('/');
