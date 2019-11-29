@@ -18,7 +18,9 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
         resposta,
         alternativaMarcada,
     })
-}
+    console.log(response)
+};
+
 
 export default function Prova(props) {
     listaRespostas = props.listaRespostas;
@@ -74,6 +76,17 @@ export default function Prova(props) {
         console.log(response);
     }
 
+    async function calcularMedia() {
+        const response = await api.get('/calculaMedia', {
+            params: {
+                idAluno,
+                idProva,
+            }
+        })
+        console.log(response);
+    }
+
+   
     //altera classe da div marcada como resposta
     const elementoMarcado = document.getElementsByClassName('opcao-marcada');
     if(alternativaMarcada === ''){
@@ -87,6 +100,14 @@ export default function Prova(props) {
 
     const marcarAlternativaUsuario = (e) => {
         setAlternativaMarcada(e);
+        listaRespostas = monitorarQuestoesProva(
+            props.listaRespostas,
+            numeroQuestao,
+            e,
+            idAluno,
+            props.idProva,
+            idQuestao,
+            alternativaCerta);
     }
 
     async function calcularMedia() {
