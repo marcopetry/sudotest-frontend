@@ -5,29 +5,35 @@ import './Autocadastro.css';
 
 import api from '../../services/api'
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
+import Feedback from '../Feedback/Feedback';
 
 export default function Autocadastro({ history }) {
     const [nome, setNome] = useState(''),
-          [email, setEmail] = useState(''),
-          [senha, setSenha] = useState(''),
-          [telefone, setTelefone] = useState(''),
-          [idade, setIdade] = useState(''),
-          [cpf, setCpf] = useState(''),
-          [espera, setEspera] = useState(false);
+        [email, setEmail] = useState(''),
+        [senha, setSenha] = useState(''),
+        [telefone, setTelefone] = useState(''),
+        [idade, setIdade] = useState(''),
+        [cpf, setCpf] = useState(''),
+        [espera, setEspera] = useState(false),
+        [feedback, setFeedback] = useState('');
+
+    function buscarPrimeiroCampoVazio() {
+        const inputs = document.getElementsByClassName('form-control');
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].value === '') {
+                alert('O campo ' + inputs[i].name + ' é obrigatório.');
+                break;
+            }
+        }
+    }
 
     async function handleCadastrar(e) {
         e.preventDefault();
 
-        if(!(nome && email && senha && telefone && cpf && idade)){
-            const inputs = document.getElementsByClassName('form-control');
-            for(let i = 0; i < inputs.length; i++){
-                if(inputs[i].value === ''){
-                    alert('O campo ' + inputs[i].name + ' é obrigatório.');
-                    break;
-                }
-            }
+        if (!(nome && email && senha && telefone && cpf && idade)) {
+            buscarPrimeiroCampoVazio();
             return;
         }
 
@@ -44,25 +50,33 @@ export default function Autocadastro({ history }) {
 
         setEspera(false)
         if (response.data.Erro) {
-            alert(response.data.Erro);
+            setFeedback(response.data.Erro);
         } else {
-            history.push('/')
-            alert('Usuário cadastrado com sucesso! Faça o login!');
+            setFeedback('Usuário cadastrado com sucesso! Faça o login!');
         }
 
         console.log(response.data);
     }
 
-    if(espera) return <TelaEspera />
+    if (espera) {
+        
+        return <TelaEspera />   
+    }
+
+    if (feedback !== ''){
+        setTimeout(() => {
+            if(feedback === 'Usuário cadastrado com sucesso! Faça o login!'){
+                history.push('/');
+            }
+            setFeedback('');
+        }, 2000)
+        return <Feedback msgPrimaria={feedback}/>
+    } 
 
     return (
         <div className="main-container">
             <div className="sudotest-container">
                 <img src={logo} alt="Sudotec Logo" />
-                <div className="titulo">
-                    <p className="sudo">SUDO</p>
-                    <p className="test">TEST</p>
-                </div>
                 <p className="sudotest-texto">Sistema de provas online</p>
             </div>
 

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './CadastroProva.css';
 import api from '../../services/api';
+import TelaEspera from '../TelaEspera/TelaEspera';
+import Feedback from '../Feedback/Feedback';
 
 export default function CadastroProva(props) {
     /* console.log(props.prova.id) */
@@ -16,10 +18,11 @@ export default function CadastroProva(props) {
         [qtdQuestoesInformatica, setQtdQuestoesInformatica] = useState(''),
         [qtdQuestoesConhecimentosGerais, setQtdQuestoesConhecimentosGerais] = useState(''),
         [porcentagemAprovacao, setPorcentagemAprovacao] = useState(''),
-        [vagasDisponiveis, setVagasDisponiveis] = useState('');
+        [vagasDisponiveis, setVagasDisponiveis] = useState(''),
+        [espera, setEspera] = useState(false), 
+        [feedback, setFeedback] = useState('');
 
-    const limparCampos = (e) => {
-        e.preventDefault();
+    const limparCampos = () => {
         setHoraInicio('');
         setHoraTerminio('');
         setData('');
@@ -33,9 +36,8 @@ export default function CadastroProva(props) {
     }
 
     //seta os campos quando vem para edição
-    console.log(props.prova);
     useEffect(() => {
-        if(props.prova !==  undefined) {
+        if (props.prova !== undefined) {
             setId(props.prova.id);
             setToken(props.prova.token);
             setHoraInicio(props.prova.horaInicio);
@@ -70,7 +72,14 @@ export default function CadastroProva(props) {
             token,
             status: "Aberta",
         })
-        console.log(response)
+
+        setEspera(false);
+        if (response) {
+            limparCampos();
+            setFeedback('Prova cadastrada com sucesso!');
+        } else {
+            setFeedback('Problema ao cadastrar prova!');
+        }
     }
 
     async function atualizarProva(e) {
@@ -91,11 +100,19 @@ export default function CadastroProva(props) {
             token,
             status: 'Aberta'
         })
-        console.log(response)
+
+        setEspera(false);
+        if (response) {
+            limparCampos();
+            setFeedback('Prova alterada com sucesso!');
+        } else {
+            setFeedback('Problema ao alterar prova!');
+        }
     }
 
     const cadastrarAtualizar = (e) => {
-        if(id === ''){
+        setEspera(true);
+        if (id === '') {
             cadastrarProva(e);
         } else {
             atualizarProva(e);
@@ -122,6 +139,13 @@ export default function CadastroProva(props) {
             gerarToken();
         }
     }
+
+    if(feedback !== '') {
+        setTimeout(() => setFeedback(''), 2000)
+        return <Feedback msgPrimaria={feedback}/>
+    }
+
+    if (espera) return <TelaEspera />
 
     return (
         <div className="container-prova">
