@@ -17,7 +17,8 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
         idQuestao,
         resposta,
         alternativaMarcada,
-    })
+    });
+    console.log(response)
 }
 
 export default function Prova(props) {
@@ -74,6 +75,17 @@ export default function Prova(props) {
         console.log(response);
     }
 
+    async function calcularMedia() {
+        const response = await api.get('/calculaMedia', {
+            params: {
+                idAluno,
+                idProva,
+            }
+        })
+        console.log(response);
+    }
+
+   
     //altera classe da div marcada como resposta
     const elementoMarcado = document.getElementsByClassName('opcao-marcada');
     if(alternativaMarcada === ''){

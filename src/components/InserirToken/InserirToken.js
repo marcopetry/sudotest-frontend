@@ -9,7 +9,7 @@ export default function InserirToken(props) {
     const [token, setToken] = useState(''),
         [espera, setEspera] = useState(false);
 
-    async function buscarToken (e) {
+    async function buscarToken(e) {
         e.preventDefault();
         setEspera(true);
         const response = await api.get('/buscaToken', {
@@ -17,18 +17,27 @@ export default function InserirToken(props) {
                 token,
             }
         });
-        
         setEspera(false);
-        if(response.data == null) {
+        if (response.data == null) {
             alert('Token Inválido');
         } else {
-            localStorage.setItem('prova', JSON.stringify(response.data));
-            localStorage.setItem('Usuario', 'user-prova');
-            props.history.push('/prova');
+            const res = await api.get('/validaAlunosProvas', {
+                params: {
+                    idProva: response.data.id,
+                    idAluno: localStorage.getItem('idUsuario'),
+                }
+            })
+            if (res.data != null) {
+                alert('Essa prova já foi realizada por você')
+            } else {
+                localStorage.setItem('prova', JSON.stringify(response.data));
+                localStorage.setItem('Usuario', 'user-prova');
+                props.history.push('/prova');
+            }
         }
     }
 
-    if(espera) return <TelaEspera />
+    if (espera) return <TelaEspera />
 
     return (
         <div className="token-container">
@@ -37,8 +46,8 @@ export default function InserirToken(props) {
                     <img src={logo} alt="Sudotec Logo" />
                 </div>
                 <input
-                    type="text" 
-                    placeholder="Digite seu token:" 
+                    type="text"
+                    placeholder="Digite seu token:"
                     value={token}
                     onChange={e => setToken(e.target.value)}
                 />
