@@ -14,7 +14,7 @@ export default function TelaEspera({ history }) {
                         type="TailSpin"
                         color="#DF4723"
                         height={100}
-                        width={150}
+                        width={100}
                     />
                 </div>
             </div>
