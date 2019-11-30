@@ -1,8 +1,8 @@
 
 export function formatarDadosProvasAbertas(listaProvas) {
-    let listaDados = [];
+    let listaDadosFormatados = [];
     listaProvas.map(prova => {
-        listaDados.push({
+        listaDadosFormatados.push({
             id: prova.id,
             primeiraInfo: prova.nomeProva,
             segundaInfo: formatarData(prova.dataRealizacao),
@@ -12,13 +12,13 @@ export function formatarDadosProvasAbertas(listaProvas) {
             sextaInfo: prova.token,
         }); 
     }); 
-    return listaDados;
+    return listaDadosFormatados;
 }
 
 export function formatarDadosProvasEncerradas(listaProvas) {
-    let listaDados = [];
+    let listaDadosFormatados = [];
     listaProvas.map(prova => {
-        listaDados.push({
+        listaDadosFormatados.push({
             id: prova.id,
             primeiraInfo: prova.nomeProva,
             segundaInfo: formatarData(prova.dataRealizacao),
@@ -28,7 +28,28 @@ export function formatarDadosProvasEncerradas(listaProvas) {
             sextaInfo: prova.status,
         }); 
     }); 
-    return listaDados;
+    return listaDadosFormatados;
+}
+
+//const cabecalhoRanking = ["Posição", "Nome", "Email", "Telefone", "Idade", "Nota"];
+export function formatarListaRankingAlunos(listaAlunosFizeramProva){
+    let listaDadosFormatados = [];
+    let posicao = 1;
+
+    console.log(listaAlunosFizeramProva[0]);
+    listaAlunosFizeramProva.map(aluno => {
+        listaDadosFormatados.push({
+            id: aluno.Aluno.id,
+            primeiraInfo: posicao,
+            segundaInfo: aluno.Aluno.nome,
+            terceiraInfo: aluno.Aluno.email,
+            quartaInfo: aluno.Aluno.telefone,
+            quintaInfo: aluno.Aluno.idade,
+            sextaInfo: aluno.porcentagemMedia,
+        }); 
+        posicao++;
+    });
+    return listaDadosFormatados;
 }
 
 export function formatarData(dataBanco){
