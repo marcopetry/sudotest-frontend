@@ -48,13 +48,13 @@ export default function ControllerADM(props) {
         }
     }
 
-    async function gerarRelatorio(idAluno, idProva) {
+    async function gerarRelatorio(idProva) {
         const response = await api.get('/geraRelatorio', {
             params: {
-                idAluno,
                 idProva
             }
-        })
+        });
+        console.log(response);
     }
 
     async function buscarQuestoesCadastradas() {
@@ -72,23 +72,21 @@ export default function ControllerADM(props) {
         if (response1 === []) {
             const response2 = await api.post('/deletaQuestaoCadastrada', {
                 //id: idQuestao,
-            });
+            }); 
             console.log(response2);
         } else {
-            const response3 = await api.get('/buscaProvasDeletarQuestoes', {
-                params: {
-                    idProva: response1,
-                    status: 'Aberta',
-                }
-            })
-            if(response3 === []) {
+            alert('Existem provas abertas cadastradas com essa questão');
+            if (true) { //se quiser excluir mesmo assim
+
+            }
+            /*if (response3 === []) {
                 const response2 = await api.post('/deletaQuestaoCadastrada', {
                     //id: idQuestao,
                 });
                 console.log(response2);
             } else {
                 alert('Existem provas abertas cadastradas com essa questão');
-                if(true) { //Se quiser deletar
+                if (true) { //Se quiser deletar
                     const response4 = await api.get('/buscaQuestaoDeletarQuestao', {
                         params: {
                             //id: idQuestao
@@ -96,7 +94,7 @@ export default function ControllerADM(props) {
                     })
                     console.log(response4);
                 }
-            }
+            }*/
 
         }
     }
@@ -120,16 +118,16 @@ export default function ControllerADM(props) {
 
     const cancelar = () => {
         setSessao('home');
-    } 
+    }
 
     if (espera) return <TelaEspera />
 
     if (sessao === 'listar-alunos') {
-        return <ListarInformacoes 
-            cabecalhoTabela={cabecalhoAlunosCadastrados} 
-            dadosTabela={dados} 
+        return <ListarInformacoes
+            cabecalhoTabela={cabecalhoAlunosCadastrados}
+            dadosTabela={dados}
             acaoClick={sessao}
-            />
+        />
     }
 
     if (sessao === 'cadastrar-prova') return <CadastroProva />
@@ -137,36 +135,36 @@ export default function ControllerADM(props) {
     if (sessao === 'cadastrar-questao') return <CadastroQuestoes />
 
     if (sessao === 'listar-provas-abertas') {
-        let funcaoClick; 
-        if (dados === '') 
+        let funcaoClick;
+        if (dados === '')
             buscarProvas(props.acaoEscolhida);
-        
+
         return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasAbertas} 
-                dadosTabela={dados} 
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasAbertas}
+                dadosTabela={dados}
                 acaoClick={sessao}
                 history={props.history}
             />
         );
     }
 
-    if (sessao === 'listar-provas-encerradas'){
-        if(dados === '')
+    if (sessao === 'listar-provas-encerradas') {
+        if (dados === '')
             buscarProvas(props.acaoEscolhida);
         return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasFechadas} 
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasFechadas}
                 dadosTabela={dados} />
-        ); 
+        );
     }
 
     if (sessao === 'listar-questoes') {
         return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasAbertas} 
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasAbertas}
                 dadosTabela={dados}
-                />
+            />
         );
     }
 
