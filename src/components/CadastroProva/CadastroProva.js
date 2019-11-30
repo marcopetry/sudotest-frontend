@@ -27,7 +27,7 @@ export default function CadastroProva(props) {
         [feedback, setFeedback] = useState('');
 
     const limparCampos = () => {
-        setHoraInicio('');
+        /* setHoraInicio('');
         setHoraTerminio('');
         setData('');
         setQtdQuestoesMatematica('');
@@ -36,7 +36,8 @@ export default function CadastroProva(props) {
         setQtdQuestoesConhecimentosGerais('');
         setPorcentagemAprovacao('');
         setVagasDisponiveis('');
-        setNomeProva('');
+        setNomeProva(''); */
+        history.push('/home');
     }
 
     //seta os campos quando vem para edição

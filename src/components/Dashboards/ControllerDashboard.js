@@ -15,7 +15,15 @@ export default function ControllerDashboard({ history }) {
 
     //guarda as ações para a dashboard
     let acoes;
-    useEffect(() => history.push(acao), [acao]);
+    useEffect(() => {
+        /* if(history.location.pathname === '/home' && acao === 'sair' ){
+            console.log('setou');
+            setAcao('home')
+        } */
+        history.push(acao);
+    }, [acao]);
+
+    console.log('acao dash', acao, ' history', history.location.pathname);
 
     if (tipoUsuario === 'adm') {
         acoes = acoesADM;

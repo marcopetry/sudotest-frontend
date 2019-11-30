@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListarInformacoes.css';
-import Feedback from '../Feedback/Feedback';
-import InfoProva from '../InfoProva/InfoProva';
+import Scrollbar from 'react-scrollbars-custom';
 
 export default function ListarInformacoes(props) {
     const [executar, setExecutar] = useState('');
@@ -23,29 +22,32 @@ export default function ListarInformacoes(props) {
     }, []);
 
     return (
-        <div className="container-lista-provas">
-            <table cellpadding="0" cellspacing="0">
-                <thead className="cabecalho-tabela">
-                    <tr>
-                        {props.cabecalhoTabela.map(cabecalho => <th>{cabecalho}</th>)}
-                    </tr>
-                </thead>
+        <Scrollbar className="scroll-table">
+            <div className="container-lista-provas">
+                <table cellpadding="0" cellspacing="0">
+                    <thead className="cabecalho-tabela">
+                        <tr>
+                            {props.cabecalhoTabela.map(cabecalho => <th>{cabecalho}</th>)}
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    {props.dadosTabela.map(elemento => {
-                        return (
-                            <tr className="row-table" key={elemento.id} onClick={() => props.funcaoClick(elemento.id)}>
-                                <td>{elemento.nomeProva}</td>
-                                <td>{elemento.dataRealizacao}</td>
-                                <td>{elemento.horaInicio}</td>
-                                <td>{elemento.vagasDisponiveis}</td>
-                                <td>{elemento.token}</td>
-                                <td>{elemento.status}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
+                    <tbody>
+                        {props.dadosTabela.map(elemento => {
+                            return (
+                                <tr className="row-table" key={elemento.id} onClick={() => props.funcaoClick(elemento.id)}>
+                                    <td>{elemento.primeiraInfo}</td>
+                                    <td>{elemento.segundaInfo}</td>
+                                    <td>{elemento.terceiraInfo}</td>
+                                    <td>{elemento.quartaInfo}</td>
+                                    <td>{elemento.quintaInfo}</td>
+                                    <td>{elemento.sextaInfo}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </Scrollbar>
     );
 }
+

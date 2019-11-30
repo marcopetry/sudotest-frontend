@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
-import ControlerInicial from './controlers/ControllerInicial';
 import ControllerProva from './controlers/ControllerProva';
 import Feedback from './components/Feedback/Feedback';
 import Dashboards from './components/Dashboards/Dashboards';
@@ -16,6 +15,7 @@ import TelaConfirmacao from './components/TelaConfirmacao/TelaConfirmacao';
 import ControllerListarInformacoes from './components/ListarInformacoes/ControllerListarInformacoes';
 import Logout from './components/Logout/Logout';
 import ControllerProvasAbertas from './controlers/ControllerProvasAbertas';
+import ControllerProvaEncerrada from './controlers/ControllerProvaEncerrada';
 
 export default function Routes() {
     //localStorage.clear();
@@ -31,6 +31,7 @@ export default function Routes() {
             <Route path="/provas-abertas" exact component={ControllerListarInformacoes} />
             <Route path="/info-prova" exact component={ControllerProvasAbertas} />
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />
+            <Route path="/ranking-prova" exact component={ControllerProvaEncerrada} />
             <Route path="/questoes" exact component={ControllerListarInformacoes} />
             <Route path="/sair" exact component={Logout} />
         </BrowserRouter>
