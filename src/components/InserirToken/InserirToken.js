@@ -5,7 +5,7 @@ import api from '../../services/api';
 import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
 
-export default function InserirToken(props) {
+export default function InserirToken({ history }) {
     const [token, setToken] = useState(''),
         [espera, setEspera] = useState(false);
 
@@ -32,7 +32,11 @@ export default function InserirToken(props) {
             } else { */
                 localStorage.setItem('prova', JSON.stringify(response.data));
                 localStorage.setItem('Usuario', 'user-prova');
-                props.history.push('/prova');
+                console.log('token ', response.data);
+                history.push({
+                    pathname: '/prova',
+                    prova: response.data
+                });
             /* } */
         }
     }

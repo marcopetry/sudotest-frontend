@@ -23,8 +23,6 @@ export default function ControllerDashboard({ history }) {
         history.push(acao);
     }, [acao]);
 
-    console.log('acao dash', acao, ' history', history.location.pathname);
-
     if (tipoUsuario === 'adm') {
         acoes = acoesADM;
     } else if (tipoUsuario === 'user') {
@@ -49,7 +47,7 @@ export default function ControllerDashboard({ history }) {
             })
         });
         acoes.push({
-            acao: 'sair',
+            acao: 'encerrar-prova',
             texto: 'Encerrar prova'
         })
     }else {

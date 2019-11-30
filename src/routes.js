@@ -16,6 +16,7 @@ import ControllerListarInformacoes from './components/ListarInformacoes/Controll
 import Logout from './components/Logout/Logout';
 import ControllerProvasAbertas from './controlers/ControllerProvasAbertas';
 import ControllerProvaEncerrada from './controlers/ControllerProvaEncerrada';
+import InserirToken from './components/InserirToken/InserirToken';
 
 export default function Routes() {
     //localStorage.clear();
@@ -25,6 +26,7 @@ export default function Routes() {
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/:slug" exact component={ControllerDashboard} />
             <Route path="/home" exact component={Home} />
+
             <Route path="/cadastrar-prova" exact component={CadastroProva} />
             <Route path="/cadastrar-questao" exact component={CadastroQuestoes} />
             <Route path="/alunos" exact component={ControllerListarInformacoes} />
@@ -33,6 +35,12 @@ export default function Routes() {
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />
             <Route path="/ranking-prova" exact component={ControllerProvaEncerrada} />
             <Route path="/questoes" exact component={ControllerListarInformacoes} />
+
+            
+
+            <Route path="/inserir-token" exact component={InserirToken} />
+            <Route path="/prova" exact component={ControllerProva} />
+
             <Route path="/sair" exact component={Logout} />
         </BrowserRouter>
     );

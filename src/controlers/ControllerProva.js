@@ -5,13 +5,15 @@ import TelaEspera from '../components/TelaEspera/TelaEspera';
 import api from '../services/api';
 import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProva';
 import Feedback from '../components/Feedback/Feedback';
+import { useHistory } from 'react-router-dom'
+
 
 //Uma lista com todas as respostas vazias do usuário para gerenciar no front-end
 let listaRespostasVazias = [];
 //Uma lista com todas as questões para mandar pro componente prova
 let questoesProva = [];
 
-export async function buscarQuestoes() {
+export async function buscarQuestoes(id) {
     const prova = JSON.parse(localStorage.getItem('prova'));
     const response = await api.get('/buscaProvasQuestoes', {
         params: {
@@ -34,10 +36,12 @@ export async function buscarQuestoes() {
 }
 
 export default function ControllerProva(props) {
+    let history = useHistory();
     const [emExecucao, setExecucao] = useState(''),
         [acao, setAcao] = useState(props.acaoEscolhida),
         [questoes, setQuestoes] = useState(questoesProva);
 
+    console.log(history.location.prova);
     //vou usar para não amarrar a dashboard a questão
     const trocarAcaoExecucaoProva = (e) => setAcao(e);
     const mudarAtividade = (acao) => {
