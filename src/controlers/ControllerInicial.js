@@ -10,6 +10,7 @@ import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import api from '../services/api';
 import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProva';
 import { buscarQuestoes } from './ControllerProva';
+import Feedback from '../components/Feedback/Feedback';
 
 let listaRespostasVazias = [];
 
@@ -51,14 +52,13 @@ export default function ControlerInicial({ history }) {
 
     } else {
         history.push('/');
-        return <Login />
     }
 
     const trocarAcao = (e) => setAcao(e);
 
     return (
         <>
-            <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} history={history} listaRespostas={listaRespostasVazias} />
+            {/* <Dashboards mudarAtividade={trocarAcao} acoesUsuario={acoes} history={history} listaRespostas={listaRespostasVazias} /> */}
             {tipoUsuario === 'adm' && <ControlerAdm acaoEscolhida={acao} history={history} />}
             {tipoUsuario === 'user' && <ControllerAluno acaoEscolhida={acao} history={history} />}
             {tipoUsuario === 'user-prova' && <ControllerProva acaoEscolhida={acao} history={history} mudarAtividade={trocarAcao}/>}

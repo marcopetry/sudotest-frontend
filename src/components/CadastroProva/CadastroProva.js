@@ -4,8 +4,12 @@ import './CadastroProva.css';
 import api from '../../services/api';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
+import { useHistory } from 'react-router-dom';
+
+
 
 export default function CadastroProva(props) {
+    let history = useHistory();
     /* console.log(props.prova.id) */
     const [id, setId] = useState(''),
         [token, setToken] = useState(''),
@@ -141,7 +145,10 @@ export default function CadastroProva(props) {
     }
 
     if(feedback !== '') {
-        setTimeout(() => setFeedback(''), 2000)
+        setTimeout(() => {
+            if(feedback === 'Prova alterada com sucesso!')
+                history.push('/provas-abertas');
+        }, 2000)
         return <Feedback msgPrimaria={feedback}/>
     }
 
@@ -223,7 +230,7 @@ export default function CadastroProva(props) {
 
                     </div>
                     <div className="container-input cont-buttons">
-                        <button onClick={limparCampos}>Limpar campos</button>
+                        <button onClick={limparCampos}>Cancelar</button>
                         <button id="botaoCadastrar">Cadastrar</button>
                     </div>
                 </div>

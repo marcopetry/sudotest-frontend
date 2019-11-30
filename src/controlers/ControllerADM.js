@@ -7,11 +7,10 @@ import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import api from '../services/api';
 
+//as acoes da dashboard estão no final deste arquivo
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
 const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
 const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"];
-
-//as acoes da dashboard estão no final deste arquivo
 
 export default function ControllerADM(props) {
     const [sessao, setSessao] = useState(props.acaoEscolhida),
@@ -187,7 +186,7 @@ export const acoesADM =
             texto: 'Home'
         },
         {
-            acao: 'listar-alunos',
+            acao: 'alunos',
             texto: 'Alunos Cadastrados'
         },
         {
@@ -199,15 +198,15 @@ export const acoesADM =
             texto: 'Cadastrar Questão'
         },
         {
-            acao: 'listar-provas-abertas',
+            acao: 'provas-abertas',
             texto: 'Provas Abertas'
         },
         {
-            acao: 'listar-provas-encerradas',
+            acao: 'provas-encerradas',
             texto: 'Provas Encerradas'
         },
         {
-            acao: 'listar-questoes',
+            acao: 'questoes',
             texto: 'Questôes Cadastradas',
         },
         {

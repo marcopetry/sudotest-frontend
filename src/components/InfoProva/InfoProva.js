@@ -1,51 +1,7 @@
 import React, { useState } from 'react';
 import './InfoProva.css';
-import api from '../../services/api';
-import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
-import Feedback from '../Feedback/Feedback';
-import CadastroProva from '../CadastroProva/CadastroProva';
 
 export default function InfoProva(props) {
-    const [operacao, setOperacao] = useState('mostrar');
-    console.log(props.prova);
-
-    const deletarProva = async function excluirProva(id) {
-        const response = await api.post('/deletaProva', {
-            id,
-        });
-        console.log(response);
-        setOperacao('deletada-com-sucesso');
-    }
-
-    const cancelarDeletar = () => setOperacao('mostrar');
-
-    const confirmarFeedback = () => props.history.push('/home');
-
-    if(operacao === 'excluir'){
-        return (
-            <TelaConfirmacao 
-                mensagem="Tem certeza que deseja excluir essa prova?"
-                funcaoCancelar={cancelarDeletar}
-                funcaoConfirmacao={() => deletarProva(props.prova.id)}/>
-        );
-        //tela confirmação, chamar a função e feedback
-    }
-
-    if(operacao === 'deletada-com-sucesso'){
-        return (
-            <Feedback 
-                msgPrimaria="Prova deletada com sucesso!"
-                textoBotao="Ok"
-                funcaoBotao={confirmarFeedback}
-                />
-        );
-    }
-
-    if(operacao === 'editar'){
-        return (
-            <CadastroProva prova={props.prova} history={props.history}/>
-        );
-    }
 
     return (
         <div className="container-info-prova">
@@ -101,8 +57,9 @@ export default function InfoProva(props) {
                     </div>
                 </div>
                 <div className="container-buttons-editar-prova">
-                    <button onClick={() => setOperacao('excluir')}>Excluir</button>
-                    <button id="botaoEditar" onClick={() => setOperacao('editar')}>Editar</button>
+                    <button onClick={() => props.history.push('/provas-abertas')}>Voltar</button>
+                    <button onClick={() => props.acao('editar')}>Editar</button>
+                    <button id="botaoExcluir" onClick={() => props.acao('excluir')}>Excluir</button>
                 </div>
             </div>
         </div>
