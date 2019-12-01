@@ -7,11 +7,10 @@ import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import api from '../services/api';
 
+//as acoes da dashboard estão no final deste arquivo
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Quantidade de vagas", "Token", "Status"];
 const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
 const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"];
-
-//as acoes da dashboard estão no final deste arquivo
 
 export default function ControllerADM(props) {
     const [sessao, setSessao] = useState(props.acaoEscolhida),
@@ -80,6 +79,14 @@ export default function ControllerADM(props) {
 
             }
             /*if (response3 === []) {
+=======
+            const response3 = await api.get('/buscaProvasDeletarQuestoes', {
+                params: {
+                    idProva: response1,
+                    status: 'Aberta',
+                }
+            })
+            if (response3 === []) {
                 const response2 = await api.post('/deletaQuestaoCadastrada', {
                     //id: idQuestao,
                 });
@@ -143,6 +150,16 @@ export default function ControllerADM(props) {
 
     if (sessao === 'cadastrar-questao') return <CadastroQuestoes />
 
+
+    if (sessao === 'listar-questoes') {
+        return (
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasAbertas}
+                dadosTabela={dados}
+            />
+        );
+    }
+
     if (sessao === 'listar-provas-abertas') {
         let funcaoClick;
         if (dados === '')
@@ -194,7 +211,7 @@ export const acoesADM =
             texto: 'Home'
         },
         {
-            acao: 'listar-alunos',
+            acao: 'alunos',
             texto: 'Alunos Cadastrados'
         },
         {
@@ -206,15 +223,15 @@ export const acoesADM =
             texto: 'Cadastrar Questão'
         },
         {
-            acao: 'listar-provas-abertas',
+            acao: 'provas-abertas',
             texto: 'Provas Abertas'
         },
         {
-            acao: 'listar-provas-encerradas',
+            acao: 'provas-encerradas',
             texto: 'Provas Encerradas'
         },
         {
-            acao: 'listar-questoes',
+            acao: 'questoes',
             texto: 'Questôes Cadastradas',
         },
         {

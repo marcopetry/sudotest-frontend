@@ -23,14 +23,13 @@ export default function Login({ history }) {
             email,
             senha,
         });
-        console.log(response.data)
+
+        setEspera(false);
         if(response.data.login === true){
             setUsuario(email, response.data.idAluno, response.data.nomeAluno);            
-            setEspera(false);
-            history.push(`/home`);
+            history.push('/home');
         }else{
             alert('Email ou Senha Inválidos');
-            setEspera(false);
         }
     }
 
