@@ -36,11 +36,9 @@ export default function InserirToken({ history }) {
             if (res.data != null) {
                 alert('Essa prova já foi realizada por você')
             } else { */
-                console.log(response.data)
                 localStorage.setItem('prova', JSON.stringify(response.data));
-                console.log(localStorage.getItem('prova'));
                 localStorage.setItem('Usuario', 'user-prova');
-                history.push('prova/questao');
+                history.push('prova/questao-1');
             /* } */
         }
     }    

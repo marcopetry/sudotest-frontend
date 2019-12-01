@@ -29,7 +29,7 @@ export default function ControllerProva(props) {
     let history = useHistory();
 
     const [emExecucao, setExecucao] = useState(''),
-        [acao, setAcao] = useState('questao-1'),
+        [acao, setAcao] = useState(history.location.pathname),
         [questoes, setQuestoes] = useState(''),
         [prova, setProva] = useState(JSON.parse(localStorage.getItem('prova'))),
         [listaRespostas, setListaRespostas] = useState(listaRespostasVazias);
@@ -72,7 +72,7 @@ export default function ControllerProva(props) {
     }
 
     const cancelar = () => {
-        setAcao('prova');
+        history.pop();
     }
 
     if(questoes === '')
@@ -85,13 +85,12 @@ export default function ControllerProva(props) {
 
     if (emExecucao === 'feedback') return <Feedback />
 
-    console.log('controller prova  ', acao);
     if (questoes.length > 0)
         return (
             <>
                 <ControllerDashboard 
-                    acao={acao}
                     mudarAtividade={mudarAtividade}/>
+
                 <Prova questao={questoes}
                     horaTermino={prova.horaTermino}
                     history={props.history}
