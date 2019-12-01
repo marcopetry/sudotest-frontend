@@ -9,18 +9,8 @@ import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela
 const cabecalhoTabela = ["Nome prova", "Data", "Quantidade de vagas", "Aprovados", "Média geral", "Minha nota"];
 export default function ControllerMeusResultados({ history }) {
     const [dados, setDados] = useState(''),
-        [loading, setLoading] = useState(true), 
-        [dadosHistory, setDadoshistory] = useState(history.location.state);
-
-    useEffect(() => {
-        //vai mostrar o ranking da prova
-        console.log(history.location.state)
-        if (!typeof (history.location.state) === 'number') {
-            console.log('dados funcao ', dados);
-            gerarRelatorio(history.location.state);
-        }
-    }, [history.location.state]);
-    
+        [loading, setLoading] = useState(true); 
+        
 
     console.log('dados ', dados);
 
@@ -31,10 +21,10 @@ export default function ControllerMeusResultados({ history }) {
             }
         })
         setDados(formatarDadosMeusResultados(response.data));
-        setLoading(false);
     }
 
     async function gerarRelatorio(idProva) {
+        console.log(idProva)
         const response = await api.get('/geraRelatorio', {
             params: {
                 idProva
@@ -42,19 +32,26 @@ export default function ControllerMeusResultados({ history }) {
         });
         console.log(response.data);
         setDados(formatarListaRankingAlunos(response.data));
-        setLoading(false);
     }
 
-    if (dados === '')
+    //gera todas as provas que o aluno fez
+    if (dados === '' && history.location.pathname.indexOf('/ranking-prova/') === -1)
         buscarResultados(localStorage.getItem('idUsuario'));
 
-    if(history.location.pathname.indexOf('/ranking-prova/') !== -1){
-        gerarRelatorio(dadosHistory);
+    let idClicado = localStorage.getItem('idClicado');
+    if(history.location.pathname.indexOf('/ranking-prova/') !== -1 && idClicado !== null){
+        localStorage.removeItem('idClicado');
+        console.log('id buscar relatório ', idClicado);
+        gerarRelatorio(idClicado);
     }
 
     //console.log(dados);
     //console.log(provas);
-    if (loading) return <TelaEspera />
+    console.log(dados.length);
+    if (dados.length === 0) {
+        console.log('porque ')
+        return <TelaEspera />
+    }
 
     return (
         <ControllerListarInformacoes

@@ -54,8 +54,6 @@ export default function ControllerListarInformacoes(props) {
         }
     }
 
-    
-
     //aqui pega o idClique, passa os dados da prova clicada pros controllers dependendo da ação
     if (idClicado !== '' && caminho === '/provas-abertas'){
         let dadosProvaClicada;
@@ -83,16 +81,22 @@ export default function ControllerListarInformacoes(props) {
        })
     }
 
+    if (caminho.indexOf('/ranking-prova/') !== -1){
+        return (
+            <ListarInformacoes
+                cabecalhoTabela={props.cabecalhoTabela} 
+                dadosTabela={props.dadosTabela} 
+                funcaoClick={pegarClique}/>
+        );   }
+
     if (loading) return <TelaEspera />
 
     if(caminho === '/meus-resultados') {
-        console.log(props);
-        console.log('id resultados', idClicado);
         //Joga para componente controller prova encerrada que já abre o relatório direto
         if(idClicado !== ''){
+            localStorage.setItem('idClicado', idClicado);
             history.push({
                 pathname: 'ranking-prova/' + idClicado,
-                state: idClicado
             });
         }
 
