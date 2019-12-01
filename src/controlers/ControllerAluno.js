@@ -3,6 +3,7 @@ import InserirToken from '../components/InserirToken/InserirToken';
 import Home from '../components/Home/Home';
 import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import Feedback from '../components/Feedback/Feedback';
+import api from '../services/api';
 
 //as acoes da dashboard estão no final deste arquivo
 export default function ControllerAluno(props) {
@@ -21,6 +22,15 @@ export default function ControllerAluno(props) {
         setSessao('home');
         console.log(sessao);
     } 
+
+    async function buscarResultados(idAluno) {
+        const response = await api.get('/buscaAlunosProvas', {
+            params: {
+                idAluno
+            }
+        })
+        console.log(buscarResultados);
+    }
 
     if (sessao === 'inserir-token') return <InserirToken history={props.history} />
 
