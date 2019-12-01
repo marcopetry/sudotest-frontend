@@ -111,6 +111,15 @@ export default function ControllerADM(props) {
         console.log(response);
     }
 
+    async function buscarResultados(idAluno) {
+        const response = await api.get('/buscaAlunosProvas', {
+            params: {
+                idAluno
+            }
+        })
+        console.log(buscarResultados);
+    }
+
     const encerrarSessao = () => {
         localStorage.clear();
         props.history.push('/');

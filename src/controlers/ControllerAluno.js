@@ -23,15 +23,6 @@ export default function ControllerAluno(props) {
         console.log(sessao);
     } 
 
-    async function buscarResultados(idAluno) {
-        const response = await api.get('/buscaAlunosProvas', {
-            params: {
-                idAluno
-            }
-        })
-        console.log(buscarResultados);
-    }
-
     if (sessao === 'inserir-token') return <InserirToken history={props.history} />
 
     if (sessao === 'meus-resultados') return <Feedback />
