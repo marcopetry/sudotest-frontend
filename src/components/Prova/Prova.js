@@ -20,9 +20,11 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
     })
     //console.log(response)
 };
-/* 
-async function calcularMedia() {
-    const porcentagemMedia = notaAluno;
+
+async function calcularMedia(idAluno, idProva, porcentagemMedia) {
+    console.log(idAluno);
+    console.log(idProva);
+    console.log(porcentagemMedia);
     const response = await api.get('/calculaMedia', {
         params: {
             idAluno,
@@ -31,7 +33,7 @@ async function calcularMedia() {
         }
     })
     console.log(response);
-} */
+}
 
 /* async function buscarResposta(e) {
     e.preventDefault();
@@ -162,6 +164,7 @@ export default function Prova(props) {
         )
         //chamar função cadastrar prova com a média
         setNota(calcularMediaProva(listaRespostas));
+        calcularMedia(localStorage.getItem('idUsuario'), idProva, calcularMediaProva(listaRespostas));
     }
 
     if (notaAluno !== '') {

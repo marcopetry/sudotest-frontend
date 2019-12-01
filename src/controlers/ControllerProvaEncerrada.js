@@ -33,7 +33,7 @@ export default function ControllerProvaEncerrada({ history }){
         return <TelaEspera />
     }else {
         if(dadosFormatados.length === 0) {
-            setTimeout(() => history.push('/provas-encerradas'), 3000);
+            setTimeout(() => history.push('/provas-encerradas'), 2000);
             return (
                 <Feedback msgPrimaria={"Você não tem alunos registrados nessa prova"}/>
             );

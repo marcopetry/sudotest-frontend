@@ -70,3 +70,22 @@ export function formatarDadosAlunosParaExibicao(listaAluno){
     });
     return listaDadosFormatados;
 }
+
+const cabecalhoTabela = ["Nome prova", "Data", "Quantidade de vagas", "Aprovados", "Média geral", "Minha nota", "Colocação"];
+export function formatarDadosMeusResultados(resultados){
+    let listaDadosFormatados = [];
+    resultados.map(resultadoProva => {
+        //console.log(resultadoProva);
+        listaDadosFormatados.push({
+            id: resultadoProva.id,
+            primeiraInfo: resultadoProva.Prova.nomeProva,
+            segundaInfo: formatarData(resultadoProva.Prova.dataRealizacao),
+            terceiraInfo: resultadoProva.Prova.vagasDisponiveis,
+            quartaInfo: resultadoProva.Prova.qtdAprovados,
+            quintaInfo: resultadoProva.Prova.mediaGeral,
+            sextaInfo: resultadoProva.porcentagemMedia,
+            setimaInfo: ""
+        });
+    });
+    return listaDadosFormatados;
+}

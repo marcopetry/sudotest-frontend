@@ -4,6 +4,7 @@ import api from '../../services/api';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
 import { formatarDadosProvasAbertas, formatarDadosProvasEncerradas } from '../../helpers/TratamentoDadosParaTabela';
+import { useHistory } from 'react-router-dom';
 
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Hora término", "Quantidade de vagas", "Token"];
 const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
@@ -12,12 +13,16 @@ let cabecalhoTabela;
 //Guardo eles para mandar pra outros componentes
 let dadosSemTratamento;
 
-export default function ControllerListarInformacoes({ history }) {
+export default function ControllerListarInformacoes(props) {
+    let history = useHistory();
     const [loading, setLoading] = useState(false),
         [dados, setDados] = useState(''), 
         [idClicado, setIdClicado] = useState('');
     
     const caminho = window.location.pathname;
+    //pega o id do clique
+    const pegarClique = e => setIdClicado(e);
+
     async function buscarProvas() {
         setLoading(true);
         if (caminho === '/provas-abertas') {
@@ -80,13 +85,21 @@ export default function ControllerListarInformacoes({ history }) {
 
     if (loading) return <TelaEspera />
 
+    if(caminho === '/meus-resultados') {
+        console.log(props);
+        return (
+            <ListarInformacoes
+                cabecalhoTabela={props.cabecalhoTabela} 
+                dadosTabela={props.dadosTabela} 
+                funcaoClick={pegarClique}/>
+        );
+    }
+
     if (dados === '' && !loading) {
         buscarProvas();
         return <Feedback msgPrimaria={"Sua busca não retornou dados!"} />
     }
-
-    //pega o id do clique
-    const pegarClique = e => setIdClicado(e);
+    
     return (
         <ListarInformacoes
             cabecalhoTabela={cabecalhoTabela} 
