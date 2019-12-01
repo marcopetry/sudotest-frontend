@@ -80,14 +80,14 @@ export default function ControllerADM(props) {
                     status: 'Aberta',
                 }
             })
-            if(response3 === []) {
+            if (response3 === []) {
                 const response2 = await api.post('/deletaQuestaoCadastrada', {
                     //id: idQuestao,
                 });
                 console.log(response2);
             } else {
                 alert('Existem provas abertas cadastradas com essa questão');
-                if(true) { //Se quiser deletar
+                if (true) { //Se quiser deletar
                     const response4 = await api.get('/buscaQuestaoDeletarQuestao', {
                         params: {
                             //id: idQuestao
@@ -119,53 +119,54 @@ export default function ControllerADM(props) {
 
     const cancelar = () => {
         setSessao('home');
-    } 
+    }
 
     if (espera) return <TelaEspera />
 
     if (sessao === 'listar-alunos') {
-        return <ListarInformacoes 
-            cabecalhoTabela={cabecalhoAlunosCadastrados} 
-            dadosTabela={dados} 
+        return <ListarInformacoes
+            cabecalhoTabela={cabecalhoAlunosCadastrados}
+            dadosTabela={dados}
             acaoClick={sessao}
-            />
+        />
     }
 
     if (sessao === 'cadastrar-prova') return <CadastroProva />
 
     if (sessao === 'cadastrar-questao') return <CadastroQuestoes />
 
-    if (sessao === 'listar-provas-abertas') {
-        let funcaoClick; 
-        if (dados === '') 
-            buscarProvas(props.acaoEscolhida);
-        
+
+    if (sessao === 'listar-questoes') {
         return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasAbertas} 
-                dadosTabela={dados} 
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasAbertas}
+                dadosTabela={dados}
+            />
+        );
+    }
+
+    if (sessao === 'listar-provas-abertas') {
+        let funcaoClick;
+        if (dados === '')
+            buscarProvas(props.acaoEscolhida);
+
+        return (
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasAbertas}
+                dadosTabela={dados}
                 acaoClick={sessao}
                 history={props.history}
             />
         );
     }
 
-    if (sessao === 'listar-provas-encerradas'){
-        if(dados === '')
+    if (sessao === 'listar-provas-encerradas') {
+        if (dados === '')
             buscarProvas(props.acaoEscolhida);
         return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasFechadas} 
+            <ListarInformacoes
+                cabecalhoTabela={cabecalhoProvasFechadas}
                 dadosTabela={dados} />
-        ); 
-    }
-
-    if (sessao === 'listar-questoes') {
-        return (
-            <ListarInformacoes 
-                cabecalhoTabela={cabecalhoProvasAbertas} 
-                dadosTabela={dados}
-                />
         );
     }
 

@@ -17,6 +17,7 @@ import Logout from './components/Logout/Logout';
 import ControllerProvasAbertas from './controlers/ControllerProvasAbertas';
 import ControllerProvaEncerrada from './controlers/ControllerProvaEncerrada';
 import InserirToken from './components/InserirToken/InserirToken';
+import ControllerMeusResultados from './controlers/ControllerMeusResultados';
 
 export default function Routes() {
     //localStorage.clear();
@@ -40,6 +41,7 @@ export default function Routes() {
 
             <Route path="/inserir-token" exact component={InserirToken} />
             <Route path="/prova/:slug" exact component={ControllerProva} />
+            <Route path="/meus-resultados" exact component={ControllerMeusResultados} />
 
             <Route path="/sair" exact component={Logout} />
         </BrowserRouter>

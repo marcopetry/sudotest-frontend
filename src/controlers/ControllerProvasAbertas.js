@@ -7,8 +7,8 @@ import api from '../services/api';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 
 export default function ControllerProvasAbertas({ history }){
-    const [acao, setAcao] = useState('');
-    const prova = history.location.state;
+    const [acao, setAcao] = useState(''), 
+        [prova, setProva] = useState(history.location.state);
 
     const deletarProva = async function excluirProva(id) {
         setAcao('espera');
@@ -22,6 +22,8 @@ export default function ControllerProvasAbertas({ history }){
     const cancelarDeletar = () => setAcao('mostrar');
 
     const confirmarFeedback = () => history.push('/provas-abertas');
+
+    const alterarAcao = e => setAcao(e);
 
     if(acao === 'espera') return <TelaEspera />
 
@@ -51,10 +53,10 @@ export default function ControllerProvasAbertas({ history }){
         );
     }
     
-    const alterarAcao = e => setAcao(e);
+    
     return (
         <InfoProva 
-            prova={history.location.state} 
+            prova={prova} 
             acao={alterarAcao}
             history={history}
             />

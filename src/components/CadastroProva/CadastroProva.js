@@ -27,7 +27,7 @@ export default function CadastroProva(props) {
         [feedback, setFeedback] = useState('');
 
     const limparCampos = () => {
-        /* setHoraInicio('');
+        setHoraInicio('');
         setHoraTerminio('');
         setData('');
         setQtdQuestoesMatematica('');
@@ -36,8 +36,7 @@ export default function CadastroProva(props) {
         setQtdQuestoesConhecimentosGerais('');
         setPorcentagemAprovacao('');
         setVagasDisponiveis('');
-        setNomeProva(''); */
-        history.push('/home');
+        setNomeProva('');
     }
 
     //seta os campos quando vem para edição
@@ -77,10 +76,9 @@ export default function CadastroProva(props) {
             token,
             status: "Aberta",
         })
-
+        
         setEspera(false);
         if (response) {
-            limparCampos();
             setFeedback('Prova cadastrada com sucesso!');
         } else {
             setFeedback('Problema ao cadastrar prova!');
@@ -108,7 +106,6 @@ export default function CadastroProva(props) {
 
         setEspera(false);
         if (response) {
-            limparCampos();
             setFeedback('Prova alterada com sucesso!');
         } else {
             setFeedback('Problema ao alterar prova!');
@@ -149,6 +146,9 @@ export default function CadastroProva(props) {
         setTimeout(() => {
             if(feedback === 'Prova alterada com sucesso!')
                 history.push('/provas-abertas');
+            if(feedback.indexOf('sucesso') !== -1)
+                limparCampos();
+            setFeedback('');
         }, 2000)
         return <Feedback msgPrimaria={feedback}/>
     }
@@ -231,8 +231,8 @@ export default function CadastroProva(props) {
 
                     </div>
                     <div className="container-input cont-buttons">
-                        <button onClick={limparCampos}>Cancelar</button>
-                        <button id="botaoCadastrar">Cadastrar</button>
+                        <button onClick={() => history.push('/home')}>Cancelar</button>
+                        <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>
             </form>

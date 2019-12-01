@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
 import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela';
@@ -9,11 +9,17 @@ const cabecalhoRanking = ["Posição", "Nome", "Email", "Telefone", "Idade", "No
 
 export default function ControllerProvaEncerrada({ history }){
     const prova = history.location.state;
-    const [loading, setLoading] = useState(false), 
+    const [loading, setLoading] = useState(true),
         [dadosFormatados, setDadosFormatados] = useState('');
     
+    useEffect(() => {
+        if(dadosFormatados === '' && prova !== undefined){
+            gerarRelatorio(prova.id);
+        }
+    })
+    
     async function gerarRelatorio(idProva) {
-        setLoading(true);
+        //setLoading(true);
         const response = await api.get('/geraRelatorio', {
             params: {
                 idProva
@@ -22,19 +28,17 @@ export default function ControllerProvaEncerrada({ history }){
         setDadosFormatados(formatarListaRankingAlunos(response.data));
         setLoading(false);
     }
-
-    if (loading ) return <TelaEspera />
-
-    console.log(dadosFormatados);
-    if(dadosFormatados.length === 0) {
-        setTimeout(() => history.push('/provas-encerradas'), 2000);
-        return (
-            <Feedback msgPrimaria={"Você não tem alunos registrados nessa prova"}/>
-        );
+    
+    if (loading) {
+        return <TelaEspera />
+    }else {
+        if(dadosFormatados.length === 0) {
+            setTimeout(() => history.push('/provas-encerradas'), 3000);
+            return (
+                <Feedback msgPrimaria={"Você não tem alunos registrados nessa prova"}/>
+            );
+        }
     }
-
-    if(dadosFormatados === '')
-        gerarRelatorio(prova.id);
     
     return (
         <>

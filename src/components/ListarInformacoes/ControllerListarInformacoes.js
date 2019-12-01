@@ -59,6 +59,7 @@ export default function ControllerListarInformacoes({ history }) {
                 dadosProvaClicada = prova;
             }
         });
+        console.log('prova ', dadosProvaClicada);
         history.push({
             pathname: '/info-prova',
             state: dadosProvaClicada

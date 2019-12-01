@@ -31,12 +31,10 @@ export function formatarDadosProvasEncerradas(listaProvas) {
     return listaDadosFormatados;
 }
 
-//const cabecalhoRanking = ["Posição", "Nome", "Email", "Telefone", "Idade", "Nota"];
 export function formatarListaRankingAlunos(listaAlunosFizeramProva){
     let listaDadosFormatados = [];
     let posicao = 1;
 
-    console.log(listaAlunosFizeramProva[0]);
     listaAlunosFizeramProva.map(aluno => {
         listaDadosFormatados.push({
             id: aluno.Aluno.id,
