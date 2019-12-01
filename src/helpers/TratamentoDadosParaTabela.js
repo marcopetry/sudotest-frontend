@@ -77,7 +77,7 @@ export function formatarDadosMeusResultados(resultados){
     resultados.map(resultadoProva => {
         //console.log(resultadoProva);
         listaDadosFormatados.push({
-            id: resultadoProva.id,
+            id: resultadoProva.Prova.id,
             primeiraInfo: resultadoProva.Prova.nomeProva,
             segundaInfo: formatarData(resultadoProva.Prova.dataRealizacao),
             terceiraInfo: resultadoProva.Prova.vagasDisponiveis,

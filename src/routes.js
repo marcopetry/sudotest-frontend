@@ -27,6 +27,7 @@ export default function Routes() {
             <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/:slug" exact component={ControllerDashboard} />
+            <Route path="/:slug/:slug" exact component={ControllerDashboard} />
             <Route path="/home" exact component={Home} />
 
             <Route path="/cadastrar-prova" exact component={CadastroProva} />
@@ -43,6 +44,7 @@ export default function Routes() {
             <Route path="/inserir-token" exact component={InserirToken} />
             <Route path="/prova/:slug" exact component={ControllerProva} />
             <Route path="/meus-resultados" exact component={ControllerMeusResultados} />
+            <Route path="/ranking-prova/:slug" exact component={ControllerMeusResultados} />
 
             <Route path="/sair" exact component={Logout} />
         </BrowserRouter>

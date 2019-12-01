@@ -87,6 +87,15 @@ export default function ControllerListarInformacoes(props) {
 
     if(caminho === '/meus-resultados') {
         console.log(props);
+        console.log('id resultados', idClicado);
+        //Joga para componente controller prova encerrada que já abre o relatório direto
+        if(idClicado !== ''){
+            history.push({
+                pathname: 'ranking-prova/' + idClicado,
+                state: idClicado
+            });
+        }
+
         return (
             <ListarInformacoes
                 cabecalhoTabela={props.cabecalhoTabela} 

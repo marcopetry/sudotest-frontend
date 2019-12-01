@@ -9,6 +9,7 @@ const cabecalhoRanking = ["Posição", "Nome", "Email", "Telefone", "Idade", "No
 
 export default function ControllerProvaEncerrada({ history }){
     const prova = history.location.state;
+    console.log(prova);
     const [loading, setLoading] = useState(true),
         [dadosFormatados, setDadosFormatados] = useState('');
     
