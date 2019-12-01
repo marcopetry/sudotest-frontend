@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Dashboards from './Dashboards';
-import { acoesADM } from '../../controlers/ControllerADM';
 import { acoesProva } from '../../controlers/ControllerProva';
 import { useHistory } from 'react-router-dom'
 
@@ -23,7 +22,7 @@ export default function ControllerDashboard(props) {
         acoes = acoesAluno;
         trocarAcao = (e) => setAcao(e);
     } else if (tipoUsuario === 'user-prova') {
-        trocarAcao = (e) => props.mudarAtividade(e);
+        trocarAcao = (e) => setAcao(e);
         acoes = acoesProva();
     } else {
         history.push('/');
@@ -55,6 +54,43 @@ const acoesAluno =
         {
             acao: '/editar-perfil',
             texto: 'Editar Perfil'
+        },
+        {
+            acao: '/sair',
+            texto: 'Sair'
+        },
+    ];
+
+
+    export const acoesADM =
+    [
+        {
+            acao: '/home',
+            texto: 'Home'
+        },
+        {
+            acao: '/alunos',
+            texto: 'Alunos Cadastrados'
+        },
+        {
+            acao: '/cadastrar-prova',
+            texto: 'Cadastrar Prova'
+        },
+        {
+            acao: '/cadastrar-questao',
+            texto: 'Cadastrar Questão'
+        },
+        {
+            acao: '/provas-abertas',
+            texto: 'Provas Abertas'
+        },
+        {
+            acao: '/provas-encerradas',
+            texto: 'Provas Encerradas'
+        },
+        {
+            acao: '/questoes',
+            texto: 'Questôes Cadastradas',
         },
         {
             acao: '/sair',

@@ -27,8 +27,8 @@ export default function Routes() {
             <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/:slug" exact component={ControllerDashboard} />
-            <Route path="/:slug/:slug" exact component={ControllerDashboard} />
-            <Route path="/home" exact component={Home} />
+            {/* <Route path="/:slug/:slug" exact component={ControllerDashboard} /> */}
+            <Route path="/home" exact component={Feedback} />
 
             <Route path="/cadastrar-prova" exact component={CadastroProva} />
             <Route path="/cadastrar-questao" exact component={CadastroQuestoes} />

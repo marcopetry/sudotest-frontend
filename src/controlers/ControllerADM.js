@@ -146,7 +146,7 @@ export default function ControllerADM(props) {
         />
     }
 
-    if (sessao === 'cadastrar-prova') return <CadastroProva />
+    /* if (sessao === 'cadastrar-prova') return <CadastroProva />
 
     if (sessao === 'cadastrar-questao') return <CadastroQuestoes />
 
@@ -201,41 +201,5 @@ export default function ControllerADM(props) {
 
     return (
         <Home />
-    );
+    ); */
 }
-
-export const acoesADM =
-    [
-        {
-            acao: 'home',
-            texto: 'Home'
-        },
-        {
-            acao: 'alunos',
-            texto: 'Alunos Cadastrados'
-        },
-        {
-            acao: 'cadastrar-prova',
-            texto: 'Cadastrar Prova'
-        },
-        {
-            acao: 'cadastrar-questao',
-            texto: 'Cadastrar Questão'
-        },
-        {
-            acao: 'provas-abertas',
-            texto: 'Provas Abertas'
-        },
-        {
-            acao: 'provas-encerradas',
-            texto: 'Provas Encerradas'
-        },
-        {
-            acao: 'questoes',
-            texto: 'Questôes Cadastradas',
-        },
-        {
-            acao: 'sair',
-            texto: 'Sair'
-        },
-    ];

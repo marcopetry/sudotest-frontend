@@ -93,6 +93,7 @@ export default function ControllerProva(props) {
 
                 <Prova questao={questoes}
                     horaTermino={prova.horaTermino}
+                    horaInicio={prova.horaInicio}
                     history={props.history}
                     listaRespostas={listaRespostasVazias}
                     idProva={prova.id}

@@ -1,20 +1,12 @@
-export function horarioRestanteProva(horaTerminoProva) {
-    const data = new Date();
-    const horaSeparada = horaTerminoProva.toString().split(':');
-    let horaTermino = parseInt(horaSeparada[0]);
-    let minutosTermino = parseInt(horaSeparada[1]);
-    let horaAtual = data.getHours();
-    let minutosAtuais = data.getMinutes();
-    
-    if(minutosTermino < minutosAtuais) 
-        minutosAtuais = 60 - minutosAtuais + minutosTermino;
-    else 
-        minutosAtuais = minutosTermino - minutosAtuais;
+export function horarioRestanteProva(horaTermino, horaInicio) {
+    const date = new Date();
+    const termino = horaTermino.toString().split(':');
+    let horaRestantes = parseInt(termino[0]) - (date.getHours() - 1);
+    let minutosRestantes = parseInt(termino[1]) - date.getMinutes();
+    if(minutosRestantes < 0) {
+        minutosRestantes += 60; 
+        horaRestantes -= 1;
+    }
 
-    if(horaTermino < horaAtual) 
-        horaAtual = 24 - horaAtual + horaTermino
-    else 
-        horaAtual = horaTermino - horaAtual;
-    
-    return (horaAtual * 3600000) + (minutosAtuais * 60000);
+    return (horaRestantes * 3600000) + (minutosRestantes * 60000);
 }

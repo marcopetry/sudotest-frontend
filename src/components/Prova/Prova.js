@@ -91,7 +91,6 @@ export default function Prova(props) {
         if (history.location.pathname !== '/prova/encerrar-prova')
             setNumero(setarNumeroPelaUrl(formatarUrlParaAcao(history.location.pathname)));
         else {
-            console.log('setou exe')
             setExecucao(true);
         }
         //altera classe da div marcada como resposta
@@ -152,6 +151,11 @@ export default function Prova(props) {
         }
     }
 
+    const cancelarEncerramentoProva = () => {
+        setExecucao(false);
+        history.push('/prova/questao-1');
+    }
+
     const cadastrarProvaConcluida = () => {
         localStorage.setItem('Usuario', 'user');
         listaRespostas.map(resposta =>
@@ -175,7 +179,7 @@ export default function Prova(props) {
     }
 
     if (execucao)
-        return <TelaConfirmacao funcaoCancelar={() => setExecucao(false)}
+        return <TelaConfirmacao funcaoCancelar={cancelarEncerramentoProva}
             funcaoConfirmacao={cadastrarProvaConcluida}
             mensagem={"Tem certeza que deseja encerrar a prova?"} />
 
@@ -185,7 +189,7 @@ export default function Prova(props) {
                 <div className="form-questoes">
                     <div id="cabecalho-prova" className="container-info info-prova">
                         <h3 className="alinhar-esquerda">Questão número {numeroQuestao + 1}:</h3>
-                        <Relogio horaTermino={props.horaTermino} terminouTempoProva={cadastrarProvaConcluida} />
+                        <Relogio horaTermino={props.horaTermino} terminouTempoProva={cadastrarProvaConcluida} horaInicio={props.horaInicio}/>
                     </div>
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>
