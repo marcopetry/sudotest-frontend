@@ -40,7 +40,7 @@ export default function ListarInformacoes(props) {
                                     <td>{elemento.terceiraInfo}</td>
                                     <td>{elemento.quartaInfo}</td>
                                     <td>{elemento.quintaInfo}</td>
-                                    <td>{elemento.sextaInfo}</td>
+                                    {elemento.sextaInfo !== "" && <td>{elemento.sextaInfo}</td>}
                                 </tr>
                             );
                         })}

@@ -66,9 +66,6 @@ export default function Prova(props) {
         [notaAluno, setNota] = useState(''),
         [acao, setAcao] = useState(history.location.pathname);
 
-    //console.log(props.questao[numeroQuestao]);
-    console.log(acao);
-    
     useEffect(() => {
         if(props.questao[numeroQuestao]){
             setPergunta(props.questao[numeroQuestao].enunciado);
@@ -181,7 +178,6 @@ export default function Prova(props) {
 
     return (
         <Scrollbar>
-            {console.log('renderizando')}
             <div className="container-questoes">
                 <div className="form-questoes">
                     <div id="cabecalho-prova" className="container-info info-prova">

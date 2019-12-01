@@ -7,7 +7,7 @@ import { formatarDadosProvasAbertas, formatarDadosProvasEncerradas } from '../..
 
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Hora término", "Quantidade de vagas", "Token"];
 const cabecalhoProvasFechadas = ["Nome", "Data", "Quantidade de aprovados", "Quantidade de vagas", "Média geral", "Status"];
-const cabecalhoAlunosCadastrados = ["Nome", "Email", "CPF", "Telefone", "Idade"];
+
 let cabecalhoTabela;
 //Guardo eles para mandar pra outros componentes
 let dadosSemTratamento;

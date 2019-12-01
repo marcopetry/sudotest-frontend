@@ -18,6 +18,7 @@ import ControllerProvasAbertas from './controlers/ControllerProvasAbertas';
 import ControllerProvaEncerrada from './controlers/ControllerProvaEncerrada';
 import InserirToken from './components/InserirToken/InserirToken';
 import ControllerMeusResultados from './controlers/ControllerMeusResultados';
+import ControllerAlunosCadastrados from './controlers/ControllerAlunosCadastrados';
 
 export default function Routes() {
     //localStorage.clear();
@@ -30,7 +31,7 @@ export default function Routes() {
 
             <Route path="/cadastrar-prova" exact component={CadastroProva} />
             <Route path="/cadastrar-questao" exact component={CadastroQuestoes} />
-            <Route path="/alunos" exact component={ControllerListarInformacoes} />
+            <Route path="/alunos" exact component={ControllerAlunosCadastrados} />
             <Route path="/provas-abertas" exact component={ControllerListarInformacoes} />
             <Route path="/info-prova" exact component={ControllerProvasAbertas} />
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />

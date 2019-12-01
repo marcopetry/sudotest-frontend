@@ -54,3 +54,19 @@ export function formatarData(dataBanco){
     const data = dataBanco.split('-');
     return data[2] + '/' + data[1] + '/' + data[0];
 }
+
+export function formatarDadosAlunosParaExibicao(listaAluno){
+    let listaDadosFormatados = [];
+    listaAluno.map(aluno => {
+        listaDadosFormatados.push({
+            id: aluno.id,
+            primeiraInfo: aluno.nome,
+            segundaInfo: aluno.email,
+            terceiraInfo: aluno.cpf,
+            quartaInfo: aluno.telefone,
+            quintaInfo: aluno.idade,
+            sextaInfo: "",
+        }); 
+    });
+    return listaDadosFormatados;
+}
