@@ -7,6 +7,7 @@ import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas, alterarQ
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Relogio from '../Relogio/Relogio';
 import Feedback from '../Feedback/Feedback';
+import { useHistory } from 'react-router-dom';
 
 let listaRespostas = [];
 async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
@@ -22,6 +23,7 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
 
 
 export default function Prova(props) {
+    let history = useHistory();
     listaRespostas = props.listaRespostas;
     const [numeroQuestao, setNumero] = useState(0),
         [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
@@ -41,9 +43,11 @@ export default function Prova(props) {
     const idQuestao = props.questao[numeroQuestao].id;
     let numero;
 
-    if (props.acao.indexOf('selecionada') !== -1 && numero !== numeroQuestao) {
+    console.log('acao prova ', props.acao);
+    console.log('url ', history.location.pathname);
+    /* if (props.acao.indexOf('selecionada') !== -1 && numero !== numeroQuestao) {
         numero = alterarQuestaoPelaDashboard(props.acao);
-    }
+    } */
 
     useEffect(() => {
         setPergunta(props.questao[numeroQuestao].enunciado);
@@ -58,11 +62,7 @@ export default function Prova(props) {
         } else {
             setAlternativaMarcada('');
         }
-        if (numero !== numeroQuestao && numero !== undefined) {
-            setNumero(numero);
-            props.trocarAcao('resposta');
-            props.mudarAtividade('resposta');
-        }
+        props.mudarAtividade('questao-' + numeroQuestao);
     }, [numeroQuestao, numero]);
 
     async function buscarResposta(e) {
@@ -114,6 +114,7 @@ export default function Prova(props) {
     }
 
     const decrementaQuestao = () => {
+        props.mudarAtividade('home');
         if (numeroQuestao > 0) {
             numero--;
             setNumero(numeroQuestao - 1);
@@ -125,6 +126,7 @@ export default function Prova(props) {
 
 
     const encrementaQuestao = () => {
+        props.mudarAtividade('home');
         if (numeroQuestao < props.questao.length - 1) {
             //seta o número para acompanhar o state caso não seja clicado no dashboard
             numero++;

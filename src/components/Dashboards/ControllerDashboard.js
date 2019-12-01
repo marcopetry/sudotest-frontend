@@ -2,66 +2,45 @@ import React, { useState, useEffect } from 'react';
 import Dashboards from './Dashboards';
 import { acoesADM } from '../../controlers/ControllerADM';
 import { acoesAluno } from '../../controlers/ControllerAluno';
-import { preencherListaComRespostasVazias } from '../../helpers/MonitorQuestoesProva';
-import { buscarQuestoes } from '../../controlers/ControllerProva';
-import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
-import Logout from '../Logout/Logout';
+import { acoesProva } from '../../controlers/ControllerProva';
+import { useHistory } from 'react-router-dom'
+import { tsPropertySignature } from '@babel/types';
 
-let listaRespostasVazias = [];
 
-export default function ControllerDashboard({ history }) {
-    const [acao, setAcao] = useState('home'),
+
+export default function ControllerDashboard(props) {
+    let history = useHistory();
+    let trocarAcao;
+    const [acaoDashboard, setAcao] = useState('home'),
         [tipoUsuario, setUsuario] = useState(localStorage.getItem('Usuario'));
 
     //guarda as ações para a dashboard
     let acoes;
     useEffect(() => {
-        /* if(history.location.pathname === '/home' && acao === 'sair' ){
-            console.log('setou');
-            setAcao('home')
-        } */
-        history.push(acao);
-    }, [acao]);
+        console.log('props acao dash', props.acao);        
+        console.log('controller dashboard 1', acaoDashboard);
+        history.push(acaoDashboard);
+    }, [acaoDashboard]);
 
     if (tipoUsuario === 'adm') {
         acoes = acoesADM;
+        trocarAcao = (e) => setAcao(e);
     } else if (tipoUsuario === 'user') {
         acoes = acoesAluno;
+        trocarAcao = (e) => setAcao(e);
     } else if (tipoUsuario === 'user-prova') {
-        async function buscarQuestoesProva() {
-            listaRespostasVazias = [];
-            listaRespostasVazias = await buscarQuestoes();
-            setAcao('resposta');
-        }
-        if (listaRespostasVazias.length === 0) {
-            buscarQuestoesProva();
-        }
-        acoes = [];
-        let i = 0;
-        listaRespostasVazias.map(elemento => {
-            i++;
-            acoes.push({
-                acao: 'questao-selecionada-' + (i - 0),
-                texto: 'Questão ' + i,
-                indiceQuestao: i
-            })
-        });
-        acoes.push({
-            acao: 'encerrar-prova',
-            texto: 'Encerrar prova'
-        })
-    }else {
+        trocarAcao = (e) => props.mudarAtividade(e);
+        acoes = acoesProva();
+    } else {
         history.push('/');
     }
 
-    const trocarAcao = (e) => setAcao(e); 
-    
+    console.log('controller dashboard 2', acaoDashboard);
     return (
-        <Dashboards 
-            mudarAtividade={trocarAcao} 
-            acoesUsuario={acoes} 
-            history={history} 
-            listaRespostas={listaRespostasVazias} 
-            />
+        <Dashboards
+            mudarAtividade={trocarAcao}
+            acoesUsuario={acoes}
+            history={history}
+        />
     );
 }
