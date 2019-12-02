@@ -85,6 +85,13 @@ export default function ControllerADM(props) {
         console.log(buscarResultados);
     }
 
-    
+    async function buscarInformacoesQuestao(idQuestao) {
+        const response = await api.get('/buscaInformacoesQuestao', {
+            params: {
+                id: idQuestao
+            }
+        })
+        console.log(response)
+    }
   
 }
