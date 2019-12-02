@@ -37,6 +37,7 @@ export default function Routes() {
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />
             <Route path="/ranking-prova" exact component={ControllerProvaEncerrada} />
             <Route path="/questoes" exact component={ControllerQuestoes} />
+            <Route path="/info-questao" exact component={ControllerQuestoes} />
 
             <Route path="/inserir-token" exact component={InserirToken} />
             <Route path="/prova/:slug" exact component={ControllerProva} />

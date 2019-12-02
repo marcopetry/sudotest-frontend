@@ -110,7 +110,12 @@ export default function ControllerListarInformacoes(props) {
     }
 
     if (caminho === '/questoes') {
-        alert(idClicado);
+        if(idClicado !== ''){
+            history.push({
+                pathname: '/info-questao',
+                state: idClicado
+            });            
+        }
         return (
             <ListarInformacoes
                 cabecalhoTabela={props.cabecalhoTabela}
