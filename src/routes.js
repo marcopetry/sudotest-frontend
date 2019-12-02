@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
@@ -17,13 +17,15 @@ import ControllerMeusResultados from './controlers/ControllerMeusResultados';
 import ControllerAlunosCadastrados from './controlers/ControllerAlunosCadastrados';
 import ControllerQuestoes from './controlers/ControllerQuestoes';
 
+
 export default function Routes() {
-    localStorage.clear();
+    //localStorage.clear();
+    
     return (
         <BrowserRouter>
-            <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/:slug" exact component={ControllerDashboard} />
+            <Route path="/" exact component={Login} />
             
             <Route path="/home" exact component={Home} />
 

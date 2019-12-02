@@ -33,6 +33,6 @@ export default function ControllerQuestoes(){
         <ControllerListarInformacoes
             cabecalhoTabela={cabecalhoTabela}
             dadosTabela={questoes}
-            funcaoCliqk={() => {}} />
+            funcaoClick={() => {}} />
     );
 }
