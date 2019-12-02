@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ListarInformacoes from "./ListarInformacoes";
-import api from '../../services/api';
-import TelaEspera from '../TelaEspera/TelaEspera';
-import Feedback from '../Feedback/Feedback';
-import { formatarDadosProvasAbertas, formatarDadosProvasEncerradas } from '../../helpers/TratamentoDadosParaTabela';
+import api from '../services/api';
+import ListarInformacoes from "../components/ListarInformacoes/ListarInformacoes";
+import TelaEspera from '../components/TelaEspera/TelaEspera';
+import Feedback from '../components/Feedback/Feedback';
+import { formatarDadosProvasAbertas, formatarDadosProvasEncerradas } from '../helpers/TratamentoDadosParaTabela';
 import { useHistory } from 'react-router-dom';
 
 const cabecalhoProvasAbertas = ["Nome", "Data", "Hora de início", "Hora término", "Quantidade de vagas", "Token"];

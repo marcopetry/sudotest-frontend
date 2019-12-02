@@ -6,7 +6,7 @@ import api from '../services/api';
 import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProva';
 import Feedback from '../components/Feedback/Feedback';
 import { useHistory } from 'react-router-dom';
-import ControllerDashboard from '../components/Dashboards/ControllerDashboard';
+import ControllerDashboard from '../controlers/ControllerDashboard';
 
 let listaRespostasVazias = [];
 

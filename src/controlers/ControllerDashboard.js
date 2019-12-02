@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Dashboards from './Dashboards';
-import { acoesProva } from '../../controlers/ControllerProva';
+import Dashboards from '../components/Dashboards/Dashboards';
+import { acoesProva } from './ControllerProva';
 import { useHistory } from 'react-router-dom'
 
 export default function ControllerDashboard(props) {

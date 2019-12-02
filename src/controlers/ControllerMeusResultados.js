@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { formatarDadosMeusResultados } from '../helpers/TratamentoDadosParaTabela';
-import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
-import ControllerListarInformacoes from '../components/ListarInformacoes/ControllerListarInformacoes';
+import ControllerListarInformacoes from './ControllerListarInformacoes';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela';
 import Feedback from '../components/Feedback/Feedback';

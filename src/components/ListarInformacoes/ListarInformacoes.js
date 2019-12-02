@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './ListarInformacoes.css';
 import Scrollbar from 'react-scrollbars-custom';
+import './ListarInformacoes.css';
 
 export default function ListarInformacoes(props) {
     const [executar, setExecutar] = useState('');
