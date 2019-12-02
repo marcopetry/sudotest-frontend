@@ -64,12 +64,6 @@ export default function ControllerADM(props) {
         console.log(response1);
     }
 
-    async function atualizarQuestaoCadastrada() {
-        const response = await api.post('/atualizaQuestaoCadastrada', {
-            //id: idQuestao,
-        });
-        console.log(response);
-    }
 
     async function buscarAlunosCadastrados() {
         const response = await api.get('/buscaAlunosCadastrados');
@@ -85,13 +79,6 @@ export default function ControllerADM(props) {
         console.log(buscarResultados);
     }
 
-    async function buscarInformacoesQuestao(idQuestao) {
-        const response = await api.get('/buscaInformacoesQuestao', {
-            params: {
-                id: idQuestao
-            }
-        })
-        console.log(response)
-    }
+    
   
 }

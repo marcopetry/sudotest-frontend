@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './InfoQuestao.css';
 
 export default function InfoQuestao(props) {
-
+    let history = useHistory();
     return (
         <div className="container-info-prova">
             <div className="cont-info">
@@ -36,8 +37,8 @@ export default function InfoQuestao(props) {
                         <p>{props.questao.alternativacorreta}</p>
                     </div>
                 </div>
-                <div className="container-buttons-editar-prova">
-                    <button onClick={() => props.history.push('/questoes')}>Voltar</button>
+                <div className="container-buttons-editar-questao">
+                    <button onClick={() => history.push('/questoes')}>Voltar</button>
                     <button onClick={() => props.acao('editar')}>Editar</button>
                     <button id="botaoExcluir" onClick={() => props.acao('excluir')}>Excluir</button>
                 </div>
