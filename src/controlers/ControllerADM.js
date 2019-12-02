@@ -85,12 +85,6 @@ export default function ControllerADM(props) {
         console.log(buscarResultados);
     }
 
-    async function encerrarProva(idProva) {
-        const response = await api.post('/encerraProva', {
-            id: idProva
-        })
-        console.log(response);
-    }
-
+    
   
 }

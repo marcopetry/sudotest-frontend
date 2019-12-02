@@ -6,9 +6,25 @@ import CadastroProva from '../components/CadastroProva/CadastroProva';
 import api from '../services/api';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 
-export default function ControllerProvasAbertas({ history }){
-    const [acao, setAcao] = useState(''), 
+let msgFeedback;
+let feedback;
+export default function ControllerProvasAbertas({ history }) {
+    const [acao, setAcao] = useState(''),
         [prova, setProva] = useState(history.location.state);
+
+    const encerrarProva = async function encerrarProva(idProva) {
+        setAcao('espera');
+        const response = await api.post('/encerraProva', {
+            id: idProva
+        })
+        if(response.error){
+            msgFeedback = "Problema ao encerrara a prova, tente novamente!";
+        }else {
+            setAcao('encerrada-com-sucesso');
+            msgFeedback = "Prova encerrada com sucesso!"
+        }
+        console.log(response);
+    }
 
     const deletarProva = async function excluirProva(id) {
         setAcao('espera');
@@ -21,45 +37,62 @@ export default function ControllerProvasAbertas({ history }){
 
     const cancelarDeletar = () => setAcao('mostrar');
 
-    const confirmarFeedback = () => history.push('/provas-abertas');
-
     const alterarAcao = e => setAcao(e);
 
-    if(acao === 'espera') return <TelaEspera />
+    if (acao === 'encerrar') {
 
-    if(acao === 'excluir'){
         return (
-            <TelaConfirmacao 
+            <TelaConfirmacao
+                mensagem="Tem certeza que deseja encerrar essa prova?"
+                funcaoCancelar={cancelarDeletar}
+                funcaoConfirmacao={() => encerrarProva(prova.id)} />
+        );
+    }
+
+    if (acao === 'espera') return <TelaEspera />
+
+    if (acao === 'excluir') {
+        return (
+            <TelaConfirmacao
                 mensagem="Tem certeza que deseja excluir essa prova?"
                 funcaoCancelar={cancelarDeletar}
-                funcaoConfirmacao={() => deletarProva(prova.id)}/>
+                funcaoConfirmacao={() => deletarProva(prova.id)} />
         );
         //tela confirmação, chamar a função e feedback
     }
 
-    if(acao === 'deletada-com-sucesso'){
+    if (acao === 'encerrada-com-sucesso') {
         setTimeout(() => history.push('/provas-abertas'), 2000);
         return (
-            <Feedback 
-                msgPrimaria="Prova excluída com sucesso!"
-                funcaoBotao={confirmarFeedback}
+            <Feedback
+                msgPrimaria="Prova encerrada com sucesso!"
                 img={'certo'}
-                />
+            />
         );
     }
 
-    if(acao === 'editar'){
+    if (acao === 'deletada-com-sucesso') {
+        setTimeout(() => history.push('/provas-abertas'), 2000);
         return (
-            <CadastroProva prova={prova} history={history}/>
+            <Feedback
+                msgPrimaria="Prova excluída com sucesso!"
+                img={'certo'}
+            />
         );
     }
-    
-    
+
+    if (acao === 'editar') {
+        return (
+            <CadastroProva prova={prova} history={history} />
+        );
+    }
+
+
     return (
-        <InfoProva 
-            prova={prova} 
+        <InfoProva
+            prova={prova}
             acao={alterarAcao}
             history={history}
-            />
+        />
     );
 }

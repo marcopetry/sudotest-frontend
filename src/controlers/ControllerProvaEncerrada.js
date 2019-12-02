@@ -19,6 +19,9 @@ export default function ControllerProvaEncerrada({ history }){
         }
     })
     
+    
+
+
     async function gerarRelatorio(idProva) {
         //setLoading(true);
         const response = await api.get('/geraRelatorio', {

@@ -3,6 +3,7 @@
     display: flex;
     align-self: center;
     justify-content: center;
+    margin: 3em 0;
 }
 
 .form {
@@ -23,7 +24,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 2em 0;
+    margin: 1.5em 0;
 }
 
 p {
@@ -38,6 +39,11 @@ p {
     border-width: 0;
     font-size: 12pt;
     padding: 1em;
+}
+
+.container-input-feedback {
+    display: flex;
+    flex-direction: column;
 }
 
 .cont-buttons {
@@ -62,4 +68,15 @@ p {
 
 #botaoCadastrar {
   background: #006641;
+}
+
+.span-feedback {
+    margin-left: 1.5em;
+    margin-top: 0.15em;
+    font-size: 0.7em;
+    position: absolute;
+}
+
+.border-erro {
+    border: 0.1em solid #DF4723 !important;
 }
