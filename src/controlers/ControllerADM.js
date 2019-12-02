@@ -62,10 +62,8 @@ export default function ControllerADM(props) {
     }
 
     async function deletarQuestaoCadastrada(idQuestao) {
-        const response1 = await api.get('/deletaAtualizaProvasQuestoes', {
-            params: {
-                idQuestao
-            }
+        const response1 = await api.post('/deletaAtualizaProvasQuestoes', {
+            idQuestao
         });
         console.log(response1);
     }
@@ -89,6 +87,13 @@ export default function ControllerADM(props) {
             }
         })
         console.log(buscarResultados);
+    }
+
+    async function encerrarProva(idProva) {
+        const response = await api.post('/encerraProva', {
+            id: idProva
+        })
+        console.log(response);
     }
 
     const encerrarSessao = () => {
