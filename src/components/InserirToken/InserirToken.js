@@ -27,7 +27,7 @@ export default function InserirToken({ history }) {
             setEspera(false);
             alert('Token Inválido');
         } else {
-            /* const res = await api.get('/validaAlunosProvas', {
+            const res = await api.get('/validaAlunosProvas', {
                 params: {
                     idProva: response.data.id,
                     idAluno: localStorage.getItem('idUsuario'),
@@ -35,13 +35,13 @@ export default function InserirToken({ history }) {
             })
             if (res.data != null) {
                 alert('Essa prova já foi realizada por você')
-            } else { */
+            } else {
                 localStorage.setItem('prova', JSON.stringify(response.data));
                 localStorage.setItem('Usuario', 'user-prova');
                 history.push('prova/questao-1');
-            /* } */
+            }
         }
-    }    
+    }
 
     if (espera) return <TelaEspera />
 
