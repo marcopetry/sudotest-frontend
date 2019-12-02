@@ -35,6 +35,7 @@ export default function InserirToken({ history }) {
             })
             if (res.data != null) {
                 alert('Essa prova já foi realizada por você')
+                setEspera(false);
             } else {
                 localStorage.setItem('prova', JSON.stringify(response.data));
                 localStorage.setItem('Usuario', 'user-prova');
