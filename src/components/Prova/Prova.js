@@ -84,10 +84,7 @@ export default function Prova(props) {
             }
             idQuestao = props.questao[numeroQuestao].id;
         }
-        //props.mudarAtividade('questao-' + numeroQuestao);
         //separa a url para gerenciar o estado
-        //setAcao(formatarUrlParaAcao(history.location.pathname));
-        //separa o estado para trocar o número da questão
         if (history.location.pathname !== '/prova/encerrar-prova')
             setNumero(setarNumeroPelaUrl(formatarUrlParaAcao(history.location.pathname)));
         else {
@@ -175,7 +172,7 @@ export default function Prova(props) {
         const mensagemPrimaria = "Parabéns " + localStorage.getItem('nomeUsuario') + ", você concluiu a prova!";
         const mensagemSecundaria = "Você acertou " + notaAluno + "% das questões!";
         setTimeout(() => props.history.push('/home'), 3000);
-        return <Feedback msgPrimaria={mensagemPrimaria} msgSecundaria={mensagemSecundaria} />
+        return <Feedback msgPrimaria={mensagemPrimaria} msgSecundaria={mensagemSecundaria} img='certo'/>
     }
 
     if (execucao)

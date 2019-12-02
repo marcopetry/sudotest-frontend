@@ -24,8 +24,6 @@ export default function ControllerDashboard(props) {
     } else if (tipoUsuario === 'user-prova') {
         trocarAcao = (e) => setAcao(e);
         acoes = acoesProva();
-    } else {
-        history.push('/');
     }
 
     return (

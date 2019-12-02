@@ -8,6 +8,7 @@
 
 .container-texto {
     border-radius: 1em;
+    display: flex;
     text-align: center;
     padding: 2em;
     background-color: rgba(245, 245, 245, 0.5);
@@ -20,21 +21,8 @@
     margin: 0.5em;
 }
 
-.button {
-    margin-top: 2em;
-    width: 100%; 
-    border: 0;
-    border-radius: 4px;
-    height: 48px;
-    font-size: 25px; 
-    background: #006641;
-    font-weight: bold;
-    color: #FFF;
-    cursor: pointer;
-    font-family: 'Asap', sans-serif;    
-}
-
 #img-feedback {
-    width: 20em;
-    height: 20em;
+    width: 5em;
+    height: 3em;
+    margin-top: 1em;
 }

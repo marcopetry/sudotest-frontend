@@ -9,6 +9,8 @@ import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
 
+//uso essa variável pra renderizar imagem no componente feedback
+let imgFeedback;
 export default function Autocadastro({ history }) {
     const [nome, setNome] = useState(''),
         [email, setEmail] = useState(''),
@@ -50,8 +52,10 @@ export default function Autocadastro({ history }) {
 
         setEspera(false)
         if (response.data.Erro) {
+            imgFeedback = 'errado';
             setFeedback(response.data.Erro);
         } else {
+            imgFeedback = 'certo';
             setFeedback('Usuário cadastrado com sucesso! Faça o login!');
         }
 
@@ -70,7 +74,7 @@ export default function Autocadastro({ history }) {
             }
             setFeedback('');
         }, 2000)
-        return <Feedback msgPrimaria={feedback}/>
+        return <Feedback msgPrimaria={feedback} img={imgFeedback}/>
     } 
 
     return (

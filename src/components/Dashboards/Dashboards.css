@@ -5,17 +5,27 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-top: 2em;
+    padding-top: 0em;
     background-color: rgba(245, 245, 245, 1);
+}
+.container-log-dash {
+    display: flex;
+    justify-content: center;
+}
+#logo-dashboard {
+    width: 8em;
+    height: 8em;
+    align-self: center;
 }
 
 ul {
     width: 100%;
+    margin-top: 1em;
 }
 
 ul li {
     list-style: none;
-    padding: 1.5em 2em;
+    padding: 1em 2em;
     font-size: 16pt;
     font-weight: 400;
 }
