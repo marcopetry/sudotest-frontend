@@ -35,18 +35,18 @@
 }
 
 .container-buttons-editar-prova button {
-    width: 45%; 
+    width: 30%; 
     border: 0;
     border-radius: 4px;
     height: 48px;
     font-size: 25px; 
-    background: #DF4723;
+    background: #006641;
     font-weight: bold;
     color: #FFF;
     cursor: pointer;
     font-family: 'Asap', sans-serif;
 }
 
-#botaoEditar {
-  background: #006641;
+#botaoExcluir {
+  background: #DF4723;
 }

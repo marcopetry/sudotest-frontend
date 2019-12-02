@@ -9,6 +9,10 @@ export default function TelaConfirmacao(props) {
         /* props.history.push('/home'); */
     }
 
+    const cancelar = () =>{
+        props.funcaoCancelar();
+    }
+
     return (
         <div className="container-confirmacao">
             <div className="container-texto-confirmacao">

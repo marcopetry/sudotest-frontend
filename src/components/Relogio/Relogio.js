@@ -4,7 +4,7 @@ import { horarioRestanteProva } from '../../helpers/Relogio';
 import Timer from 'react-compound-timer';
 
 export default function Relogio(props) {
-    const tempoProva = horarioRestanteProva(props.horaTermino);
+    const tempoProva = horarioRestanteProva(props.horaTermino, props.horaInicio);
 
     return (
         <Timer initialTime={tempoProva}

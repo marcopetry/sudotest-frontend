@@ -7,8 +7,6 @@
     align-items: flex-start;
     padding-top: 2em;
     background-color: rgba(245, 245, 245, 1);
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em; 
 }
 
 ul {

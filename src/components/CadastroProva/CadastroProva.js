@@ -4,8 +4,12 @@ import './CadastroProva.css';
 import api from '../../services/api';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
+import { useHistory } from 'react-router-dom';
+
+
 
 export default function CadastroProva(props) {
+    let history = useHistory();
     /* console.log(props.prova.id) */
     const [id, setId] = useState(''),
         [token, setToken] = useState(''),
@@ -72,10 +76,9 @@ export default function CadastroProva(props) {
             token,
             status: "Aberta",
         })
-
+        
         setEspera(false);
         if (response) {
-            limparCampos();
             setFeedback('Prova cadastrada com sucesso!');
         } else {
             setFeedback('Problema ao cadastrar prova!');
@@ -103,7 +106,6 @@ export default function CadastroProva(props) {
 
         setEspera(false);
         if (response) {
-            limparCampos();
             setFeedback('Prova alterada com sucesso!');
         } else {
             setFeedback('Problema ao alterar prova!');
@@ -141,7 +143,13 @@ export default function CadastroProva(props) {
     }
 
     if(feedback !== '') {
-        setTimeout(() => setFeedback(''), 2000)
+        setTimeout(() => {
+            if(feedback === 'Prova alterada com sucesso!')
+                history.push('/provas-abertas');
+            if(feedback.indexOf('sucesso') !== -1)
+                limparCampos();
+            setFeedback('');
+        }, 2000)
         return <Feedback msgPrimaria={feedback}/>
     }
 
@@ -223,8 +231,8 @@ export default function CadastroProva(props) {
 
                     </div>
                     <div className="container-input cont-buttons">
-                        <button onClick={limparCampos}>Limpar campos</button>
-                        <button id="botaoCadastrar">Cadastrar</button>
+                        <button onClick={() => history.push('/home')}>Cancelar</button>
+                        <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>
             </form>

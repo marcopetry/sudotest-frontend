@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .container-lista-provas table {
@@ -12,7 +13,7 @@
     text-align: center;
     width: 90%;
     padding: 1em;
-    margin-top: 2em;
+    margin: 3em;
     overflow: auto;
 }
 

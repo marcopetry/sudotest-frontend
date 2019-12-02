@@ -4,8 +4,14 @@ import api from '../../services/api';
 
 import logo from '../../assets/logo1.png';
 import TelaEspera from '../TelaEspera/TelaEspera';
+import { preencherListaComRespostasVazias } from '../../helpers/MonitorQuestoesProva';
 
-export default function InserirToken(props) {
+//Uma lista com todas as respostas vazias do usuário para gerenciar no front-end
+let listaRespostasVazias = [];
+//Uma lista com todas as questões para mandar pro componente prova
+let questoesProva = [];
+
+export default function InserirToken({ history }) {
     const [token, setToken] = useState(''),
         [espera, setEspera] = useState(false);
 
@@ -17,8 +23,8 @@ export default function InserirToken(props) {
                 token,
             }
         });
-        setEspera(false);
         if (response.data == null) {
+            setEspera(false);
             alert('Token Inválido');
         } else {
             /* const res = await api.get('/validaAlunosProvas', {
@@ -32,10 +38,10 @@ export default function InserirToken(props) {
             } else { */
                 localStorage.setItem('prova', JSON.stringify(response.data));
                 localStorage.setItem('Usuario', 'user-prova');
-                props.history.push('/prova');
+                history.push('prova/questao-1');
             /* } */
         }
-    }
+    }    
 
     if (espera) return <TelaEspera />
 

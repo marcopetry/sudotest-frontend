@@ -7,6 +7,7 @@ import { monitorarQuestoesProva, conferirSeTodasRespostasEstaoMarcadas, alterarQ
 import TelaConfirmacao from '../TelaConfirmacao/TelaConfirmacao';
 import Relogio from '../Relogio/Relogio';
 import Feedback from '../Feedback/Feedback';
+import { useHistory } from 'react-router-dom';
 
 let listaRespostas = [];
 async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternativaMarcada) {
@@ -20,64 +21,82 @@ async function cadastrarResposta(idAluno, idProva, idQuestao, resposta, alternat
     //console.log(response)
 };
 
+async function calcularMedia(idAluno, idProva, porcentagemMedia) {
+    console.log(idAluno);
+    console.log(idProva);
+    console.log(porcentagemMedia);
+    const response = await api.get('/calculaMedia', {
+        params: {
+            idAluno,
+            idProva,
+            porcentagemMedia
+        }
+    })
+    console.log(response);
+}
+
+/* async function buscarResposta(e) {
+    e.preventDefault();
+    const response = await api.get('/buscaAlunosProvasQuestoes', {
+        params: {
+            idAluno,
+            idProva,
+            idQuestao,
+        }
+    })
+    console.log(response);
+} */
 
 export default function Prova(props) {
-    listaRespostas = props.listaRespostas;
-    const [numeroQuestao, setNumero] = useState(0),
-        [pergunta, setPergunta] = useState(props.questao[numeroQuestao].enunciado),
-        [res1, setRes1] = useState(props.questao[numeroQuestao].alternativa1),
-        [res2, setRes2] = useState(props.questao[numeroQuestao].alternativa2),
-        [res3, setRes3] = useState(props.questao[numeroQuestao].alternativa3),
-        [res4, setRes4] = useState(props.questao[numeroQuestao].alternativa4),
-        [res5, setRes5] = useState(props.questao[numeroQuestao].alternativa5),
-        [alternativaCerta, setAlternativaCerta] = useState(props.questao[numeroQuestao].alternativacorreta),
-        [alternativaMarcada, setAlternativaMarcada] = useState(''),
-        [execucao, setExecucao] = useState(false),
-        [porcentagemMedia, setMedia] = useState(''), 
-        [notaAluno, setNota] = useState('');
-
+    let history = useHistory();
     const idAluno = localStorage.getItem('idUsuario');
     const idProva = props.idProva;
-    const idQuestao = props.questao[numeroQuestao].id;
-    let numero;
-
-    if (props.acao.indexOf('selecionada') !== -1 && numero !== numeroQuestao) {
-        numero = alterarQuestaoPelaDashboard(props.acao);
-    }
+    let idQuestao;
+    listaRespostas = props.listaRespostas;
+    
+    const [numeroQuestao, setNumero] = useState(0),
+        [pergunta, setPergunta] = useState(),
+        [res1, setRes1] = useState(),
+        [res2, setRes2] = useState(),
+        [res3, setRes3] = useState(),
+        [res4, setRes4] = useState(),
+        [res5, setRes5] = useState(),
+        [alternativaCerta, setAlternativaCerta] = useState(),
+        [alternativaMarcada, setAlternativaMarcada] = useState(''),
+        [execucao, setExecucao] = useState(false),
+        [porcentagemMedia, setMedia] = useState(''),
+        [notaAluno, setNota] = useState(''),
+        [acao, setAcao] = useState(history.location.pathname);
 
     useEffect(() => {
-        setPergunta(props.questao[numeroQuestao].enunciado);
-        setRes1(props.questao[numeroQuestao].alternativa1);
-        setRes2(props.questao[numeroQuestao].alternativa2);
-        setRes3(props.questao[numeroQuestao].alternativa3);
-        setRes4(props.questao[numeroQuestao].alternativa4);
-        setRes5(props.questao[numeroQuestao].alternativa5);
-        setAlternativaCerta(props.questao[numeroQuestao].alternativacorreta);
-        if (listaRespostas.length > 0 && numeroQuestao < listaRespostas.length) {
-            setAlternativaMarcada(listaRespostas[numeroQuestao].alternativaMarcada);
-        } else {
-            setAlternativaMarcada('');
-        }
-        if (numero !== numeroQuestao && numero !== undefined) {
-            setNumero(numero);
-            props.trocarAcao('resposta');
-            props.mudarAtividade('resposta');
-        }
-    }, [numeroQuestao, numero]);
-
-    async function buscarResposta(e) {
-        e.preventDefault();
-        const response = await api.get('/buscaAlunosProvasQuestoes', {
-            params: {
-                idAluno,
-                idProva,
-                idQuestao,
+        if(props.questao[numeroQuestao]){
+            setPergunta(props.questao[numeroQuestao].enunciado);
+            setRes1(props.questao[numeroQuestao].alternativa1);
+            setRes2(props.questao[numeroQuestao].alternativa2);
+            setRes3(props.questao[numeroQuestao].alternativa3);
+            setRes4(props.questao[numeroQuestao].alternativa4);
+            setRes5(props.questao[numeroQuestao].alternativa5);
+            setAlternativaCerta(props.questao[numeroQuestao].alternativacorreta);
+            if (listaRespostas.length > 0 && numeroQuestao < listaRespostas.length) {
+                setAlternativaMarcada(listaRespostas[numeroQuestao].alternativaMarcada);
+            } else {
+                setAlternativaMarcada('');
             }
-        })
-        console.log(response);
-    }
-
-    //altera classe da div marcada como resposta
+            idQuestao = props.questao[numeroQuestao].id;
+        }
+        //props.mudarAtividade('questao-' + numeroQuestao);
+        //separa a url para gerenciar o estado
+        //setAcao(formatarUrlParaAcao(history.location.pathname));
+        //separa o estado para trocar o número da questão
+        if (history.location.pathname !== '/prova/encerrar-prova')
+            setNumero(setarNumeroPelaUrl(formatarUrlParaAcao(history.location.pathname)));
+        else {
+            setExecucao(true);
+        }
+        //altera classe da div marcada como resposta
+    }, [numeroQuestao, history.location.pathname]);
+    
+    //aplica classe css na resposta marcada
     const elementoMarcado = document.getElementsByClassName('opcao-marcada');
     if (alternativaMarcada === '') {
         if (elementoMarcado[0] !== undefined)
@@ -85,8 +104,16 @@ export default function Prova(props) {
     } else {
         if (elementoMarcado[0] !== undefined)
             elementoMarcado[0].classList.remove('opcao-marcada');
-        if(document.getElementById(alternativaMarcada) !== null)
+        if (document.getElementById(alternativaMarcada) !== null)
             document.getElementById(alternativaMarcada).classList.add('opcao-marcada');
+    }
+
+    function formatarUrlParaAcao(url) {
+        return url.split('/')[2];
+    }
+
+    function setarNumeroPelaUrl(acaoFormatada) {
+        return parseInt(acaoFormatada.split('-')[1]) - 1;
     }
 
     const marcarAlternativaUsuario = (e) => {
@@ -101,34 +128,20 @@ export default function Prova(props) {
             alternativaCerta);
     }
 
-    async function calcularMedia() {
-        const porcentagemMedia = notaAluno;
-        const response = await api.get('/calculaMedia', {
-            params: {
-                idAluno,
-                idProva,
-                porcentagemMedia
-            }
-        })
-        console.log(response);
-    }
-
     const decrementaQuestao = () => {
+        //props.mudarAtividade('home');
         if (numeroQuestao > 0) {
-            numero--;
-            setNumero(numeroQuestao - 1);
+            history.push('questao-' + numeroQuestao)
         }
         else {
             alert('Essa é a primeira questão, não tem como voltar!')
         }
     }
 
-
     const encrementaQuestao = () => {
         if (numeroQuestao < props.questao.length - 1) {
-            //seta o número para acompanhar o state caso não seja clicado no dashboard
-            numero++;
-            setNumero(numeroQuestao + 1)
+            //soma-se 2, 1 para avançar indice da questão e mais um pra pegar pelo navegador
+            history.push('questao-' + (numeroQuestao + 2))
         }
         else {
             if (conferirSeTodasRespostasEstaoMarcadas(listaRespostas)) {
@@ -136,6 +149,11 @@ export default function Prova(props) {
                 //tela de confirmação, banco pra guardar, apresenta a nota
             }
         }
+    }
+
+    const cancelarEncerramentoProva = () => {
+        setExecucao(false);
+        history.push('/prova/questao-1');
     }
 
     const cadastrarProvaConcluida = () => {
@@ -150,9 +168,10 @@ export default function Prova(props) {
         )
         //chamar função cadastrar prova com a média
         setNota(calcularMediaProva(listaRespostas));
+        calcularMedia(localStorage.getItem('idUsuario'), idProva, calcularMediaProva(listaRespostas));
     }
 
-    if(notaAluno !== ''){
+    if (notaAluno !== '') {
         const mensagemPrimaria = "Parabéns " + localStorage.getItem('nomeUsuario') + ", você concluiu a prova!";
         const mensagemSecundaria = "Você acertou " + notaAluno + "% das questões!";
         setTimeout(() => props.history.push('/home'), 3000);
@@ -160,7 +179,7 @@ export default function Prova(props) {
     }
 
     if (execucao)
-        return <TelaConfirmacao funcaoCancelar={() => setExecucao(false)}
+        return <TelaConfirmacao funcaoCancelar={cancelarEncerramentoProva}
             funcaoConfirmacao={cadastrarProvaConcluida}
             mensagem={"Tem certeza que deseja encerrar a prova?"} />
 
@@ -170,7 +189,7 @@ export default function Prova(props) {
                 <div className="form-questoes">
                     <div id="cabecalho-prova" className="container-info info-prova">
                         <h3 className="alinhar-esquerda">Questão número {numeroQuestao + 1}:</h3>
-                        <Relogio horaTermino={props.horaTermino} terminouTempoProva={cadastrarProvaConcluida} />
+                        <Relogio horaTermino={props.horaTermino} terminouTempoProva={cadastrarProvaConcluida} horaInicio={props.horaInicio}/>
                     </div>
                     <div className="container-info">
                         <label className="alinhar-esquerda">{pergunta}</label>
