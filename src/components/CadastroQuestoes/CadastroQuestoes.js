@@ -30,6 +30,7 @@ export default function CadastroQuestoes(props) {
             setAlternativa3(props.questao.alternativa3);
             setAlternativa4(props.questao.alternativa4);
             setAlternativa5(props.questao.alternativa5);
+            console.log('categoria ', props.questao.categoria)
             setCategoria(props.questao.categoria);
             setAlternativaCorreta(props.questao.alternativacorreta);
         }
