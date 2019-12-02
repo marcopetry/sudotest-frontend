@@ -130,3 +130,24 @@ export function formatarDadosQuestoes(listaQuestoes){
     });
     return dadosQuestoesTratados;
 }
+
+const cabecalhoRankingMeusResultados = ["Colocação", "Nome", "Nota"];
+export function formatarListaRankingAlunosMeusResultados(listaAlunosNota){
+    let listaDadosFormatados = [];
+    let i = 1;
+    listaAlunosNota.map(resultados => {
+        console.log(resultados);
+        listaDadosFormatados.push({
+            id: resultados.idAluno,
+            primeiraInfo: i,
+            segundaInfo: resultados.Aluno.nome,
+            terceiraInfo: resultados.porcentagemMedia,
+            quartaInfo: "",
+            quintaInfo: "",
+            sextaInfo: "",
+            setimaInfo: ""
+        });
+    });
+    console.log(listaDadosFormatados);
+    return listaDadosFormatados;
+}
