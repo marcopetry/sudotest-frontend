@@ -59,8 +59,8 @@ export default function InfoProva(props) {
                 <div className="container-buttons-editar-prova">
                     <button onClick={() => props.history.push('/provas-abertas')}>Voltar</button>
                     <button onClick={() => props.acao('editar')}>Editar</button>
-                    <button onClick={() => props.acao('encerrar')}>Encerrar prova</button>
                     <button id="botaoExcluir" onClick={() => props.acao('excluir')}>Excluir</button>
+                    <button id="botaoEncerrarProva" onClick={() => props.acao('encerrar')}>Encerrar prova</button>
                 </div>
             </div>
         </div>

@@ -12,10 +12,10 @@
     display: flex;
     justify-content: center;
 }
+
 #logo-dashboard {
     width: 8em;
     height: 8em;
-    align-self: center;
 }
 
 ul {
@@ -25,10 +25,19 @@ ul {
 
 ul li {
     list-style: none;
-    padding: 1em 2em;
+    padding: 0.8em 2em;
     font-size: 16pt;
     font-weight: 400;
+    display: flex;
+    align-items: center;
 }
+
+.icones-dash {
+    margin-right: 2em;
+    height: 2em;
+    width: 2em;
+}
+
 
 ul li:hover {
     cursor: pointer;

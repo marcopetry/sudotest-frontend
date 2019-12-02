@@ -41,11 +41,14 @@
     height: 48px;
     font-size: 25px; 
     background-color: #4e4e4e;
-    /* background: #006641; */
     font-weight: bold;
     color: #FFF;
     cursor: pointer;
     font-family: 'Asap', sans-serif;
+}
+
+#botaoEncerrarProva {
+    background: #006641;
 }
 
 #botaoExcluir {

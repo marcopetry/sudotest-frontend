@@ -45,7 +45,11 @@ export default function Dashboards(props) {
                     <img src={logo} id="logo-dashboard"/>
                 </div>
                 <ul>
-                    {props.acoesUsuario.map((e) => <li id={e.acao} onClick={() => mudaAtividade(e.acao)}>{e.texto}</li>)}
+                    {props.acoesUsuario.map((e) => 
+                        <li id={e.acao} onClick={() => mudaAtividade(e.acao)}>
+                            {e.icone !== '' && <img className="icones-dash" src={e.icone} />}
+                            {e.texto}
+                        </li>)}
                 </ul>
             </Scrollbar>
         </div>

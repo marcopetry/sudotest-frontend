@@ -14,13 +14,13 @@ export default function TelaEspera({ history }) {
                 <div className="loader">
                     <Loader
                         type="TailSpin"
-                        color="#DF4723"
+                        color="#493171"
                         height={100}
                         width={100}
                     />
                 </div>
                 <div className="loader div-texto-carregar">
-                    <label>Estamos carregando suas informações . . .</label>
+                    <label>Estamos carregando as informações . . .</label>
                 </div>
             </div>
         </div>

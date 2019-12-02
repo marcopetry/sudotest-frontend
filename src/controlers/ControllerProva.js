@@ -16,11 +16,12 @@ export function acoesProva() {
         acoes.push({
             acao: 'questao-' + (i + 1),
             texto: 'Questão ' + (i + 1),
-            indiceQuestao: i
+            icone: ''
         })
     acoes.push({
         acao: 'encerrar-prova',
-        texto: 'Encerrar prova'
+        texto: 'Encerrar prova',
+        icone: ''
     });
     return acoes;
 }

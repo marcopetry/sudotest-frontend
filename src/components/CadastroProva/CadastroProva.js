@@ -148,6 +148,14 @@ export default function CadastroProva(props) {
         }
     }
 
+    const cancelarCadatroAlteracao = () => {
+        if(id === ''){
+            limparCampos();
+        }else{
+            history.push('/provas-abertas');
+        }
+    }
+
     if(feedback !== '') {
         setTimeout(() => {
             if(feedback === 'Prova alterada com sucesso!')
@@ -237,7 +245,7 @@ export default function CadastroProva(props) {
 
                     </div>
                     <div className="container-input cont-buttons">
-                        <button onClick={() => history.push('/home')}>Cancelar</button>
+                        <button type="button" onClick={cancelarCadatroAlteracao}>Cancelar</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>
