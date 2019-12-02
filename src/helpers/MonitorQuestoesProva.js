@@ -75,5 +75,5 @@ export function calcularMediaProva(listaRespostas){
         if(resposta.resposta === 'correta') 
             quantidadeCorretas++;
     });
-    return quantidadeCorretas / listaRespostas.length * 100;
+    return (quantidadeCorretas / listaRespostas.length * 100).toFixed(2);
 }

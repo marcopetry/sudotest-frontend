@@ -110,6 +110,12 @@ export default function ControllerListarInformacoes(props) {
     }
 
     if (caminho === '/questoes') {
+        if(idClicado !== ''){
+            history.push({
+                pathname: '/info-questao',
+                state: idClicado
+            });            
+        }
         return (
             <ListarInformacoes
                 cabecalhoTabela={props.cabecalhoTabela}
@@ -121,6 +127,12 @@ export default function ControllerListarInformacoes(props) {
     if (dados === '' && !loading) {
         buscarProvas();
         return <Feedback msgPrimaria={"Sua busca não retornou dados!"} />
+    }
+
+    if(dados.length === 0){
+        return (
+            <Feedback msgPrimaria="Você não tem nada cadastrado neste item" img="errado"/>
+        );
     }
 
     return (
