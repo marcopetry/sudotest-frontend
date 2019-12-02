@@ -7,6 +7,8 @@ import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProv
 import Feedback from '../components/Feedback/Feedback';
 import { useHistory } from 'react-router-dom';
 import ControllerDashboard from '../controlers/ControllerDashboard';
+import logoProva from '../assets/fazer-prova-icon.svg';
+import sair from '../assets/sair-icon.svg';
 
 let listaRespostasVazias = [];
 
@@ -16,12 +18,12 @@ export function acoesProva() {
         acoes.push({
             acao: 'questao-' + (i + 1),
             texto: 'Questão ' + (i + 1),
-            icone: ''
+            icone: logoProva
         })
     acoes.push({
         acao: 'encerrar-prova',
         texto: 'Encerrar prova',
-        icone: ''
+        icone: sair
     });
     return acoes;
 }
