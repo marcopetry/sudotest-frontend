@@ -5,6 +5,7 @@ import api from '../../services/api';
 import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
 import { useHistory } from 'react-router-dom';
+import { validarCadastroProva } from '../../validators/ValidatorCadastroProva';
 
 
 
@@ -62,6 +63,8 @@ export default function CadastroProva(props) {
 
     async function cadastrarProva(e) {
         e.preventDefault();
+        validarCadastroProva(nomeProva);
+        return;
         var token = await gerarToken();
 
         const response = await api.post('/cadastroProva', {
@@ -119,7 +122,7 @@ export default function CadastroProva(props) {
     }
 
     const cadastrarAtualizar = (e) => {
-        setEspera(true);
+        //setEspera(true);
         if (id === '') {
             cadastrarProva(e);
         } else {
@@ -176,6 +179,7 @@ export default function CadastroProva(props) {
                     <div className="container-input">
                         <p>Nome da prova:</p>
                         <input type="text"
+                            id="nome-prova"
                             placeholder="Digite aqui o nome do prova:"
                             value={nomeProva}
                             onChange={e => setNomeProva(e.target.value)} />

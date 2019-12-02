@@ -63,3 +63,8 @@ p {
 #botaoCadastrar {
   background: #006641;
 }
+
+.border-erro {
+    border: 10em solid red;
+    height: 10em;
+}
