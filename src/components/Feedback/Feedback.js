@@ -2,6 +2,7 @@ import React from 'react';
 import './Feedback.css';
 import certo from '../../assets/certo.png';
 import errado from '../../assets/errado.png';
+import logo from '../../assets/logo1.png';
 
 export default function Feedback(props) {
     let imagem;
@@ -16,6 +17,7 @@ export default function Feedback(props) {
 
     return (
         <div className="container-resposta">
+            <img id="logo-feed" src={logo} />
             <div className="container-texto">
                 {imagem !== null && <img id="img-feedback" src={imagem} />}
                 <div>
