@@ -21,20 +21,21 @@ export default function ListarInformacoes(props) {
         }
     }, []);
 
+    //nas informações para listar questões eu passo uma classe como alinhamento diferente das outras
     return (
         <Scrollbar className="scroll-table">
             <div className="container-lista-provas">
                 <table cellpadding="0" cellspacing="0">
                     <thead className="cabecalho-tabela">
-                        <tr>
-                            {props.cabecalhoTabela.map(cabecalho => <th>{cabecalho}</th>)}
+                        <tr >
+                            {props.cabecalhoTabela.map(cabecalho => <th className={props.dadosTabela[0].class}>{cabecalho}</th>)}
                         </tr>
                     </thead>
 
                     <tbody>
                         {props.dadosTabela.map(elemento => {
                             return (
-                                <tr className="row-table" key={elemento.id} onClick={() => props.funcaoClick(elemento.id)}>
+                                <tr className={"row-table " + elemento.class} key={elemento.id} onClick={() => props.funcaoClick(elemento.id)}>
                                     {elemento.primeiraInfo !== "" && <td>{elemento.primeiraInfo}</td>}
                                     {elemento.segundaInfo !== "" && <td>{elemento.segundaInfo}</td>}
                                     {elemento.terceiraInfo !== "" && <td>{elemento.terceiraInfo}</td>}

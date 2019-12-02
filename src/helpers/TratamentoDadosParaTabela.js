@@ -105,15 +105,27 @@ export function formatarDadosQuestoes(listaQuestoes){
         } else {
             respostaCerta = questao.alternativa5;
         }
+
+        let categoria;
+        if(questao.categoria === 'conhecimentos'){
+            categoria = 'Conhecimentos Gerais';
+        }else if(questao.categoria === 'matematica'){
+            categoria = 'Matemática';
+        }else if(questao.categoria === 'portugues'){
+            categoria = 'Português';
+        }else {
+            categoria = 'Informática'
+        }
         dadosQuestoesTratados.push({
             id: questao.id,
-            primeiraInfo: questao.categoria,
-            segundaInfo: questao.enunciado,
-            terceiraInfo: respostaCerta,
+            primeiraInfo: categoria,
+            segundaInfo: questao.enunciado.substring(0, 100),
+            terceiraInfo: respostaCerta.substring(0, 20),
             quartaInfo: "",
             quintaInfo: "",
             sextaInfo: "",
-            setimaInfo: ""
+            setimaInfo: "",
+            class: "alinhamento-questoes"
         });
     });
     return dadosQuestoesTratados;

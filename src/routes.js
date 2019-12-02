@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Autocadastro from './components/Autocadastro/Autocadastro';
@@ -17,13 +17,15 @@ import ControllerMeusResultados from './controlers/ControllerMeusResultados';
 import ControllerAlunosCadastrados from './controlers/ControllerAlunosCadastrados';
 import ControllerQuestoes from './controlers/ControllerQuestoes';
 
+
 export default function Routes() {
-    localStorage.clear();
+    //localStorage.clear();
+    
     return (
         <BrowserRouter>
-            <Route path="/" exact component={Login}/>
             <Route path="/autocadastro" exact component={Autocadastro}/>
             <Route path="/:slug" exact component={ControllerDashboard} />
+            <Route path="/" exact component={Login} />
             
             <Route path="/home" exact component={Home} />
 
@@ -35,6 +37,7 @@ export default function Routes() {
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />
             <Route path="/ranking-prova" exact component={ControllerProvaEncerrada} />
             <Route path="/questoes" exact component={ControllerQuestoes} />
+            <Route path="/info-questao" exact component={ControllerQuestoes} />
 
             <Route path="/inserir-token" exact component={InserirToken} />
             <Route path="/prova/:slug" exact component={ControllerProva} />

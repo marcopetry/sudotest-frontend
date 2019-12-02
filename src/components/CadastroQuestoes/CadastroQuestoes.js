@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CadastroQuestoes.css';
 import api from '../../services/api';
 import Feedback from '../Feedback/Feedback';
 import TelaEspera from '../TelaEspera/TelaEspera';
+import { useHistory } from 'react-router-dom';
 
 //uso essa variável pra renderizar imagem no componente feedback
 let imgFeedback;
-export default function CadastroQuestoes() {
+export default function CadastroQuestoes(props) {
+    let history = useHistory();
     const [enunciado, setEnunciado] = useState(''),
         [alternativa1, setAlternativa1] = useState(''),
         [alternativa2, setAlternativa2] = useState(''),
@@ -16,7 +18,22 @@ export default function CadastroQuestoes() {
         [alternativacorreta, setAlternativaCorreta] = useState(''),
         [categoria, setCategoria] = useState('Selecione'),
         [espera, setEspera] = useState(false),
-        [feedback, setFeedback] = useState('');
+        [feedback, setFeedback] = useState(''), 
+        [id, setId] = useState('');
+    
+    useEffect(() => {
+        if(props.questao !== undefined){
+            setId(props.questao.id);
+            setEnunciado(props.questao.enunciado);
+            setAlternativa1(props.questao.alternativa1);
+            setAlternativa2(props.questao.alternativa2);
+            setAlternativa3(props.questao.alternativa3);
+            setAlternativa4(props.questao.alternativa4);
+            setAlternativa5(props.questao.alternativa5);
+            setCategoria(props.questao.categoria);
+            setAlternativaCorreta(props.questao.alternativacorreta);
+        }
+    });
 
     function pegarPrimeiroCampoVazio() {
         if (categoria === 'Selecione')
@@ -66,6 +83,23 @@ export default function CadastroQuestoes() {
         }
     }
 
+
+    async function atualizarQuestaoCadastrada() {
+        setEspera(true);
+        const response = await api.post('/atualizaQuestaoCadastrada', {
+            id: id,
+        });
+        setEspera(false);
+        if(response.error){
+            imgFeedback = 'errado';
+            setFeedback('Problema ao atualizar questao');
+        }else {
+            imgFeedback = 'certo';
+            setFeedback('Questão atualizada com sucesso.');
+        }
+        console.log(response);
+    }
+
     const limpar = () => {
         setEnunciado('');
         setAlternativa1('');
@@ -77,8 +111,29 @@ export default function CadastroQuestoes() {
         setAlternativaCorreta('');
     }
 
+    function enviarQuestao(e){
+        e.preventDefault();
+        if(id === ''){
+            cadastrarQuestao(e);
+        }else {
+            atualizarQuestaoCadastrada();
+        }
+    }
+
+    function cancelar(){
+        if(id === ''){
+            limpar();
+        }else {
+            history.push('/questoes');
+        }
+    }
+
     if (feedback !== '') {
-        setTimeout(() => setFeedback(''), 2000)
+        setTimeout(() => {
+            setFeedback('');
+            if(id !== '')
+                history.push('/questoes');
+        }, 2000)
         return <Feedback msgPrimaria={feedback} img={imgFeedback} />
     }
 
@@ -86,7 +141,7 @@ export default function CadastroQuestoes() {
 
     return (
         <div className="container-questao">
-            <form className="form" onSubmit={cadastrarQuestao}>
+            <form className="form" onSubmit={enviarQuestao}>
                 <div className="container-form">
                     <div className="item-cadastro-questao-sem-radio">
                         <select className="form-control" value={categoria} onChange={(e) => setCategoria(e.target.value)} >
@@ -189,7 +244,7 @@ export default function CadastroQuestoes() {
                     </div>
 
                     <div className="cont-buttons">
-                        <button type="button" onClick={limpar}>Limpar campos</button>
+                        <button type="button" onClick={cancelar}>Cancelar</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>
