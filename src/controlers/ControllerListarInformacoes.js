@@ -16,9 +16,9 @@ let dadosSemTratamento;
 export default function ControllerListarInformacoes(props) {
     let history = useHistory();
     const [loading, setLoading] = useState(false),
-        [dados, setDados] = useState(''), 
+        [dados, setDados] = useState(''),
         [idClicado, setIdClicado] = useState('');
-    
+
     const caminho = window.location.pathname;
     //pega o id do clique
     const pegarClique = e => setIdClicado(e);
@@ -55,10 +55,10 @@ export default function ControllerListarInformacoes(props) {
     }
 
     //aqui pega o idClique, passa os dados da prova clicada pros controllers dependendo da ação
-    if (idClicado !== '' && caminho === '/provas-abertas'){
+    if (idClicado !== '' && caminho === '/provas-abertas') {
         let dadosProvaClicada;
         dadosSemTratamento.map(prova => {
-            if(idClicado === prova.id){
+            if (idClicado === prova.id) {
                 dadosProvaClicada = prova;
             }
         });
@@ -66,34 +66,35 @@ export default function ControllerListarInformacoes(props) {
         history.push({
             pathname: '/info-prova',
             state: dadosProvaClicada
-       })
+        })
     }
 
-    if (idClicado !== '' && caminho === '/provas-encerradas'){
+    if (idClicado !== '' && caminho === '/provas-encerradas') {
         let dadosProvaClicada;
         dadosSemTratamento.map(prova => {
-            if(idClicado === prova.id)
+            if (idClicado === prova.id)
                 dadosProvaClicada = prova;
         });
         history.push({
             pathname: '/ranking-prova',
             state: dadosProvaClicada
-       })
+        })
     }
 
-    if (caminho.indexOf('/ranking-prova/') !== -1){
+    if (caminho.indexOf('/ranking-prova/') !== -1) {
         return (
             <ListarInformacoes
-                cabecalhoTabela={props.cabecalhoTabela} 
-                dadosTabela={props.dadosTabela} 
-                funcaoClick={pegarClique}/>
-        );   }
+                cabecalhoTabela={props.cabecalhoTabela}
+                dadosTabela={props.dadosTabela}
+                funcaoClick={pegarClique} />
+        );
+    }
 
     if (loading) return <TelaEspera />
 
-    if(caminho === '/meus-resultados') {
+    if (caminho === '/meus-resultados') {
         //Joga para componente controller prova encerrada que já abre o relatório direto
-        if(idClicado !== ''){
+        if (idClicado !== '') {
             localStorage.setItem('idClicado', idClicado);
             history.push({
                 pathname: 'ranking-prova/' + idClicado,
@@ -102,9 +103,18 @@ export default function ControllerListarInformacoes(props) {
 
         return (
             <ListarInformacoes
-                cabecalhoTabela={props.cabecalhoTabela} 
-                dadosTabela={props.dadosTabela} 
-                funcaoClick={pegarClique}/>
+                cabecalhoTabela={props.cabecalhoTabela}
+                dadosTabela={props.dadosTabela}
+                funcaoClick={pegarClique} />
+        );
+    }
+
+    if (caminho === '/questoes') {
+        return (
+            <ListarInformacoes
+                cabecalhoTabela={props.cabecalhoTabela}
+                dadosTabela={props.dadosTabela}
+                funcaoClick={pegarClique} />
         );
     }
 
@@ -112,11 +122,11 @@ export default function ControllerListarInformacoes(props) {
         buscarProvas();
         return <Feedback msgPrimaria={"Sua busca não retornou dados!"} />
     }
-    
+
     return (
         <ListarInformacoes
-            cabecalhoTabela={cabecalhoTabela} 
-            dadosTabela={dados} 
-            funcaoClick={pegarClique}/>
+            cabecalhoTabela={cabecalhoTabela}
+            dadosTabela={dados}
+            funcaoClick={pegarClique} />
     );
 }

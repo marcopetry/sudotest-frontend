@@ -15,6 +15,7 @@ import ControllerProvaEncerrada from './controlers/ControllerProvaEncerrada';
 import InserirToken from './components/InserirToken/InserirToken';
 import ControllerMeusResultados from './controlers/ControllerMeusResultados';
 import ControllerAlunosCadastrados from './controlers/ControllerAlunosCadastrados';
+import ControllerQuestoes from './controlers/ControllerQuestoes';
 
 export default function Routes() {
     return (
@@ -32,7 +33,7 @@ export default function Routes() {
             <Route path="/info-prova" exact component={ControllerProvasAbertas} />
             <Route path="/provas-encerradas" exact component={ControllerListarInformacoes} />
             <Route path="/ranking-prova" exact component={ControllerProvaEncerrada} />
-            <Route path="/questoes" exact component={ControllerListarInformacoes} />
+            <Route path="/questoes" exact component={ControllerQuestoes} />
 
             <Route path="/inserir-token" exact component={InserirToken} />
             <Route path="/prova/:slug" exact component={ControllerProva} />
