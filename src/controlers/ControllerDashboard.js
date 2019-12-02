@@ -66,11 +66,6 @@ const acoesAluno =
             icone: meusResultados
         },
         {
-            acao: '/editar-perfil',
-            texto: 'Editar Perfil',
-            icone: editarPerfil
-        },
-        {
             acao: '/sair',
             texto: 'Sair',
             icone: sair
