@@ -37,8 +37,6 @@ export default function ControllerProvasAbertas({ history }) {
 
     const cancelarDeletar = () => setAcao('mostrar');
 
-    const confirmarFeedback = () => history.push('/provas-abertas');
-
     const alterarAcao = e => setAcao(e);
 
     if (acao === 'encerrar') {
@@ -68,7 +66,6 @@ export default function ControllerProvasAbertas({ history }) {
         return (
             <Feedback
                 msgPrimaria="Prova encerrada com sucesso!"
-                funcaoBotao={confirmarFeedback}
                 img={'certo'}
             />
         );
@@ -79,7 +76,6 @@ export default function ControllerProvasAbertas({ history }) {
         return (
             <Feedback
                 msgPrimaria="Prova excluída com sucesso!"
-                funcaoBotao={confirmarFeedback}
                 img={'certo'}
             />
         );

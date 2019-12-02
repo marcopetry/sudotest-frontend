@@ -18,6 +18,7 @@ import ControllerAlunosCadastrados from './controlers/ControllerAlunosCadastrado
 import ControllerQuestoes from './controlers/ControllerQuestoes';
 
 export default function Routes() {
+    localStorage.clear();
     return (
         <BrowserRouter>
             <Route path="/" exact component={Login}/>

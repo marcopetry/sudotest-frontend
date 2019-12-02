@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import ControllerDashboard from '../controlers/ControllerDashboard';
 import logoProva from '../assets/fazer-prova-icon.svg';
 import sair from '../assets/sair-icon.svg';
+import Login from '../components/Login/Login';
 
 let listaRespostasVazias = [];
 
@@ -30,6 +31,8 @@ export function acoesProva() {
 
 export default function ControllerProva(props) {
     let history = useHistory();
+    console.log(localStorage.getItem('Usuario'));
+    
 
     const [emExecucao, setExecucao] = useState(''),
         [acao, setAcao] = useState(history.location.pathname),
@@ -40,6 +43,12 @@ export default function ControllerProva(props) {
     useEffect(() => {
         setAcao(history.location.pathname);
     }, [acao]);
+
+    //Pra não dar erro pela rota
+    if(localStorage.getItem('Usuario') === null) {
+        history.push('/');
+        return <Login />
+    }
 
     async function buscarQuestoes() {
         const response = await api.get('/buscaProvasQuestoes', {
