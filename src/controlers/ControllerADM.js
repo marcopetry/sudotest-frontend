@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Home from '../components/Home/Home';
-import CadastroProva from '../components/CadastroProva/CadastroProva';
-import CadastroQuestoes from '../components/CadastroQuestoes/CadastroQuestoes';
 import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
-import TelaConfirmacao from '../components/TelaConfirmacao/TelaConfirmacao';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import api from '../services/api';
 
@@ -125,25 +121,6 @@ export default function ControllerADM(props) {
             }
         })
         console.log(buscarResultados);
-    }
-
-    const encerrarSessao = () => {
-        localStorage.clear();
-        props.history.push('/');
-    }
-
-    const cancelar = () => {
-        setSessao('home');
-    }
-
-    if (espera) return <TelaEspera />
-
-    if (sessao === 'listar-alunos') {
-        return <ListarInformacoes
-            cabecalhoTabela={cabecalhoAlunosCadastrados}
-            dadosTabela={dados}
-            acaoClick={sessao}
-        />
     }
 
 }
