@@ -4,6 +4,8 @@ import api from '../../services/api';
 import Feedback from '../Feedback/Feedback';
 import TelaEspera from '../TelaEspera/TelaEspera';
 
+//uso essa variável pra renderizar imagem no componente feedback
+let imgFeedback;
 export default function CadastroQuestoes() {
     const [enunciado, setEnunciado] = useState(''),
         [alternativa1, setAlternativa1] = useState(''),
@@ -55,8 +57,10 @@ export default function CadastroQuestoes() {
 
         setEspera(false);
         if (response.data.Erro) {
+            imgFeedback = 'errado';
             setFeedback(response.data.Erro)
         } else {
+            imgFeedback = 'certo';
             setFeedback('Questão cadastrada com sucesso');
             limpar();
         }
@@ -75,7 +79,7 @@ export default function CadastroQuestoes() {
 
     if (feedback !== '') {
         setTimeout(() => setFeedback(''), 2000)
-        return <Feedback msgPrimaria={feedback} />
+        return <Feedback msgPrimaria={feedback} img={imgFeedback} />
     }
 
     if (espera) return <TelaEspera />

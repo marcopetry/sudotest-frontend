@@ -71,7 +71,6 @@ export function formatarDadosAlunosParaExibicao(listaAluno){
     return listaDadosFormatados;
 }
 
-const cabecalhoTabela = ["Nome prova", "Data", "Quantidade de vagas", "Aprovados", "Média geral", "Minha nota", "Colocação"];
 export function formatarDadosMeusResultados(resultados){
     let listaDadosFormatados = [];
     resultados.map(resultadoProva => {
@@ -88,4 +87,34 @@ export function formatarDadosMeusResultados(resultados){
         });
     });
     return listaDadosFormatados;
+}
+
+export function formatarDadosQuestoes(listaQuestoes){
+    let dadosQuestoesTratados = [];
+
+    listaQuestoes.map( questao => {
+        let respostaCerta;
+        if(questao.alternativacorreta === 'alternativa1'){
+            respostaCerta = questao.alternativa1;
+        } else if(questao.alternativacorreta === 'alternativa2'){
+            respostaCerta = questao.alternativa2;
+        } else if(questao.alternativacorreta === 'alternativa3'){
+            respostaCerta = questao.alternativa3;
+        }else if(questao.alternativacorreta === 'alternativa4'){
+            respostaCerta = questao.alternativa4;
+        } else {
+            respostaCerta = questao.alternativa5;
+        }
+        dadosQuestoesTratados.push({
+            id: questao.id,
+            primeiraInfo: questao.categoria,
+            segundaInfo: questao.enunciado,
+            terceiraInfo: respostaCerta,
+            quartaInfo: "",
+            quintaInfo: "",
+            sextaInfo: "",
+            setimaInfo: ""
+        });
+    });
+    return dadosQuestoesTratados;
 }

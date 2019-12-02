@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Dashboards from './Dashboards';
-import { acoesProva } from '../../controlers/ControllerProva';
-import { useHistory } from 'react-router-dom'
+import Dashboards from '../components/Dashboards/Dashboards';
+import { acoesProva } from './ControllerProva';
+import { useHistory } from 'react-router-dom';
+import home from '../assets/home-icon.svg';
+import fazerProva from '../assets/fazer-prova-icon.svg';
+import meusResultados from '../assets/meus-resultados-icon.svg';
+import editarPerfil from '../assets/editar-perfil-icon.svg';
+import sair from '../assets/sair-icon.svg';
+import alunos from '../assets/alunos-icon.svg';
+import cadastrarProva from '../assets/cadastrar-prova-icon.svg';
+import cadastrarQuestao from '../assets/cadastrar-questao-icon.svg';
+import questoes from '../assets/questoes-icon.svg';
+import provasEncerradas from '../assets/provas-encerradas-icon.svg';
+import provasAbertas from '../assets/provas-abertas-icon.svg';
 
 export default function ControllerDashboard(props) {
     let history = useHistory();
@@ -24,8 +35,6 @@ export default function ControllerDashboard(props) {
     } else if (tipoUsuario === 'user-prova') {
         trocarAcao = (e) => setAcao(e);
         acoes = acoesProva();
-    } else {
-        history.push('/');
     }
 
     return (
@@ -41,23 +50,28 @@ const acoesAluno =
     [
         {
             acao: '/home',
-            texto: 'Home'
+            texto: 'Home',
+            icone: home
         },
         {
             acao: '/inserir-token',
-            texto: 'Fazer Prova'
+            texto: 'Fazer Prova',
+            icone: fazerProva
         },
         {
             acao: '/meus-resultados',
-            texto: 'Meus Resultados'
+            texto: 'Meus Resultados',
+            icone: meusResultados
         },
         {
             acao: '/editar-perfil',
-            texto: 'Editar Perfil'
+            texto: 'Editar Perfil',
+            icone: editarPerfil
         },
         {
             acao: '/sair',
-            texto: 'Sair'
+            texto: 'Sair',
+            icone: sair
         },
     ];
 
@@ -66,34 +80,42 @@ const acoesAluno =
     [
         {
             acao: '/home',
-            texto: 'Home'
+            texto: 'Home',
+            icone: home 
         },
         {
             acao: '/alunos',
-            texto: 'Alunos Cadastrados'
+            texto: 'Alunos Cadastrados',
+            icone: alunos
         },
         {
             acao: '/cadastrar-prova',
-            texto: 'Cadastrar Prova'
+            texto: 'Cadastrar Prova',
+            icone: cadastrarProva
         },
         {
             acao: '/cadastrar-questao',
-            texto: 'Cadastrar Questão'
+            texto: 'Cadastrar Questão', 
+            icone: cadastrarQuestao
         },
         {
             acao: '/provas-abertas',
-            texto: 'Provas Abertas'
+            texto: 'Provas Abertas', 
+            icone: provasAbertas
         },
         {
             acao: '/provas-encerradas',
-            texto: 'Provas Encerradas'
+            texto: 'Provas Encerradas', 
+            icone: provasEncerradas
         },
         {
             acao: '/questoes',
             texto: 'Questôes Cadastradas',
+            icone: questoes
         },
         {
             acao: '/sair',
-            texto: 'Sair'
+            texto: 'Sair', 
+            icone: sair
         },
     ];

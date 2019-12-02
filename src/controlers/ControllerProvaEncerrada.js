@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
-import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import Feedback from '../components/Feedback/Feedback';
+import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela';
 
 const cabecalhoRanking = ["Posição", "Nome", "Email", "Telefone", "Idade", "Nota"];
 

@@ -6,7 +6,7 @@ import api from '../services/api';
 import { preencherListaComRespostasVazias } from '../helpers/MonitorQuestoesProva';
 import Feedback from '../components/Feedback/Feedback';
 import { useHistory } from 'react-router-dom';
-import ControllerDashboard from '../components/Dashboards/ControllerDashboard';
+import ControllerDashboard from '../controlers/ControllerDashboard';
 
 let listaRespostasVazias = [];
 
@@ -16,11 +16,12 @@ export function acoesProva() {
         acoes.push({
             acao: 'questao-' + (i + 1),
             texto: 'Questão ' + (i + 1),
-            indiceQuestao: i
+            icone: ''
         })
     acoes.push({
         acao: 'encerrar-prova',
-        texto: 'Encerrar prova'
+        texto: 'Encerrar prova',
+        icone: ''
     });
     return acoes;
 }

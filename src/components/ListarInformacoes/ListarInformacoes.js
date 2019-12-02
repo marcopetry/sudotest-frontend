@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './ListarInformacoes.css';
 import Scrollbar from 'react-scrollbars-custom';
+import './ListarInformacoes.css';
 
 export default function ListarInformacoes(props) {
     const [executar, setExecutar] = useState('');
@@ -35,11 +35,11 @@ export default function ListarInformacoes(props) {
                         {props.dadosTabela.map(elemento => {
                             return (
                                 <tr className="row-table" key={elemento.id} onClick={() => props.funcaoClick(elemento.id)}>
-                                    <td>{elemento.primeiraInfo}</td>
-                                    <td>{elemento.segundaInfo}</td>
-                                    <td>{elemento.terceiraInfo}</td>
-                                    <td>{elemento.quartaInfo}</td>
-                                    <td>{elemento.quintaInfo}</td>
+                                    {elemento.primeiraInfo !== "" && <td>{elemento.primeiraInfo}</td>}
+                                    {elemento.segundaInfo !== "" && <td>{elemento.segundaInfo}</td>}
+                                    {elemento.terceiraInfo !== "" && <td>{elemento.terceiraInfo}</td>}
+                                    {elemento.quartaInfo !== "" && <td>{elemento.quartaInfo}</td>}
+                                    {elemento.quintaInfo !== "" && <td>{elemento.quintaInfo}</td>}
                                     {elemento.sextaInfo !== "" && <td>{elemento.sextaInfo}</td>}
                                 </tr>
                             );

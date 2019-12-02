@@ -43,6 +43,7 @@ export default function ControllerProvasAbertas({ history }){
             <Feedback 
                 msgPrimaria="Prova excluída com sucesso!"
                 funcaoBotao={confirmarFeedback}
+                img={'certo'}
                 />
         );
     }

@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { formatarDadosMeusResultados } from '../helpers/TratamentoDadosParaTabela';
-import ListarInformacoes from '../components/ListarInformacoes/ListarInformacoes';
-import ControllerListarInformacoes from '../components/ListarInformacoes/ControllerListarInformacoes';
+import ControllerListarInformacoes from './ControllerListarInformacoes';
 import TelaEspera from '../components/TelaEspera/TelaEspera';
 import { formatarListaRankingAlunos } from '../helpers/TratamentoDadosParaTabela';
+import Feedback from '../components/Feedback/Feedback';
 
 const cabecalhoTabela = ["Nome prova", "Data", "Quantidade de vagas", "Aprovados", "Média geral", "Minha nota"];
 export default function ControllerMeusResultados({ history }) {
     const [dados, setDados] = useState(''),
         [loading, setLoading] = useState(true); 
-        
-
-    console.log('dados ', dados);
 
     async function buscarResultados(idAluno) {
         const response = await api.get('/buscaAlunosProvas', {
@@ -21,6 +18,7 @@ export default function ControllerMeusResultados({ history }) {
             }
         })
         setDados(formatarDadosMeusResultados(response.data));
+        setLoading(false)
     }
 
     async function gerarRelatorio(idProva) {
@@ -32,6 +30,7 @@ export default function ControllerMeusResultados({ history }) {
         });
         console.log(response.data);
         setDados(formatarListaRankingAlunos(response.data));
+        setLoading(false)
     }
 
     //gera todas as provas que o aluno fez
@@ -45,11 +44,11 @@ export default function ControllerMeusResultados({ history }) {
         gerarRelatorio(idClicado);
     }
 
-    //console.log(dados);
-    //console.log(provas);
-    console.log(dados.length);
-    if (dados.length === 0) {
-        console.log('porque ')
+    if (dados.length === 0 && !loading) {
+        return <Feedback msgPrimaria={'Você não realizou nenhuma prova!'} />
+    }
+
+    if (loading) {
         return <TelaEspera />
     }
 

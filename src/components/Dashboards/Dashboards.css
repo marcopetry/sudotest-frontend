@@ -5,20 +5,39 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-top: 2em;
+    padding-top: 0em;
     background-color: rgba(245, 245, 245, 1);
+}
+.container-log-dash {
+    display: flex;
+    justify-content: center;
+}
+
+#logo-dashboard {
+    width: 8em;
+    height: 8em;
 }
 
 ul {
     width: 100%;
+    margin-top: 1em;
 }
 
 ul li {
     list-style: none;
-    padding: 1.5em 2em;
+    padding: 0.8em 2em;
     font-size: 16pt;
     font-weight: 400;
+    display: flex;
+    align-items: center;
 }
+
+.icones-dash {
+    margin-right: 2em;
+    height: 2em;
+    width: 2em;
+}
+
 
 ul li:hover {
     cursor: pointer;

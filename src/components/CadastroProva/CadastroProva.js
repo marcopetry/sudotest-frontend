@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';
 
 
 
+//uso essa variável pra renderizar imagem no componente feedback
+let imgFeedback;
 export default function CadastroProva(props) {
     let history = useHistory();
     /* console.log(props.prova.id) */
@@ -79,8 +81,10 @@ export default function CadastroProva(props) {
         
         setEspera(false);
         if (response) {
+            imgFeedback = 'certo';
             setFeedback('Prova cadastrada com sucesso!');
         } else {
+            imgFeedback = 'errado';
             setFeedback('Problema ao cadastrar prova!');
         }
     }
@@ -106,8 +110,10 @@ export default function CadastroProva(props) {
 
         setEspera(false);
         if (response) {
+            imgFeedback = 'certo';
             setFeedback('Prova alterada com sucesso!');
         } else {
+            imgFeedback = 'errado';
             setFeedback('Problema ao alterar prova!');
         }
     }
@@ -142,6 +148,14 @@ export default function CadastroProva(props) {
         }
     }
 
+    const cancelarCadatroAlteracao = () => {
+        if(id === ''){
+            limparCampos();
+        }else{
+            history.push('/provas-abertas');
+        }
+    }
+
     if(feedback !== '') {
         setTimeout(() => {
             if(feedback === 'Prova alterada com sucesso!')
@@ -150,7 +164,7 @@ export default function CadastroProva(props) {
                 limparCampos();
             setFeedback('');
         }, 2000)
-        return <Feedback msgPrimaria={feedback}/>
+        return <Feedback msgPrimaria={feedback} img={imgFeedback}/>
     }
 
     if (espera) return <TelaEspera />
@@ -231,7 +245,7 @@ export default function CadastroProva(props) {
 
                     </div>
                     <div className="container-input cont-buttons">
-                        <button onClick={() => history.push('/home')}>Cancelar</button>
+                        <button type="button" onClick={cancelarCadatroAlteracao}>Cancelar</button>
                         <button id="botaoCadastrar" type="submit">Cadastrar</button>
                     </div>
                 </div>
