@@ -62,41 +62,13 @@ export default function ControllerADM(props) {
         console.log(response);
     }
 
-    async function deletarQuestaoCadastrada() {
-        const response1 = await api.get('/buscaTodasProvasQuestoes', {
+    async function deletarQuestaoCadastrada(idQuestao) {
+        const response1 = await api.get('/deletaAtualizaProvasQuestoes', {
             params: {
-                //idQuestao
+                idQuestao
             }
         });
         console.log(response1);
-        if (response1 === []) {
-            const response2 = await api.post('/deletaQuestaoCadastrada', {
-                //id: idQuestao,
-            }); 
-            console.log(response2);
-        } else {
-            alert('Existem provas abertas cadastradas com essa questão');
-            if (true) { //se quiser excluir mesmo assim
-
-            }
-            /*if (response3 === []) {
-                const response2 = await api.post('/deletaQuestaoCadastrada', {
-                    //id: idQuestao,
-                });
-                console.log(response2);
-            } else {
-                alert('Existem provas abertas cadastradas com essa questão');
-                if (true) { //Se quiser deletar
-                    const response4 = await api.get('/buscaQuestaoDeletarQuestao', {
-                        params: {
-                            //id: idQuestao
-                        }
-                    })
-                    console.log(response4);
-                }
-            }*/
-
-        }
     }
 
     async function atualizarQuestaoCadastrada() {
