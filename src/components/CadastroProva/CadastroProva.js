@@ -6,6 +6,7 @@ import TelaEspera from '../TelaEspera/TelaEspera';
 import Feedback from '../Feedback/Feedback';
 import { useHistory } from 'react-router-dom';
 import { validarCadastroProva } from '../../validators/ValidatorCadastroProva';
+import Scrollbar from 'react-scrollbars-custom';
 
 
 
@@ -26,7 +27,7 @@ export default function CadastroProva(props) {
         [qtdQuestoesConhecimentosGerais, setQtdQuestoesConhecimentosGerais] = useState(''),
         [porcentagemAprovacao, setPorcentagemAprovacao] = useState(''),
         [vagasDisponiveis, setVagasDisponiveis] = useState(''),
-        [espera, setEspera] = useState(false), 
+        [espera, setEspera] = useState(false),
         [feedback, setFeedback] = useState('');
 
     const limparCampos = () => {
@@ -63,7 +64,8 @@ export default function CadastroProva(props) {
 
     async function cadastrarProva(e) {
         e.preventDefault();
-        validarCadastroProva(nomeProva);
+        validarCadastroProva(nomeProva, dataRealizacao, horaInicio, horaTermino, qtdQuestoesMatematica, qtdQuestoesPortugues, qtdQuestoesInformatica,
+            qtdQuestoesConhecimentosGerais, porcentagemAprovacao, vagasDisponiveis);
         return;
         var token = await gerarToken();
 
@@ -81,7 +83,7 @@ export default function CadastroProva(props) {
             token,
             status: "Aberta",
         })
-        
+
         setEspera(false);
         if (response) {
             imgFeedback = 'certo';
@@ -152,108 +154,190 @@ export default function CadastroProva(props) {
     }
 
     const cancelarCadatroAlteracao = () => {
-        if(id === ''){
+        if (id === '') {
             limparCampos();
-        }else{
+        } else {
             history.push('/provas-abertas');
         }
     }
 
-    if(feedback !== '') {
+    const resetMensagemErro = (e) => {
+        console.log(e.target.name);
+        e.target.classList.remove('border-erro');
+        document.querySelector('span[name=' + e.target.name + ']').innerHTML = '';
+    }
+
+    if (feedback !== '') {
         setTimeout(() => {
-            if(feedback === 'Prova alterada com sucesso!')
+            if (feedback === 'Prova alterada com sucesso!')
                 history.push('/provas-abertas');
-            if(feedback.indexOf('sucesso') !== -1)
+            if (feedback.indexOf('sucesso') !== -1)
                 limparCampos();
             setFeedback('');
         }, 2000)
-        return <Feedback msgPrimaria={feedback} img={imgFeedback}/>
+        return <Feedback msgPrimaria={feedback} img={imgFeedback} />
     }
 
     if (espera) return <TelaEspera />
 
     return (
-        <div className="container-prova">
-            <form className="form" onSubmit={cadastrarAtualizar}>
-                <div className="container-form">
-                    <div className="container-input">
-                        <p>Nome da prova:</p>
-                        <input type="text"
-                            id="nome-prova"
-                            placeholder="Digite aqui o nome do prova:"
-                            value={nomeProva}
-                            onChange={e => setNomeProva(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Data de realização:</p>
-                        <input type="date"
-                            placeholder="dia/mês/ano"
-                            value={dataRealizacao}
-                            onChange={e => setData(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Hora de início:</p>
-                        <input type="time"
-                            placeholder="Digite os minutos aqui:"
-                            value={horaInicio}
-                            onChange={e => setHoraInicio(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Hora de término:</p>
-                        <input type="time"
-                            placeholder="Digite os minutos aqui:"
-                            value={horaTermino}
-                            onChange={e => setHoraTerminio(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Quantidade de questões de matemática:</p>
-                        <input type="number"
-                            placeholder="Questões de matemática:"
-                            value={qtdQuestoesMatematica}
-                            onChange={e => setQtdQuestoesMatematica(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Quantidade de questões de português:</p>
-                        <input type="number"
-                            placeholder="Questões de português:"
-                            value={qtdQuestoesPortugues}
-                            onChange={e => setQtdQuestoesPortugues(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Quantidade de questões de informática:</p>
-                        <input type="number"
-                            placeholder="Questões de informática:"
-                            value={qtdQuestoesInformatica}
-                            onChange={e => setQtdQuestoesInformatica(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Quantidade de questões de conhecimentos gerais:</p>
-                        <input type="number"
-                            placeholder="Questões de conhecimentos gerais:"
-                            value={qtdQuestoesConhecimentosGerais}
-                            onChange={e => setQtdQuestoesConhecimentosGerais(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Porcentagem para aprovação:</p>
-                        <input type="number"
-                            placeholder="Digite a nota mínima para aprovação:"
-                            value={porcentagemAprovacao}
-                            onChange={e => setPorcentagemAprovacao(e.target.value)} />
-                    </div>
-                    <div className="container-input">
-                        <p>Número de vagas:</p>
-                        <input type="number"
-                            placeholder="Digite a quantidade de vagas disponíveis:"
-                            value={vagasDisponiveis}
-                            onChange={e => setVagasDisponiveis(e.target.value)} />
+        <Scrollbar className="container-prova">
+            <div className="container-prova">
+                <form className="form" onSubmit={cadastrarAtualizar}>
+                    <div className="container-form">
+                        <div className="container-input">
+                            <p>Nome da prova:</p>
+                            <div id="nome-prova" className="container-input-feedback"> {/*asduhasudhasud*/}
+                                <input type="text"
+                                    name="nome-prova" //idjasidja
+                                    placeholder="Digite aqui o nome do prova:"
+                                    value={nomeProva}
+                                    onChange={e => {
+                                        setNomeProva(e.target.value);
+                                        resetMensagemErro(e)
+                                    }} /> {/** */}
+                                <span name="nome-prova" className="span-feedback"></span> {/**/}
+                            </div>
+                        </div>
 
+                        <div className="container-input">
+                            <p>Data de realização:</p>
+                            <div id="dataRealizacao" className="container-input-feedback">
+                                <input type="date"
+                                    name="dataRealizacao"
+                                    placeholder="dia/mês/ano"
+                                    value={dataRealizacao}
+                                    onChange={e => {
+                                        setData(e.target.value);
+                                        resetMensagemErro(e)
+                                    }} />
+                                <span name="dataRealizacao" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Hora de início:</p>
+                            <div id="horaInicio" className="container-input-feedback">
+                                <input type="time"
+                                    name="horaInicio"
+                                    value={horaInicio}
+                                    onChange={e => {
+                                        setHoraInicio(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="horaInicio" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Hora de término:</p>
+                            <div id="horaTermino" className="container-input-feedback">
+                                <input type="time"
+                                    name="horaTermino"
+                                    value={horaTermino}
+                                    onChange={e => {
+                                        setHoraTerminio(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="horaTermino" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Quantidade de questões de matemática:</p>
+                            <div id="qtdQuestoesMatematica" className="container-input-feedback">
+                                <input type="number"
+                                    name="qtdQuestoesMatematica"
+                                    placeholder="Questões de matemática:"
+                                    value={qtdQuestoesMatematica}
+                                    onChange={e => {
+                                        setQtdQuestoesMatematica(e.target.value)
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="qtdQuestoesMatematica" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Quantidade de questões de português:</p>
+                            <div id="qtdQuestoesPortugues" className="container-input-feedback">
+                                <input type="number"
+                                    name="qtdQuestoesPortugues"
+                                    placeholder="Questões de português:"
+                                    value={qtdQuestoesPortugues}
+                                    onChange={e => {
+                                        setQtdQuestoesPortugues(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="qtdQuestoesPortugues" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Quantidade de questões de informática:</p>
+                            <div id="qtdQuestoesInformatica" className="container-input-feedback">
+                                <input type="number"
+                                    name="qtdQuestoesInformatica"
+                                    placeholder="Questões de informática:"
+                                    value={qtdQuestoesInformatica}
+                                    onChange={e => {
+                                        setQtdQuestoesInformatica(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="qtdQuestoesInformatica" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Quantidade de questões de conhecimentos gerais:</p>
+                            <div id="qtdQuestoesConhecimentosGerais" className="container-input-feedback">
+                                <input type="number"
+                                    name="qtdQuestoesConhecimentosGerais"
+                                    placeholder="Questões de conhecimentos gerais:"
+                                    value={qtdQuestoesConhecimentosGerais}
+                                    onChange={e => {
+                                        setQtdQuestoesConhecimentosGerais(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="qtdQuestoesConhecimentosGerais" className="span-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div className="container-input">
+                            <p>Porcentagem para aprovação:</p>
+                            <div id="porcentagemAprovacao" className="container-input-feedback">
+                                <input type="number"
+                                    name="porcentagemAprovacao"
+                                    placeholder="Digite a nota mínima para aprovação:"
+                                    value={porcentagemAprovacao}
+                                    onChange={e => {
+                                        setPorcentagemAprovacao(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="porcentagemAprovacao" className="span-feedback"></span>
+                            </div>
+                        </div>
+                        <div className="container-input">
+                            <p>Número de vagas:</p>
+                            <div id="vagasDisponiveis" className="container-input-feedback">
+                                <input type="number"
+                                    name="vagasDisponiveis"
+                                    placeholder="Digite a quantidade de vagas disponíveis:"
+                                    value={vagasDisponiveis}
+                                    onChange={e => {
+                                        setVagasDisponiveis(e.target.value);
+                                        resetMensagemErro(e);
+                                    }} />
+                                <span name="vagasDisponiveis" className="span-feedback"></span>
+                            </div>
+                        </div>
+                        <div className="container-input cont-buttons">
+                            <button type="button" onClick={cancelarCadatroAlteracao}>Cancelar</button>
+                            <button id="botaoCadastrar" type="submit">Cadastrar</button>
+                        </div>
                     </div>
-                    <div className="container-input cont-buttons">
-                        <button type="button" onClick={cancelarCadatroAlteracao}>Cancelar</button>
-                        <button id="botaoCadastrar" type="submit">Cadastrar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </Scrollbar>
     );
 }
